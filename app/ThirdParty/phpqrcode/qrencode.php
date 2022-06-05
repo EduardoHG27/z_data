@@ -285,7 +285,7 @@
             var_dump("qr function");
             $enc = QRencode::factory($level, $size, $margin);
 
-            var_dump($enc);
+            var_dump($enc->encodePNG($text, $outfile, $saveandprint=false));
             return $enc->encodePNG($text, $outfile, $saveandprint=false);
         }
 
