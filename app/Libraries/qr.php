@@ -15,13 +15,15 @@ class qr
     public function create_qr($pass,$location)
     {
        
-       
+      
         if(QRcode::png($pass, $location))
         {
+            var_dump("data true");
             return true;
         }
         else
         {
+            var_dump("data false");
             return false;
         }
 
