@@ -14,7 +14,7 @@ var app = new Vue({
       self.scans.unshift({ date: +(Date.now()), content: content });
       
       $.ajax({
-       url:'https://ecommerce343.com/data/public/student/qr',
+       url:'https://ecommerce343.com/public/student/qr',
       // url:'http://gym-system.ecommerce343.com/gym_code/public/student/qr',
         method: "post",
         data: {
