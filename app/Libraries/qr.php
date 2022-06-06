@@ -18,12 +18,12 @@ class qr
       
         if(QRcode::png($pass, $location))
         {
-            var_dump("data true");
+     
             return true;
         }
         else
         {
-            var_dump("data false");
+         
             return false;
         }
 
