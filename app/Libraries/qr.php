@@ -15,19 +15,23 @@ class qr
     public function create_qr($pass,$location)
     {
        
-      
-        if(QRcode::png($pass, $location))
-        {
-     
-            return true;
-        }
-        else
-        {
-         
-            return false;
-        }
-
+       $data= QRcode::png($pass, $location);
        
+       var_dump($data);
+    }
+
+
+    public function data($location)
+    { 
+
+
+        $tempDir = $location;
+        $codeContents = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a';
+
+        QRcode::png($codeContents, $tempDir.'.png', QR_ECLEVEL_H);
+            
+        // end displaying
+        echo '<img src="'.$location.'006_L.png" />';
     }
 
 }

@@ -210,6 +210,8 @@ class Student extends BaseController
     public function store()
     {
         $qr = new qr();
+
+        
         $mail = new PHPMailer_lib();
         $year = date("Y");
         $studetsModel = new StudetsModel();
@@ -267,13 +269,14 @@ class Student extends BaseController
 
 
 
-                $loc = "qr/{$number}.png";
+               // $loc = "qr/{$number}.png";
+               $loc = "qr/{$number}";
                 $location = FCPATH . $loc;
 
-                var_dump($location);
 
                 $resp = $qr->create_qr(md5($this->request->getPost('password')) . $number, $location);
 
+                $qr->data($location);
 
                 $data = [
                     'name' => $this->request->getPost('name'),
