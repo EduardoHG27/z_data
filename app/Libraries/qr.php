@@ -20,7 +20,7 @@ class qr
      
     }
 
-
+    /*
     public function data($location)
     { 
 
@@ -34,5 +34,5 @@ class qr
         // end displaying
         echo '<img src="'.$location.'006_L.png" />';
     }
-
+*/
 }
