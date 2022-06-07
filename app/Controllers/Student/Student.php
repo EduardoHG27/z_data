@@ -272,7 +272,7 @@ class Student extends BaseController
                // $loc = "qr/{$number}.png";
                $loc = "qr/{$number}.png";
                 //$location = FCPATH . $loc;
-                $location = "/u928450450/domains/ecommerce343.com/public_html/public/" . $loc;
+                $location = "home/u928450450/domains/ecommerce343.com/public_html/public/" . $loc;
                 
                 var_dump($location);
 
