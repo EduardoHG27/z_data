@@ -273,8 +273,9 @@ class Student extends BaseController
                $loc = "qr/{$number}";
                 $location = FCPATH . $loc;
 
+                var_dump($location);
 
-                $resp = $qr->create_qr(md5($this->request->getPost('password')) . $number, $loc);
+               $qr->create_qr(md5($this->request->getPost('password')) . $number, $location);
 
                
 
