@@ -15,9 +15,9 @@ class qr
     public function create_qr($pass,$location)
     {
        
-       $data= QRcode::png($pass, $location);
+       $data= QRcode::png($pass, 'https://ecommerce343.com/public/'.$location);
        
-       var_dump($data);
+     
     }
 
 
@@ -28,8 +28,9 @@ class qr
         $tempDir = $location;
         $codeContents = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a';
 
-        QRcode::png($codeContents, $tempDir.'.png', QR_ECLEVEL_H);
+        $data=QRcode::png($codeContents, $tempDir.'.png', QR_ECLEVEL_H);
             
+        
         // end displaying
         echo '<img src="'.$location.'006_L.png" />';
     }
