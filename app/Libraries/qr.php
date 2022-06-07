@@ -16,7 +16,7 @@ class qr
     {
         var_dump($location);
 
-       $data= QRcode::png($pass,'/home/u928450450/domains/ecommerce343.com/public_html/');
+       $data= QRcode::png($pass,'/home/hostras/public_html/');
     
      
     }
