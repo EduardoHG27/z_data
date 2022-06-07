@@ -15,8 +15,9 @@ class qr
     public function create_qr($pass,$location)
     {
        
-       $data= QRcode::png($pass, $location);
-       var_dump("create_qr");
+
+       $data= QRcode::png($pass);
+    
      
     }
 
