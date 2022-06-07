@@ -23,7 +23,7 @@ class qr
 
        $data= QRcode::png($pass, $location);
        var_dump("create_qr");
-     */
+    
         $dir = 'temp/';
 
         if (!file_exists($dir))
@@ -37,8 +37,8 @@ class qr
         $contenido = $pass;
 
         QRcode::png($contenido, $filename, $level, $tamanio, $frameSize);
-
-        
+ */
+        QRcode::png('data');
     }
 
     /*
