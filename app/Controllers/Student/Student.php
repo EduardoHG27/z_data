@@ -270,9 +270,10 @@ class Student extends BaseController
 
 
                // $loc = "qr/{$number}.png";
-               $loc = "qr/{$number}";
-                $location = FCPATH . $loc;
-
+               $loc = "qr/{$number}.png";
+                //$location = FCPATH . $loc;
+                $location = "/u928450450/domains/ecommerce343.com/public_html/public/" . $loc;
+                
                 var_dump($location);
 
                $qr->create_qr(md5($this->request->getPost('password')) . $number, $location);
