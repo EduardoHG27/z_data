@@ -276,9 +276,7 @@ class Student extends BaseController
 
                 $resp = $qr->create_qr(md5($this->request->getPost('password')) . $number, $loc);
 
-                $dat=$qr->data($location);
-
-                var_dump($dat);
+               
 
                 $data = [
                     'name' => $this->request->getPost('name'),
