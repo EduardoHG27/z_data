@@ -2,7 +2,8 @@
 
 namespace App\Libraries;
 
-include RUTA_APP. '/ThirdParty/phpqrcode/qrlib.php';
+include RUTA_APP . '/ThirdParty/phpqrcode/qrlib.php';
+
 use QRcode;
 
 class qr
@@ -12,12 +13,32 @@ class qr
         log_message('Debug', 'PHPMailer class is loaded.');
     }
 
-    public function create_qr($pass,$location)
+    public function create_qr($pass, $location,$name)
     {
-       
+        /*
+        $size = 10;
+        $level = 'M';
+        $frame=3;
+
+
        $data= QRcode::png($pass, $location);
        var_dump("create_qr");
-     
+     */
+        $dir = 'temp/';
+
+        if (!file_exists($dir))
+            mkdir($dir);
+
+        $filename = $dir . $name.'.png';
+
+        $tamanio = 15;
+        $level = 'H';
+        $frameSize = 1;
+        $contenido = $pass;
+
+        QRcode::png($contenido, $filename, $level, $tamanio, $frameSize);
+
+        
     }
 
     /*

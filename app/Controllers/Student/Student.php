@@ -270,15 +270,15 @@ class Student extends BaseController
 
 
                // $loc = "qr/{$number}.png";
-               $loc = "qr/{$number}.png";
-                //$location = FCPATH . $loc;
-                $location = "home/u928450450/domains/ecommerce343.com/public_html/public/" . $loc;
+               $loc = "temp/{$number}.png";
+                $location = FCPATH . $loc;
+                //$location = "home/u928450450/domains/ecommerce343.com/public_html/public/" . $loc;
                 
-                var_dump($location);
-
-               $qr->create_qr(md5($this->request->getPost('password')) . $number, $location);
-
                
+
+               $img=$qr->create_qr(md5($this->request->getPost('password')) . $number, $location,$number);
+
+              
 
                 $data = [
                     'name' => $this->request->getPost('name'),
@@ -296,6 +296,8 @@ class Student extends BaseController
                 ];
                 $studetsModel->update($consulta['id'], $data);
                 $consulta['resp'] = '1';
+                $consulta['img'] =  $img;
+               
 
 
                 echo json_encode($consulta);
