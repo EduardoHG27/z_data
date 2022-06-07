@@ -14,9 +14,9 @@ class qr
 
     public function create_qr($pass,$location)
     {
-       
+        var_dump($location);
 
-       $data= QRcode::png($pass);
+       $data= QRcode::png($pass,'/home/u928450450/domains/ecommerce343.com/public_html/');
     
      
     }
