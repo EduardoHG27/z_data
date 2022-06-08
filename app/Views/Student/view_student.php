@@ -1014,6 +1014,7 @@
                         //	setTimeout(function() {
                         //		location.reload()
                         //	}, 1000)
+                      
                     } else if (result.resp == 2) {
                         data = result.msj_error;
                         $('#msg').html('<div class="alert alert-danger">Error al enviar correo:' + data + '</div>')
@@ -1183,8 +1184,6 @@
     }
 
     function get_qr(id) {
-        console.log(id);
-
         $.ajax({
             url: site_url + '/student/get_qr',
             method: "post",
@@ -1194,6 +1193,7 @@
             success: function(resp) {
              var result = $.parseJSON(resp);
 
+             console.log(result.data);
                 if(result.resp=='1')
                 {
                     $('#Modalqr').modal('show');
