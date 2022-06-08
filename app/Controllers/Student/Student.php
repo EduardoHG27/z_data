@@ -241,9 +241,10 @@ class Student extends BaseController
             );
 
             $correo->SMTPAuth = true;
-            $correo->Username  = 'desarrollo.hergut@gmail.com';
+            $correo->Username  = 'eduardoenrique.hernandez@gmail.com';
+            //$correo->Username  = 'desarrollo.hergut@gmail.com';
             // $correo->Password = 'Hergut27!';
-            $correo->Password = 'hergut27';
+            $correo->Password = 'xgquztnppmjzgwuw';
             $correo->SMTPSecure = 'ssl';
 
             $correo->setFrom('desarrollo.hergut@gmail.com', 'CodexWorld');
@@ -276,7 +277,7 @@ class Student extends BaseController
                 
                
 
-               $img=$qr->create_qr(md5($this->request->getPost('password')) . $number, $location,$number);
+               $img=$qr->create_qr(md5($this->request->getPost('password')).$number, $location,$number);
 
               
 
