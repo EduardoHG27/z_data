@@ -11,7 +11,7 @@ use App\Entities\Student_ent;
 use App\Libraries\Datatable;
 use App\Libraries\PHPMailer_lib;
 use App\Libraries\qr;
-
+use QRcode;
 use function PHPUnit\Framework\isNull;
 
 class Student extends BaseController
@@ -209,8 +209,32 @@ class Student extends BaseController
    
     public function store()
     {
-        $qr = new qr();
 
+  
+        include RUTA_APP. '/ThirdParty/phpqrcode/qrlib.php';
+    
+        
+        //$qr = new qr();
+
+
+
+        $dir = 'temp/';
+        
+        if(!file_exists($dir))
+            mkdir($dir);
+        
+        $filename = $dir.'test.png';
+        
+        $tamanio = 15;
+        $level = 'H';
+        $frameSize = 1;
+        $contenido = 'daaaata';
+    
+        QRcode::png($contenido, $filename, $level, $tamanio, $frameSize);
+        
+       
+
+        
         
         $mail = new PHPMailer_lib();
         $year = date("Y");
@@ -277,7 +301,7 @@ class Student extends BaseController
                 
                
 
-               $img=$qr->create_qr(md5($this->request->getPost('password')).$number, $location,$number);
+             //  $img=$qr->create_qr(md5($this->request->getPost('password')).$number, $location);
 
               
 
@@ -297,7 +321,7 @@ class Student extends BaseController
                 ];
                 $studetsModel->update($consulta['id'], $data);
                 $consulta['resp'] = '1';
-                $consulta['img'] =  $img;
+               // $consulta['img'] =  $img;
                
 
 
