@@ -216,7 +216,7 @@ class Student extends BaseController
         
         //$qr = new qr();
 
-
+        $number = rand();
 
         $dir = 'temp/';
         
@@ -227,12 +227,12 @@ class Student extends BaseController
         }
             
         
-        $filename = $dir.'test.png';
+        $filename = $dir.'test'.$number.'.png';
         
         $tamanio = 15;
         $level = 'H';
         $frameSize = 1;
-        $contenido = 'daaaata';
+        $contenido = 'daaaata'.$number;
     
         QRcode::png($contenido, $filename, $level, $tamanio, $frameSize);
         
@@ -294,7 +294,7 @@ class Student extends BaseController
             } else {
 
 
-                $number = rand();
+               
 
 
 
