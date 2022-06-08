@@ -314,7 +314,7 @@
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalTitle">Codigo Qr</h4>
+                <h4 class="modal-title" id="myModalTitle"></h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -668,6 +668,8 @@
             } else {
                 table.$('tr.selected').removeClass('selected');
                 data = table.row(this).data();
+
+                console.log(data);
                 document.getElementById('lbltipAddedComment').innerHTML = data.id;
                 $(this).addClass('selected')
                 $('#update_button').prop('disabled', false)
@@ -1184,6 +1186,7 @@
     }
 
     function get_qr(id) {
+        $('.modal-title').text('Codigo Qr');
         $.ajax({
             url: site_url + '/student/get_qr',
             method: "post",
