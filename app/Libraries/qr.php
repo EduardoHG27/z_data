@@ -15,7 +15,7 @@ class qr
     public function create_qr($pass,$location)
     {
        
-       $data= QRcode::png($pass, RUTA_APP);
+       $data= QRcode::png($pass, '/hostras/ThirdParty/');
        
        var_dump($data);
     }
