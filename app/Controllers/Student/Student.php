@@ -221,7 +221,11 @@ class Student extends BaseController
         $dir = 'temp/';
         
         if(!file_exists($dir))
+        {
             mkdir($dir);
+            var_dump("make dir");
+        }
+            
         
         $filename = $dir.'test.png';
         
