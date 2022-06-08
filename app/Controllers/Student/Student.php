@@ -216,28 +216,6 @@ class Student extends BaseController
         
         //$qr = new qr();
 
-        $number = rand();
-
-        $dir = 'temp/';
-        
-        if(!file_exists($dir))
-        {
-            mkdir($dir);
-            var_dump("make dir");
-        }
-            
-        
-        $filename = $dir.'test'.$number.'.png';
-        
-        $tamanio = 15;
-        $level = 'H';
-        $frameSize = 1;
-        $contenido = 'daaaata'.$number;
-    
-        QRcode::png($contenido, $filename, $level, $tamanio, $frameSize);
-        
-       
-
         
         
         $mail = new PHPMailer_lib();
@@ -295,12 +273,33 @@ class Student extends BaseController
 
 
                
+                $number = rand();
+
+                $dir = 'temp/';
+                
+                if(!file_exists($dir))
+                {
+                    mkdir($dir);
+                }
+                    
+                
+                $filename = $dir.''.$number.'.png';
+                
+                $tamanio = 15;
+                $level = 'H';
+                $frameSize = 1;
+                $contenido = md5($this->request->getPost('password')).$number;
+            
+                QRcode::png($contenido, $filename, $level, $tamanio, $frameSize);
+                
+            
+
 
 
 
                // $loc = "qr/{$number}.png";
-               $loc = "temp/{$number}.png";
-                $location = FCPATH . $loc;
+                //$loc = "temp/{$number}.png";
+               // $location = FCPATH . $loc;
                 //$location = "home/u928450450/domains/ecommerce343.com/public_html/public/" . $loc;
                 
                
@@ -314,8 +313,8 @@ class Student extends BaseController
                     'email' => $this->request->getPost('email'),
                     'mobile' => $this->request->getPost('mobile'),
                     'password' => md5($this->request->getPost('password')),
-                    'qr_location' => $loc,
-                    'password_qr' => md5($this->request->getPost('password')) . $number
+                    'qr_location' => $filename,
+                    'password_qr' => md5($this->request->getPost('password')).$number
                 ];
 
                 $studetsModel->save($data);
