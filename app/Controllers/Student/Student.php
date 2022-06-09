@@ -349,6 +349,8 @@ class Student extends BaseController
 
     public function qr()
     {
+        $model = model('StudetsModel');
+
         $studetsModel = new StudetsModel();
         $data = [
             'id' => $this->request->getPost('id')
@@ -359,16 +361,33 @@ class Student extends BaseController
         $query = $studetsModel->get();
         $data_validation = $query->getResult('array');
 
+       
         $dat=count($data_validation);
         if ($dat=='0') {
             $consulta['resp'] = '0';
-            $consulta['data'] = 'Código QR no reconocido';
+            $consulta['msj'] = 'Código QR no reconocido';
             echo json_encode($consulta);
         } else {
             
-            $consulta['resp'] = '1';
-            $consulta['data'] = $data_validation;
-            echo json_encode($consulta);
+            $user = $model->getUserBy('matricula', $data_validation[0]['matricula']);
+            if ($user['status'] != 'true') {
+
+               
+                $consulta['resp'] = '2';
+                $consulta['name'] = $user['name'];
+                $consulta['msj'] = 'Usuario se agoto su membresia';
+                echo json_encode($consulta);
+
+            } else {
+
+
+                $consulta['resp'] = '1';
+                $consulta['name'] = $user['name'];
+                $consulta['msj'] = 'Usuario Activo';
+                echo json_encode($consulta);
+
+            }
+            
         }
     }
 
@@ -611,6 +630,7 @@ class Student extends BaseController
         }
 
         $mes = [];
+        $mes_res = [];
         $j = -1;
         foreach ($get_total as $key => $value) {
             $fecha = $value['date_in'];
@@ -700,10 +720,15 @@ class Student extends BaseController
             }
         }
 
+        $k=0;
+        foreach ($mes as $key => $value) {
+         
+          $mes_res[$k++]=$value;
+        } 
         $data = [100, 100, 100, 100, 100, 100, 40];
         $consulta['datos_entrada'] = $data;
         $consulta['datos_ingresos'] = $arr_dat;
-        $consulta['mes'] = $mes;
+        $consulta['mes'] = $mes_res;
         $consulta['resp'] = '1';
 
         echo json_encode($consulta);
