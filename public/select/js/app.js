@@ -14,28 +14,34 @@ var app = new Vue({
       self.scans.unshift({ date: +(Date.now()), content: content });
       
       $.ajax({
-       url:'https://ecommerce343.com/public/student/qr',
-      // url:'http://gym-system.ecommerce343.com/gym_code/public/student/qr',
+      // url:'https://ecommerce343.com/public/student/qr',
+       url:'http://192.168.100.158:8080/gym_code/public/student/qr',
         method: "post",
         data: {
           id: content
       },
         success: function(resp) {
           var result = $.parseJSON(resp);
-          console.log(result.data);
-
           if(result.resp=='0')
           {
             Swal.fire(
-              'Atencion!',
-              result.data,
+              'Atencion!!',
+              result.msj,
+              'error'
+            )
+          }else if (result.resp=='2')
+          {
+            Swal.fire(
+              'Atencion!!',
+              result.name + ' -> ' + result.msj,
               'warning'
             )
-          }else
+          }
+          else
           {
             Swal.fire(
               'Bienvenido',
-              result.data[0]['name'],
+              result.name + ' -> ' + result.msj,
               'success'
             )
           }
