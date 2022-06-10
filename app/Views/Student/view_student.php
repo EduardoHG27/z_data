@@ -6,9 +6,9 @@
 
 
 <script type="text/javascript" src="<?php echo base_url(); ?>/select/js/select2.js"></script>
-<div class="row mt-3 ml-3 mr-3">
 
 
+<div class="container-fluid">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
@@ -44,40 +44,10 @@
                                     </div>
                                     <a class="small-box-footere">Eliminar Miembro <i class="fa fa-arrow-circle-right"></i></a>
                                 </button>
-                                <!--
-                    <button id="btnActForm" class="ejemplo1 bg-green-active dis button1">
-                        <div class="icono">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <a class="small-box-footere">Activar Forma Adquisición<i class="fa fa-arrow-circle-right"></i></a>
-                    </button>
-                    <button id="btnDesForm" class="ejemplo1 bg-red-active dis button2">
-                        <div class="icono">
-                            <i class="fas fa-window-close"></i>
-                        </div>
-                        <a class="small-box-footere">Desactivar Forma Adquisición<i class="fa fa-arrow-circle-right"></i></a>
-                    </button>
 
-                    <button id="btnImprimir" class="ejemplo1 btn-info" onclick="delete_btn()">
-                        <div class="icono">
-                            <i class="fa fa-print"></i>
-                        </div>
-                        <a class="small-box-footere">Imprimir Reporte <i class="fa fa-arrow-circle-right"></i></a>
-                    </button>
-
--->
                             </div>
                         </div>
-                        <!--  <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <button type="button" class="btn btn-primary btn-block btn-sm col-sm-2 float-right" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"> <i class="fa fa-plus"></i>New</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button type="button" id="update_button" class="btn btn-primary btn-block btn-sm col-sm-2 float-right" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"> <i class="fa fa-plus"></i>Update</button>
-                    </div>
-                </div>
-            </div>-->
+
                         <label id="lbltipAddedComment">test</label>
                     </span>
                 </div>
@@ -106,16 +76,8 @@
     </div>
 </div>
 
-</div>
-<div class="card">
 
 
-
-
-
-
-
-</div>
 
 
 
@@ -1197,20 +1159,17 @@
              var result = $.parseJSON(resp);
 
              console.log(result.data);
-                if(result.resp=='1')
-                {
+                if (result.resp == '1') {
                     $('#Modalqr').modal('show');
-                    document.getElementById("image_qr").src = "../"+result.data;
-                }
-                else
-                {
+                    document.getElementById("image_qr").src = "../" + result.data;
+                } else {
                     Swal.fire({
-                            position: 'top-end',
-                            icon: 'warning',
-                            title: 'Usuario no cuenta con código Qr',
-                            showConfirmButton: false,
-                            timer: 2500
-                        })
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: 'Usuario no cuenta con código Qr',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
                 }
             }
         });

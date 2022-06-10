@@ -7,9 +7,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>/select/js/select2.js"></script>
 
 
-<div class="row mt-3 ml-3 mr-3">
-
-
+<div class="container-fluid">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
@@ -58,6 +56,7 @@
         </div>
     </div>
 </div>
+
 
 
 
