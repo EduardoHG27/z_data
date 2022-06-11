@@ -129,21 +129,24 @@ class First_page extends BaseController
         $paysModel = new PaysModel();
         $studetsModel->select();
         $studetsModel->where('status', 'true');
+        $studetsModel->where('year_act', $_SESSION['year_act']);
+        $studetsModel->where('company',$_SESSION['company']);
         $query = $studetsModel->get();
         $miembros_activos = $query->getResult('array');
         $miembros_activos = count($miembros_activos);
         $studetsModel->select();
         $studetsModel->where('status', 'false');
+        $studetsModel->where('year_act', $_SESSION['year_act']);
+        $studetsModel->where('company',$_SESSION['company']);
         $query = $studetsModel->get();
         $miembros_inactivos = $query->getResult('array');
         $miembros_inactivos = count($miembros_inactivos);
 
-
-
-
         $paysModel->select('cost,date_in');
         $paysModel->where('date_in >=', $mes_p_start);
         $paysModel->where('date_in <=', $mes_p_today);
+        $paysModel->where('year_act', $_SESSION['year_act']);
+        $paysModel->where('company',$_SESSION['company']);
         $query = $paysModel->get();
         $cost = $query->getResult('array');
 
@@ -153,6 +156,8 @@ class First_page extends BaseController
         }
         $paysModel->where('date_in >=', $date_in);
         $paysModel->where('date_in <=', $date_last);
+        $paysModel->where('year_act', $_SESSION['year_act']);
+        $paysModel->where('company',$_SESSION['company']);
         $query = $paysModel->get();
         $cost = $query->getResult('array');
         $ingresos_mensual = 0;
@@ -180,6 +185,8 @@ class First_page extends BaseController
         $ingresos_diario = 0;
         $paysModel->select('cost,date_in');
         $paysModel->where('date_in =', $todays);
+        $paysModel->where('year_act', $_SESSION['year_act']);
+        $paysModel->where('company',$_SESSION['company']);
         $query = $paysModel->get();
         $cost = $query->getResult('array');
         foreach ($cost as $key => $value) {
