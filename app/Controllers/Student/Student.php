@@ -22,6 +22,7 @@ class Student extends BaseController
     {
 
         $this->db = \Config\Database::connect();
+        $session = session();
     }
 
     public function listStudent()
@@ -45,13 +46,12 @@ class Student extends BaseController
             'id' => $this->request->getPost('id')
         ];
 
-
-
-
         if ($data = $studetsModel->find($data['id'])) {
 
             $paysModel->select();
             $paysModel->where('id_member', $data['id']);
+            $paysModel->where('year_act', $_SESSION['year_act']);
+            $paysModel->where('company',$_SESSION['company']);
             $paysModel->where('pay_status', 'true');
             $query = $paysModel->get();
             $pay_data = $query->getResult('array');
@@ -132,9 +132,9 @@ class Student extends BaseController
         $studetsModel = new StudetsModel();
 
         $id = $this->request->getPost('id');
+        $data=$studetsModel->find($id);
+        unlink($data['qr_location']);
         $studetsModel->where('id', $id);
-
-
         if ($studetsModel->delete()) {
             $consulta['resp'] = '1';
             echo json_encode($consulta);
@@ -209,30 +209,19 @@ class Student extends BaseController
    
     public function store()
     {
-
-  
         include RUTA_APP. '/ThirdParty/phpqrcode/qrlib.php';
-    
-        
-        //$qr = new qr();
-
-        
-        
         $mail = new PHPMailer_lib();
         $year = date("Y");
         $studetsModel = new StudetsModel();
-
-
         $studetsModel->select('*');
         $studetsModel->where('name', $this->request->getPost('name'));
+        $studetsModel->where('year_act', $_SESSION['year_act']);
+        $studetsModel->where('company',$_SESSION['company']);
         $studetsModel->orWhere('email', $this->request->getPost('email'));
         $query = $studetsModel->get();
         $data_validation = $query->getResult('array');
 
-
         if (empty($data_validation)) {
-
-
 
             $correo = $mail->load();
             $correo->isSMTP();
@@ -253,7 +242,7 @@ class Student extends BaseController
             $correo->Password = 'xgquztnppmjzgwuw';
             $correo->SMTPSecure = 'ssl';
 
-            $correo->setFrom('desarrollo.hergut@gmail.com', 'CodexWorld');
+            $correo->setFrom('eduardoenrique.hernandez@gmail.com', 'CodexWorld');
             $correo->addReplyTo($this->request->getPost('email'), 'Codexworld');
             $correo->addAddress($this->request->getPost('email'));
             $correo->Subject = 'Registro de Usuario Exitoso';
@@ -270,43 +259,18 @@ class Student extends BaseController
                 $consulta['msj_error'] = $correo->ErrorInfo;
                 echo json_encode($consulta);
             } else {
-
-
-               
                 $number = rand();
-
                 $dir = 'temp/';
-                
                 if(!file_exists($dir))
                 {
                     mkdir($dir);
                 }
-                    
-                
                 $filename = $dir.''.$number.'.png';
-                
                 $tamanio = 15;
                 $level = 'H';
                 $frameSize = 1;
                 $contenido = md5($this->request->getPost('password')).$number;
-            
                 QRcode::png($contenido, $filename, $level, $tamanio, $frameSize);
-                
-            
-
-
-
-
-               // $loc = "qr/{$number}.png";
-                //$loc = "temp/{$number}.png";
-               // $location = FCPATH . $loc;
-                //$location = "home/u928450450/domains/ecommerce343.com/public_html/public/" . $loc;
-                
-               
-
-             //  $img=$qr->create_qr(md5($this->request->getPost('password')).$number, $location);
-
-              
 
                 $data = [
                     'name' => $this->request->getPost('name'),
@@ -314,7 +278,9 @@ class Student extends BaseController
                     'mobile' => $this->request->getPost('mobile'),
                     'password' => md5($this->request->getPost('password')),
                     'qr_location' => $filename,
-                    'password_qr' => md5($this->request->getPost('password')).$number
+                    'password_qr' => md5($this->request->getPost('password')).$number,
+                    'year_act' => $_SESSION['year_act'],
+                    'company' => $_SESSION['company']
                 ];
 
                 $studetsModel->save($data);
@@ -325,9 +291,6 @@ class Student extends BaseController
                 $studetsModel->update($consulta['id'], $data);
                 $consulta['resp'] = '1';
                // $consulta['img'] =  $img;
-               
-
-
                 echo json_encode($consulta);
             }
         } else {
@@ -335,19 +298,9 @@ class Student extends BaseController
             $consulta['resp'] = '3';
             echo json_encode($consulta);
         }
-
-        /*
-       
-        $studetsModel = new StudetsModel();
-        $data = [
-            'name' => $this->request->getVar('name'),
-            'email'  => $this->request->getVar('email'),
-        ];
-        $studetsModel->insert($data);
-        return $this->response->redirect(site_url('/users-list'));*/
     }
 
-    public function qr()
+    public function qr_log()
     {
         $model = model('StudetsModel');
 
@@ -470,9 +423,6 @@ class Student extends BaseController
 
     public function ajaxLoadData()
     {
-
-
-
         // $params['draw'] = $_REQUEST['draw'];
 
         /*
@@ -544,11 +494,10 @@ class Student extends BaseController
         );
 
 
-
-        $data = $studetsModel->findAll();
+        $data = $studetsModel->where('company',$_SESSION['company'])->findAll();
         $total_count = $data;
 
-        $lib = new Datatable($studetsModel, 'gp1', ['id', 'matricula', 'name', 'email', 'mobile', 'status', 'password', 'created_at', 'updated_at', 'deleted_at']);
+        $lib = new Datatable($studetsModel, 'gp1', ['id', 'matricula', 'name', 'email', 'mobile', 'status', 'password', 'year_act', 'company', 'created_at', 'updated_at', 'deleted_at']);
         $json_data = $lib->getResponse([
             'draw' => $_REQUEST['draw'],
             'length' => $_REQUEST['length'],
@@ -559,6 +508,7 @@ class Student extends BaseController
             'search' => $_REQUEST['search']['value'],
             'like' => $like
         ]);
+            $json_data['data']=$data;
         /*
 
 

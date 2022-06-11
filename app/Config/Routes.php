@@ -76,7 +76,7 @@ $routes->group('student', ['namespace' => 'App\Controllers\Student'], function (
     $routes->post("planmember_store", "Student::store_planmember");
     $routes->post("student_chek_delete", "Student::chek_delete");
     $routes->post("dash_panel", "Student::dash");
-    $routes->post("qr", "Student::qr");
+    $routes->post("qr_log", "Student::qr_log");
     $routes->post("get_qr", "Student::get_qr");
     
     
@@ -101,6 +101,7 @@ $routes->group('staff', ['namespace' => 'App\Controllers\Staff'], function ($rou
     $routes->post("staff-ajax-load", "Staff::ajaxLoadDataStaff");
     $routes->post("staff_store", "Staff::store");
     $routes->post("staff_delete", "Staff::delete");
+    $routes->post("get_qr", "Staff::get_qr");
     $routes->post("plan_store", "Staff::store");
     $routes->post("staff_update", "Staff::get_staff");
     $routes->post("plan_update", "Staff::update");

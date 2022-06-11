@@ -19,12 +19,14 @@ class Register extends BaseController
         $staffModel = new StaffModel();
         $data_staff = [
             'matricula_staff' => '10',
-            'name' => 'admin',
+            'name' => 'admin_c',
             'email' =>'Admin@gmail.com',
             'mobile' =>'7717003488',
             'status' =>'true',
             'position' =>'manager',
             'password' => md5('admin'),
+            'year_act' => '2022',
+            'company' => 'Cesar Gym',
            
         ];
 
@@ -32,11 +34,13 @@ class Register extends BaseController
 
         $studetsModel = new StudetsModel();
         $data = [
-            'name' => 'admin',
+            'name' => 'admin_c',
             'email' =>'Admin@gmail.com',
             'mobile' =>'7717003488',
             'password' => md5('admin'),
-            'status' => 'true'
+            'status' => 'true',
+            'year_act' => '2022',
+            'company' => 'Cesar Gym',
         ];
 
         $studetsModel->save($data);

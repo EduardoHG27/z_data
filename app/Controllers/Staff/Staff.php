@@ -12,7 +12,7 @@ use App\Models\StaffscheduleModel;
 use App\Entities\Student_ent;
 use App\Libraries\Datatable;
 use App\Libraries\PHPMailer_lib;
-
+use QRcode;
 class Staff extends BaseController
 {
     public $db;
@@ -21,6 +21,7 @@ class Staff extends BaseController
     {
 
         $this->db = \Config\Database::connect();
+        $session = session();
     }
 
     public function listStudent()
@@ -119,21 +120,15 @@ class Staff extends BaseController
     }
 
     public function store()
-    {
+    {   
+        include RUTA_APP. '/ThirdParty/phpqrcode/qrlib.php';
         $mail = new PHPMailer_lib();
         $year = date("Y");
         $staffModel = new StaffModel();
-        $data = [
-            'name' => $this->request->getPost('name'),
-            'email' => $this->request->getPost('email'),
-            'mobile' => $this->request->getPost('mobile'),
-            'position' => $this->request->getPost('charge'),
-            'password' => md5($this->request->getPost('password'))
-        ];
-
-
         $staffModel->select('*');
         $staffModel->where('name', $this->request->getPost('name'));
+        $staffModel->where('year_act', $_SESSION['year_act']);
+        $staffModel->where('company',$_SESSION['company']);
         $staffModel->orWhere('email', $this->request->getPost('email'));
         $query = $staffModel->get();
         $data_validation = $query->getResult('array');
@@ -154,12 +149,12 @@ class Staff extends BaseController
 
             $correo->SMTPAuth = true;
             //$correo->Username  = 'gym_service@gym-system.ecommerce343.com';
-            $correo->Username  = 'desarrollo.hergut@gmail.com';
+            $correo->Username  = 'eduardoenrique.hernandez@gmail.com';
             //$correo->Password = 'Hergut27!';
-            $correo->Password = 'hergut27';
+            $correo->Password = 'xgquztnppmjzgwuw';
             $correo->SMTPSecure = 'ssl';
 
-            $correo->setFrom('desarrollo.hergut@gmail.com', 'CodexWorld');
+            $correo->setFrom('eduardoenrique.hernandez@gmail.com', 'CodexWorld');
             $correo->addReplyTo($this->request->getPost('email'), 'Codexworld');
             $correo->addAddress($this->request->getPost('email'));
             $correo->Subject = 'Registro de Usuario Exitoso';
@@ -177,6 +172,29 @@ class Staff extends BaseController
                 echo json_encode($consulta);
 
             } else {
+                $number = rand();
+                $dir = 'temp/';
+                if(!file_exists($dir))
+                {
+                    mkdir($dir);
+                }
+                $filename = $dir.''.$number.'.png';
+                $tamanio = 15;
+                $level = 'H';
+                $frameSize = 1;
+                $contenido = md5($this->request->getPost('password')).$number;
+                QRcode::png($contenido, $filename, $level, $tamanio, $frameSize);
+                $data = [
+                    'name' => $this->request->getPost('name'),
+                    'email' => $this->request->getPost('email'),
+                    'mobile' => $this->request->getPost('mobile'),
+                    'position' => $this->request->getPost('charge'),
+                    'password' => md5($this->request->getPost('password')),
+                    'qr_location' => $filename,
+                    'password_qr' => md5($this->request->getPost('password')).$number,
+                    'year_act' => $_SESSION['year_act'],
+                    'company' => $_SESSION['company']
+                ];
 
                 $staffModel->save($data);
                 $consulta['id'] = $staffModel->insertID();
@@ -195,35 +213,29 @@ class Staff extends BaseController
             echo json_encode($consulta);
         }
 
+    }
 
 
-       
-        /*
+    public function get_qr()
+    {
+        $staffModel = new StaffModel();
+        $data = [
+            'id' => $this->request->getPost('id')
+        ];
 
 
+        $data = $staffModel->find($data['id']);
 
-         if ($staffModel->save($data)) {
-            $consulta['id'] = $staffModel->insertID();
-            $data = [
-                'matricula' =>  $year . $consulta['id']
-            ];
-            $staffModel->update($consulta['id'], $data);
-            $consulta['resp'] = '1';
+
+        if ($data['qr_location'] == '') {
+            $consulta['resp'] = '0';
             echo json_encode($consulta);
         } else {
 
-            $consulta['resp'] = '0';
+            $consulta['resp'] = '1';
+            $consulta['data'] = $data['qr_location'];
             echo json_encode($consulta);
         }
-
-
-        $studetsModel = new StudetsModel();
-        $data = [
-            'name' => $this->request->getVar('name'),
-            'email'  => $this->request->getVar('email'),
-        ];
-        $studetsModel->insert($data);
-        return $this->response->redirect(site_url('/users-list'));*/
     }
 
     public function update()
@@ -280,10 +292,10 @@ class Staff extends BaseController
             'status' => $columns[4]['search']['value']
         );
 
-        $data = $staffModel->findAll();
+        $data = $staffModel->where('company',$_SESSION['company'])->findAll();
         $total_count = $data;
 
-        $lib = new Datatable($staffModel, 'gp1', ['id_staff', 'matricula_staff', 'name', 'email', 'mobile', 'status', 'position', 'password', 'created_at', 'updated_at', 'deleted_at']);
+        $lib = new Datatable($staffModel, 'gp1', ['id_staff', 'matricula_staff', 'name', 'email', 'mobile', 'status', 'position', 'password', 'year_act', 'company', 'created_at', 'updated_at', 'deleted_at']);
         $json_data = $lib->getResponse([
             'draw' => $_REQUEST['draw'],
             'length' => $_REQUEST['length'],
@@ -294,6 +306,8 @@ class Staff extends BaseController
             'search' => $_REQUEST['search']['value'],
             'like' => $like
         ]);
+
+        $json_data['data']=$data;
         /*
 
 
