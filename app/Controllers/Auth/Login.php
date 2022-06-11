@@ -57,6 +57,8 @@ class Login extends BaseController
             } else {
 
                 //use App\Models\StudetsModel;
+
+                ///----------------------------- Actualizacion de membrecias
                 $paysModel = new PaysModel();
                 $membersModel = new StudetsModel();
                 $data = $paysModel->where('pay_status', 'true');
@@ -87,7 +89,7 @@ class Login extends BaseController
                             
                         } else {
                 
-                          //  var_dump('update_no');
+                           var_dump('error al actualuzar canselacion de membrecia');
                         }
 
                     }
@@ -107,6 +109,8 @@ class Login extends BaseController
 
                    $session = \Config\Services::session();
                   $session->set($data);
+                  $session->set('year_act',$user['year_act']);
+                  $session->set('company',$user['company']);
                  return redirect()->route('principal/dashboard');
             }
         }
