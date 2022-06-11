@@ -400,18 +400,35 @@
     </div>
 
 </div>
-         <div class="container">
-        <div class='col-md-4'>
          
+
+    <div class="modal fade" id="Modalqr" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalTitle"></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-2">
+                        <img id="image_qr" name="image_qr" width="300" height="300">
+                    </div>
+                    <div class="col-md-8">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
         </div>
-        <div class='col-md-4'>
-          <input type="text" id="slider3" class="slider" />
-        </div>
-        <div class='col-md-4'>
-          
-        </div>
-        
     </div>
+</div>
 
 <link rel="stylesheet" href="<?php echo base_url(); ?>/select/css/rSlider.min.css">
 
@@ -688,8 +705,9 @@
                                                     '</button>' +
                                                     '</div>';*/
                         return '<div >' +
-                            '<button class="red-button-min" onclick="eliminar(' + row.id + ')"><i class="fas fa-trash-alt"></i></button>' +
-                            '<button class="yellow-button-min" onclick="actualizar(' + row.id + ')"><i class="fa fa-pencil-square-o"></i></button>' +
+                            '<button class="red-button-min" onclick="eliminar(' + row.id_staff + ')"><i class="fas fa-trash-alt"></i></button>' +
+                            '<button class="yellow-button-min" onclick="actualizar(' + row.id_staff + ')"><i class="fa fa-pencil-square-o"></i></button>' +
+                            '<button class="bluew-button-min" onclick="get_qr(' + row.id_staff + ')"><i class="fa fa-qrcode"></i></button>' +
                             '</div>';
                     }
                 },
@@ -1330,6 +1348,36 @@
 
         /*
          */
+    }
+
+    function get_qr(id) {
+
+        console.log(id);
+        $('.modal-title').text('Codigo Qr');
+        $.ajax({
+            url: site_url + '/staff/get_qr',
+            method: "post",
+            data: {
+                id: id
+            },
+            success: function(resp) {
+             var result = $.parseJSON(resp);
+
+             console.log(result.data);
+                if (result.resp == '1') {
+                    $('#Modalqr').modal('show');
+                    document.getElementById("image_qr").src = "../" + result.data;
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: 'Usuario no cuenta con código Qr',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                }
+            }
+        });  
     }
 
     function actualizar(id) {
