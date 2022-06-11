@@ -104,8 +104,10 @@ class Staff extends BaseController
     public function delete()
     {
         $staffModel = new StaffModel();
-
+       
         $id = $this->request->getPost('id');
+        $data=$staffModel->find($id);
+        unlink($data['qr_location']);
         $staffModel->where('id_staff', $id);
 
 
