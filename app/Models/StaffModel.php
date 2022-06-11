@@ -13,7 +13,7 @@ class StaffModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['name','email','mobile','status','position','password','matricula_staff'];
+    protected $allowedFields = ['name','email','mobile','status','position','password','matricula_staff','qr_location','password_qr','year_act','company'];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

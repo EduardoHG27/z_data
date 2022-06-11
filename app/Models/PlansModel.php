@@ -13,7 +13,7 @@ class PlansModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['name','month','discount','status'];
+    protected $allowedFields = ['name','month','discount','status','year_act','company'];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

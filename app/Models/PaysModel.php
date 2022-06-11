@@ -13,7 +13,7 @@ class PaysModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['id_member', 'date_in','date_out','cost','pay_status'];
+    protected $allowedFields = ['id_member', 'date_in','date_out','cost','pay_status','year_act','company'];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
