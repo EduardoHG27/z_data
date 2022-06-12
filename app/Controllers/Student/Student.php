@@ -372,6 +372,12 @@ class Student extends BaseController
                     $hoy['minutes'] = '0' . $hoy['minutes'];
                     var_dump($hoy['minutes']);
                 }
+
+                if (strlen($hoy['seconds']) == 1) {
+                    $hoy['seconds'] = '0' . $hoy['seconds'];
+                    var_dump($hoy['seconds']);
+                }
+
                 $hour_today = $hoy['hours'] . ':' . $hoy['minutes'] . ':' . $hoy['seconds'];
                 $day_today = $hoy['mday'] . '-' . $hoy['mon'] . '-' . $hoy['year'];
 
@@ -421,9 +427,6 @@ class Student extends BaseController
                     foreach ($data_schedule as $key => $value) {
                         # code...
                         if ($value['day'] == $dia) {
-
-
-
                             $data = [
                                 'id_staff' => $data_validation_staff[0]['id_staff'],
                                 'hour_in' => $hour_today,
