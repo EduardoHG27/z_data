@@ -16,6 +16,7 @@ use App\Libraries\Datatable;
 use App\Libraries\PHPMailer_lib;
 use App\Libraries\qr;
 use QRcode;
+use DateTime;
 use function PHPUnit\Framework\isNull;
 
 class Student extends BaseController
@@ -365,7 +366,7 @@ class Student extends BaseController
             } else {
 
 
-                
+
                 $schedulestaffModel = new StaffscheduleModel();
                 $schedulestaffModel->select('day,hour_in,hour_out');
                 $schedulestaffModel->where('id_staff', $data_validation_staff[0]['id_staff']);
@@ -373,9 +374,20 @@ class Student extends BaseController
                 $schedulestaffModel->where('company', $_SESSION['company']);
                 $query = $schedulestaffModel->get();
                 $data_schedule = $query->getResult('array');
-        
-                var_dump($data_schedule);
-                $log= new LogStaffModel();
+
+                $datetime = DateTime::createFromFormat('Ymd', '20151102');
+
+                var_dump($datetime->format('D'));
+
+
+                $date = strtotime('2016-2-3');
+                $date = date('l', $date);
+                var_dump($date);
+
+                
+                $log = new LogStaffModel();
+
+
 
 
                 $consulta['resp'] = '1';
@@ -383,7 +395,6 @@ class Student extends BaseController
                 $consulta['msj'] = 'Usuario Activo';
                 echo json_encode($consulta);
             }
-
         } else {
 
             $consulta['resp'] = '0';
