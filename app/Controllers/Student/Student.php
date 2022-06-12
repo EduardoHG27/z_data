@@ -395,7 +395,7 @@ class Student extends BaseController
                 } else if ($hoy['weekday'] == 'Sunday') {
                     $dia = 'domingo';
                 }
-
+                $bandera=0;
                 foreach ($data_schedule as $key => $value) {
                     # code...
                     if ($value['day'] == $dia) {
@@ -414,16 +414,28 @@ class Student extends BaseController
         
                         $log->save($data);
                         var_dump('Si tiene dia hoy');
-
+                        $bandera=0;
                     } else {
-                        $consulta['resp'] = '3';
-                        $consulta['name'] = $user['name'];
-                        $consulta['msj'] = 'No se tiene registrado hoy su ingreso';
-                        echo json_encode($consulta);
+                        
+                        $bandera=1;
                     }
                 }
 
+                if($bandera==0)
+                {
+                    $consulta['resp'] = '3';
+                    $consulta['name'] = $user['name'];
+                    $consulta['msj'] = 'No se tiene registrado hoy su ingreso';
 
+                }else
+                {
+
+                    $consulta['resp'] = '1';
+                    $consulta['name'] = $user['name'];
+                    $consulta['msj'] = 'Ser registro tu Entrada con exito!!';
+                    echo json_encode($consulta);
+                }
+              
 
 
               
@@ -431,10 +443,6 @@ class Student extends BaseController
 
 
 
-                $consulta['resp'] = '1';
-                $consulta['name'] = $user['name'];
-                $consulta['msj'] = 'Usuario Activo';
-                echo json_encode($consulta);
             }
         } else {
 
