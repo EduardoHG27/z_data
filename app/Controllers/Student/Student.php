@@ -365,7 +365,7 @@ class Student extends BaseController
             'id' => $this->request->getPost('id')
         ];
 
-        $data = $studetsModel->where('company',$_SESSION['company'])->findAll();
+        $data = $studetsModel->where('company',$_SESSION['company'])->find($data['id']);
 
         var_dump($data);
         //->find($data['id']);
