@@ -368,9 +368,8 @@ class Student extends BaseController
 
                 $hoy = getdate();
 
-                if(strlen($hoy['minutes'])==1)
-                {
-                    $hoy['minutes']='0'.$hoy['minutes'];
+                if (strlen($hoy['minutes']) == 1) {
+                    $hoy['minutes'] = '0' . $hoy['minutes'];
                     var_dump($hoy['minutes']);
                 }
                 $hour_today = $hoy['hours'] . ':' . $hoy['minutes'] . ':' . $hoy['seconds'];
@@ -398,7 +397,7 @@ class Student extends BaseController
                 $schedulestaffModel->where('id_staff', $data_validation_staff[0]['id_staff']);
                 $schedulestaffModel->where('year_act', $_SESSION['year_act']);
                 $schedulestaffModel->where('company', $_SESSION['company']);
-                $schedulestaffModel->where('day', $dia );
+                $schedulestaffModel->where('day', $dia);
                 $query = $schedulestaffModel->get();
                 $data_schedule = $query->getResult('array');
 
@@ -415,55 +414,71 @@ class Student extends BaseController
                 $data_log = $query_log->getResult('array');
 
                 var_dump($data_log);
-                
-                $bandera=0;
-                foreach ($data_schedule as $key => $value) {
-                    # code...
-                    if ($value['day'] == $dia) {
 
-                       
 
-                        $data = [
-                            'id_staff' => $data_validation_staff[0]['id_staff'],
-                            'hour_in' => $hour_today,
-                            'hour_in_save' => $value['hour_in'],
-                            'day' => $dia,
-                            'day_save' => $day_today,
-                            'year_act' => $_SESSION['year_act'],
-                            'company' => $_SESSION['company']
-                        ];
-        
-                        $log->save($data);
-                        $bandera=0;
-                        break;
-                    } else {
-                        
-                        $bandera=1;
+                if (count($data_log) == 0) {
+                    $bandera = 0;
+                    foreach ($data_schedule as $key => $value) {
+                        # code...
+                        if ($value['day'] == $dia) {
+
+
+
+                            $data = [
+                                'id_staff' => $data_validation_staff[0]['id_staff'],
+                                'hour_in' => $hour_today,
+                                'hour_in_save' => $value['hour_in'],
+                                'day' => $dia,
+                                'day_save' => $day_today,
+                                'year_act' => $_SESSION['year_act'],
+                                'company' => $_SESSION['company']
+                            ];
+
+                            $log->save($data);
+                            $bandera = 0;
+                            $consulta['resp'] = '1';
+                            $consulta['name'] = $user['name'];
+                            $consulta['msj'] = 'Se registro tu Entrada con exito!!';
+                            echo json_encode($consulta);
+                        }
                     }
-                }
+                } else if (count($data_log) == 1) {
+                    $bandera = 0;
+                    foreach ($data_schedule as $key => $value) {
+                        # code...
+                        if ($value['day'] == $dia) {
 
-                if($bandera==0)
-                {
-                    $consulta['resp'] = '1';
+
+
+                            $data = [
+                                'id_staff' => $data_validation_staff[0]['id_staff'],
+                                'hour_in' => $hour_today,
+                                'hour_in_save' => $value['hour_in'],
+                                'day' => $dia,
+                                'day_save' => $day_today,
+                                'year_act' => $_SESSION['year_act'],
+                                'company' => $_SESSION['company']
+                            ];
+
+                            $log->save($data);
+                            $bandera = 0;
+
+
+                            $consulta['resp'] = '1';
+                            $consulta['name'] = $user['name'];
+                            $consulta['msj'] = 'Se registro tu Salida con exito!!';
+                            echo json_encode($consulta);
+                        }
+                    }
+                } else if(count($data_log)>1) {
+                    $consulta['resp'] = '2';
                     $consulta['name'] = $user['name'];
-                    $consulta['msj'] = 'Se registro tu Entrada con exito!!';
-                    echo json_encode($consulta);
-
-                }else
-                {
+                    $consulta['msj'] = 'Se ha registrado Su entrada y salida por hoy';
+                }else {
                     $consulta['resp'] = '3';
                     $consulta['name'] = $user['name'];
                     $consulta['msj'] = 'No se tiene registrado hoy su ingreso';
-  
                 }
-              
-
-
-              
-
-
-
-
             }
         } else {
 
