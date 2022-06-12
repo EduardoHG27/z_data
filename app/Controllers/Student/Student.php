@@ -451,8 +451,8 @@ class Student extends BaseController
 
 
                             $data = [
-                                'hour_out' => $data_validation_staff[0]['id_staff'],
-                                'hour_out_save' => $value['hour_in']
+                                'hour_out' => $hour_today,
+                                'hour_out_save' => $value['hour_out']
                             ];
 
                             $log->update($data_log[0]['id_entrada'], $data);
