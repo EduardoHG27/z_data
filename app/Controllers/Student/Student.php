@@ -365,7 +365,12 @@ class Student extends BaseController
             'id' => $this->request->getPost('id')
         ];
 
-        $data = $studetsModel->where('company',$_SESSION['company'])->find($data['id']);
+        $studetsModel->select('*');
+        $studetsModel->where('id',$data['id']);
+        $studetsModel->where('year_act', $_SESSION['year_act']);
+        $studetsModel->where('company',$_SESSION['company']);
+        $query_student = $studetsModel->get();
+        $data = $query_student->getResult('array');
 
         var_dump($data);
         //->find($data['id']);
