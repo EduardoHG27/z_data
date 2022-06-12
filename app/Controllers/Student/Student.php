@@ -403,7 +403,7 @@ class Student extends BaseController
 
                 $log = new LogStaffModel();
 
-                $log = new StaffscheduleModel();
+               
                 $log->select('id_entrada');
                 $log->where('id_staff', $data_validation_staff[0]['id_staff']);
                 $log->where('day', $dia);
@@ -451,17 +451,11 @@ class Student extends BaseController
 
 
                             $data = [
-                                'id_staff' => $data_validation_staff[0]['id_staff'],
-                                'hour_in' => $hour_today,
-                                'hour_in_save' => $value['hour_in'],
-                                'day' => $dia,
-                                'day_save' => $day_today,
-                                'year_act' => $_SESSION['year_act'],
-                                'company' => $_SESSION['company']
+                                'hour_out' => $data_validation_staff[0]['id_staff'],
+                                'hour_out_save' => $value['hour_in']
                             ];
 
-                            $log->save($data);
-                            $bandera = 0;
+                            $log->update($data_log[0]['id_entrada'], $data);
 
 
                             $consulta['resp'] = '1';
