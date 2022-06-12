@@ -328,7 +328,7 @@ class Student extends BaseController
 
 
         $staffModel = new StaffModel();
-        $staffModel->select('name,matricula');
+        $staffModel->select('name,matricula_staff');
         $staffModel->where('password_qr', $this->request->getPost('id'));
         $staffModel->where('year_act', $_SESSION['year_act']);
         $staffModel->where('company', $_SESSION['company']);
