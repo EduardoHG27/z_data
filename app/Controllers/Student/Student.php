@@ -339,25 +339,21 @@ class Student extends BaseController
         $dat_staff = count($data_validation_staff);
 
         if (!$dat == '0') {
-            $user = $model->getUserBy('matricula', $data_validation[0]['matricula']);
+            $user = $studetsModel->getUserBy('matricula', $data_validation[0]['matricula']);
 
             if ($user['status'] != 'true') {
-
-
                 $consulta['resp'] = '2';
                 $consulta['name'] = $user['name'];
                 $consulta['msj'] = 'Usuario se agoto su membresia';
                 echo json_encode($consulta);
             } else {
-
-
                 $consulta['resp'] = '1';
                 $consulta['name'] = $user['name'];
                 $consulta['msj'] = 'Usuario Activo';
                 echo json_encode($consulta);
             }
         } else if (!$dat_staff == '0') {
-            $user = $model->getUserBy('matricula_staff', $data_validation_staff[0]['matricula_staff']);
+            $user = $staffModel->getUserBy('matricula_staff', $data_validation_staff[0]['matricula_staff']);
             if ($user['status'] != 'true') {
                 $consulta['resp'] = '2';
                 $consulta['name'] = $user['name'];
