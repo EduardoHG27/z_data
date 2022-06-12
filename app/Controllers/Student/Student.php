@@ -8,6 +8,7 @@ use App\Models\StudetsModel;
 use App\Models\StaffModel;
 use App\Models\PlansModel;
 use App\Models\PaysModel;
+use App\Models\LogStaffModel;
 use App\Entities\Student_ent;
 use App\Libraries\Datatable;
 use App\Libraries\PHPMailer_lib;
@@ -360,6 +361,13 @@ class Student extends BaseController
                 $consulta['msj'] = 'Miembro de Staff no tiene un horario asignado!!';
                 echo json_encode($consulta);
             } else {
+
+
+                var_dump($data_validation_staff[0]['matricula_staff']);
+                
+                $log= new LogStaffModel();
+
+
                 $consulta['resp'] = '1';
                 $consulta['name'] = $user['name'];
                 $consulta['msj'] = 'Usuario Activo';
@@ -492,28 +500,6 @@ class Student extends BaseController
             'like' => $like
         ]);
         $json_data['data'] = $data;
-        /*
-
-
-       
-        $json_data = array(
-            "draw" => intval($params['draw']),
-            "length" => $_REQUEST['length'],
-            "start" => $_REQUEST['start'],
-            "recordsTotal" => count($total_count),
-            "recordsFiltered" => count($total_count),
-            "data" => $data   // total data array
-        );
-
-
-   /*
-        $json_data = array(
-            "draw" => intval($params['draw']),
-            "recordsTotal" => count($total_count),
-            "recordsFiltered" => count($total_count),
-            "data" => $data   // total data array
-        );
- */
 
         echo json_encode($json_data);
     }
