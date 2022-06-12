@@ -366,17 +366,13 @@ class Student extends BaseController
             } else {
 
 
-
-                $schedulestaffModel = new StaffscheduleModel();
-                $schedulestaffModel->select('day,hour_in,hour_out');
-                $schedulestaffModel->where('id_staff', $data_validation_staff[0]['id_staff']);
-                $schedulestaffModel->where('year_act', $_SESSION['year_act']);
-                $schedulestaffModel->where('company', $_SESSION['company']);
-                $query = $schedulestaffModel->get();
-                $data_schedule = $query->getResult('array');
-
-
                 $hoy = getdate();
+
+                if(strlen($hoy['minutes'])==1)
+                {
+                    $hoy['minutes']='0'.$hoy['minutes'];
+                    var_dump($hoy['minutes']);
+                }
                 $hour_today = $hoy['hours'] . ':' . $hoy['minutes'] . ':' . $hoy['seconds'];
 
 
@@ -395,6 +391,20 @@ class Student extends BaseController
                 } else if ($hoy['weekday'] == 'Sunday') {
                     $dia = 'domingo';
                 }
+
+                $schedulestaffModel = new StaffscheduleModel();
+                $schedulestaffModel->select('day,hour_in,hour_out');
+                $schedulestaffModel->where('id_staff', $data_validation_staff[0]['id_staff']);
+                $schedulestaffModel->where('year_act', $_SESSION['year_act']);
+                $schedulestaffModel->where('company', $_SESSION['company']);
+                $schedulestaffModel->where('day', $dia );
+                $query = $schedulestaffModel->get();
+                $data_schedule = $query->getResult('array');
+
+                var_dump($data_schedule);
+
+
+              
                 $bandera=0;
                 foreach ($data_schedule as $key => $value) {
                     # code...
