@@ -5,6 +5,7 @@ namespace App\Controllers\Student;
 
 use App\Controllers\BaseController;
 use App\Models\StudetsModel;
+use App\Models\StaffModel;
 use App\Models\PlansModel;
 use App\Models\PaysModel;
 use App\Entities\Student_ent;
@@ -154,55 +155,66 @@ class Student extends BaseController
             'password' => $this->request->getPost('password')
         ];
         $nombre = trim($data['username']);
-        //$password = trim($this->request->getVar('password'));
-
         $password = md5($data['password']);
-        $model = model('StudetsModel');
 
-        if (!$user = $model->getUserBy('name', $nombre)) {
+        $studetsModel = new StudetsModel();
+       
+        $studetsModel->select('*');
+        $studetsModel->where('name',$nombre);
+        $studetsModel->where('password',$password);
+        $studetsModel->where('year_act', $_SESSION['year_act']);
+        $studetsModel->where('company',$_SESSION['company']);
+         $query_student = $studetsModel->get();
+        $data_validation_student = $query_student->getResult('array');
+        
+       
+        $staffModel = new StaffModel();
+        $staffModel->select('*');
+        $staffModel->where('name',$nombre);
+        $staffModel->where('password',$password);
+        $staffModel->where('year_act', $_SESSION['year_act']);
+        $staffModel->where('company',$_SESSION['company']);
+	    $query = $staffModel->get();
+        $data_validation = $query->getResult('array');   
 
-            /* return redirect()->back()
-                ->with('msg', [
-                    'type' => 'danger',
-                    'body' => 'Este usuario no se encuentra registrado en el sistema'
-                ]);
-                */
-            $consulta['data'] = '0';
-            $consulta['msj'] = 'Este usuario no se encuentra registrado en el sistema';
+        
+       
+        if(!empty($data_validation)){
 
-            echo json_encode($consulta);
-        } else {
-
-
-            if ($user['name'] == 'admin') {
-                if ($password != $user['password']) {
+            if ($data_validation[0]['position'] == 'manager') {
+                if ($password != $data_validation[0]['password']) {
 
                     $consulta['data'] = '1';
                     $consulta['msj'] = 'Contraseña Incorrecta';
                     echo json_encode($consulta);
                 } else {
+                    
                     $consulta['data'] = '5';
                     $consulta['msj'] = 'Admin';
                     echo json_encode($consulta);
                 }
-            } else {
-                if ($password != $user['password']) {
-                    // if (!password_verify($password, $user->username)) {
-                    $consulta['data'] = '1';
-                    $consulta['msj'] = 'Contraseña Incorrecta';
-
-                    echo json_encode($consulta);
-                } else if ($user['status'] != 'true') {
-                    $consulta['data'] = '2';
-                    $consulta['msj'] = 'Usuario se agoto su membresia';
-                    echo json_encode($consulta);
-                } else {
-
-                    $consulta['data'] = '3';
-                    $consulta['msj'] = 'Usuario Activo';
-                    echo json_encode($consulta);
-                }
             }
+        } else if(!empty($data_validation_student))
+        {
+            if ($password != $data_validation_student[0]['password']) {
+                $consulta['data'] = '1';
+                $consulta['msj'] = 'Contraseña Incorrecta';
+
+                echo json_encode($consulta);
+            } else if ($data_validation_student[0]['status'] != 'true') {
+                $consulta['data'] = '2';
+                $consulta['msj'] = 'Usuario se agoto su membresia';
+                echo json_encode($consulta);
+            } else {
+
+                $consulta['data'] = '3';
+                $consulta['msj'] = 'Usuario Activo';
+                echo json_encode($consulta);
+            }
+        }else {
+            $consulta['data'] = '0';
+            $consulta['msj'] = 'Este usuario no se encuentra registrado en el sistema';
+            echo json_encode($consulta);
         }
     }
 
@@ -219,7 +231,6 @@ class Student extends BaseController
         $studetsModel->where('company',$_SESSION['company']);
         $studetsModel->where('email', $this->request->getPost('email'));
         $query = $studetsModel->get();
-  
         $data_validation = $query->getResult('array');
  
         if (empty($data_validation)) {
@@ -312,6 +323,8 @@ class Student extends BaseController
 
         $studetsModel->select('name,matricula');
         $studetsModel->where('password_qr', $this->request->getPost('id'));
+        $studetsModel->where('year_act', $_SESSION['year_act']);
+        $studetsModel->where('company',$_SESSION['company']);
         $query = $studetsModel->get();
         $data_validation = $query->getResult('array');
 
