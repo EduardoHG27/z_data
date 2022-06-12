@@ -404,7 +404,7 @@ class Student extends BaseController
                 $log = new LogStaffModel();
 
                
-                $log->select('id_entrada');
+                $log->select('id_entrada,hour_out');
                 $log->where('id_staff', $data_validation_staff[0]['id_staff']);
                 $log->where('day', $dia);
                 $log->where('day_save', $day_today);
@@ -443,21 +443,16 @@ class Student extends BaseController
                         }
                     }
                 } else if (count($data_log) == 1) {
-                    $bandera = 0;
+          
                     foreach ($data_schedule as $key => $value) {
                         # code...
                         if ($value['day'] == $dia) {
-
-
-
                             $data = [
                                 'hour_out' => $hour_today,
                                 'hour_out_save' => $value['hour_out']
                             ];
 
                             $log->update($data_log[0]['id_entrada'], $data);
-
-
                             $consulta['resp'] = '1';
                             $consulta['name'] = $user['name'];
                             $consulta['msj'] = 'Se registro tu Salida con exito!!';
