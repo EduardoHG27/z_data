@@ -413,8 +413,8 @@ class Student extends BaseController
                         ];
         
                         $log->save($data);
-                        var_dump('Si tiene dia hoy');
                         $bandera=0;
+                        break;
                     } else {
                         
                         $bandera=1;
@@ -423,17 +423,17 @@ class Student extends BaseController
 
                 if($bandera==0)
                 {
-                    $consulta['resp'] = '3';
+                    $consulta['resp'] = '1';
                     $consulta['name'] = $user['name'];
-                    $consulta['msj'] = 'No se tiene registrado hoy su ingreso';
+                    $consulta['msj'] = 'Se registro tu Entrada con exito!!';
+                    echo json_encode($consulta);
 
                 }else
                 {
-
-                    $consulta['resp'] = '1';
+                    $consulta['resp'] = '3';
                     $consulta['name'] = $user['name'];
-                    $consulta['msj'] = 'Ser registro tu Entrada con exito!!';
-                    echo json_encode($consulta);
+                    $consulta['msj'] = 'No se tiene registrado hoy su ingreso';
+  
                 }
               
 
