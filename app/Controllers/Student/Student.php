@@ -364,25 +364,18 @@ class Student extends BaseController
         $data = [
             'id' => $this->request->getPost('id')
         ];
-      
-        $studetsModel->select('*');
-        $studetsModel->where('password_qr',$data['id']);
-        $studetsModel->where('year_act', $_SESSION['year_act']);
-        $studetsModel->where('company',$_SESSION['company']);
-        $query_student = $studetsModel->get();
-        $data = $query_student->getResult('array');
-
-        
-        //->find($data['id']);
 
 
-        if ($data[0]['qr_location'] == '') {
+        $data = $studetsModel->find($data['id']);
+
+
+        if ($data['qr_location'] == '') {
             $consulta['resp'] = '0';
             echo json_encode($consulta);
         } else {
 
             $consulta['resp'] = '1';
-            $consulta['data'] = $data[0]['qr_location'];
+            $consulta['data'] = $data['qr_location'];
             echo json_encode($consulta);
         }
     }
