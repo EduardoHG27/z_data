@@ -4,10 +4,12 @@
 namespace App\Controllers\Student;
 
 use App\Controllers\BaseController;
+use App\Database\Migrations\TblStaffSchedule;
 use App\Models\StudetsModel;
 use App\Models\StaffModel;
 use App\Models\PlansModel;
 use App\Models\PaysModel;
+use App\Models\StaffscheduleModel;
 use App\Models\LogStaffModel;
 use App\Entities\Student_ent;
 use App\Libraries\Datatable;
@@ -329,7 +331,7 @@ class Student extends BaseController
 
 
         $staffModel = new StaffModel();
-        $staffModel->select('name,matricula_staff');
+        $staffModel->select('id_staff,name,matricula_staff');
         $staffModel->where('password_qr', $this->request->getPost('id'));
         $staffModel->where('year_act', $_SESSION['year_act']);
         $staffModel->where('company', $_SESSION['company']);
@@ -363,8 +365,16 @@ class Student extends BaseController
             } else {
 
 
-                var_dump($data_validation_staff[0]['matricula_staff']);
                 
+                $schedulestaffModel = new StaffscheduleModel();
+                $schedulestaffModel->select('day,hour_in,hour_out');
+                $schedulestaffModel->where('id_staff', $data_validation_staff[0]['id_staff']);
+                $schedulestaffModel->where('year_act', $_SESSION['year_act']);
+                $schedulestaffModel->where('company', $_SESSION['company']);
+                $query = $schedulestaffModel->get();
+                $data_schedule = $query->getResult('array');
+        
+                var_dump($data_schedule);
                 $log= new LogStaffModel();
 
 
