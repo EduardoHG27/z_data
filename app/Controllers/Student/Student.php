@@ -365,8 +365,10 @@ class Student extends BaseController
             'id' => $this->request->getPost('id')
         ];
 
+        $data = $studetsModel->where('company',$_SESSION['company'])->findAll();
 
-        $data = $studetsModel->find($data['id']);
+        var_dump($data);
+        //->find($data['id']);
 
 
         if ($data['qr_location'] == '') {
