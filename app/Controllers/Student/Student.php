@@ -442,7 +442,7 @@ class Student extends BaseController
                             echo json_encode($consulta);
                         }
                     }
-                } else if (count($data_log) == 1) {
+                } else if ($data_log[0]['hour_out'] == '') {
           
                     foreach ($data_schedule as $key => $value) {
                         # code...
@@ -459,7 +459,7 @@ class Student extends BaseController
                             echo json_encode($consulta);
                         }
                     }
-                } else if(count($data_log)>1) {
+                } else if($data_log[0]['hour_out'] != '') {
                     $consulta['resp'] = '2';
                     $consulta['name'] = $user['name'];
                     $consulta['msj'] = 'Se ha registrado Su entrada y salida por hoy';
