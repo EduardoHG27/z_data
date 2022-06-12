@@ -375,17 +375,58 @@ class Student extends BaseController
                 $query = $schedulestaffModel->get();
                 $data_schedule = $query->getResult('array');
 
-               
+
                 $hoy = getdate();
-                $date_today=$hoy['hours'].':'.$hoy['minutes'].':'.$hoy['seconds'];
-                var_dump($date_today);
-                
+                $hour_today = $hoy['hours'] . ':' . $hoy['minutes'] . ':' . $hoy['seconds'];
 
-                
+
+                if ($hoy['weekday'] == 'Monday') {
+                    $dia = 'lunes';
+                } else if ($hoy['weekday'] == 'Tuesday') {
+                    $dia = 'martes';
+                } else if ($hoy['weekday'] == 'Wednesday') {
+                    $dia = 'miercoles';
+                } else if ($hoy['weekday'] == 'Thursday') {
+                    $dia = 'jueves';
+                } else if ($hoy['weekday'] == 'Friday') {
+                    $dia = 'viernes';
+                } else if ($hoy['weekday'] == 'Saturday') {
+                    $dia = 'sabado';
+                } else if ($hoy['weekday'] == 'Sunday') {
+                    $dia = 'domingo';
+                }
+
+                foreach ($data_schedule as $key => $value) {
+                    # code...
+                    if ($value['day'] == $dia) {
+
+                        $log = new LogStaffModel();
+
+                        $data = [
+                            'id_staff' => $data_validation_staff[0]['id_staff'],
+                            'hour_in' => $hour_today,
+                            'hour_in_save' => $value['hour_in'],
+                            'day' => $dia,
+                            'day_save' => $value['day'],
+                            'year_act' => $_SESSION['year_act'],
+                            'company' => $_SESSION['company']
+                        ];
+        
+                        $log->save($data);
+                        var_dump('Si tiene dia hoy');
+
+                    } else {
+                        $consulta['resp'] = '3';
+                        $consulta['name'] = $user['name'];
+                        $consulta['msj'] = 'No se tiene registrado hoy su ingreso';
+                        echo json_encode($consulta);
+                    }
+                }
+
+
+
+
               
-
-
-                $log = new LogStaffModel();
 
 
 
