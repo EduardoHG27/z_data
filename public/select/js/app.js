@@ -22,14 +22,7 @@ var app = new Vue({
       },
         success: function(resp) {
           var result = $.parseJSON(resp);
-          if(result.resp=='0')
-          {
-            Swal.fire(
-              'Atencion!!',
-              result.msj,
-              'error'
-            )
-          }else if (result.resp=='2')
+         if (result.resp=='2')
           {
             Swal.fire(
               'Atencion!!',
@@ -37,12 +30,40 @@ var app = new Vue({
               'warning'
             )
           }
-          else
+          else if (result.resp=='1')
           {
             Swal.fire(
               'Bienvenido',
               result.name + ' -> ' + result.msj,
               'success'
+            )
+          }else if (result.resp=='3')
+          {
+            Swal.fire(
+              'Staff',
+              result.name + ' -> ' + result.msj,
+              'success'
+            )
+          }else if (result.resp=='4')
+          {
+            Swal.fire(
+              'Staff',
+              result.name + ' -> ' + result.msj,
+              'success'
+            )
+          }else if (result.resp=='5')
+          {
+            Swal.fire(
+              'Staff',
+              result.name + ' -> ' + result.msj,
+              'warning'
+            )
+          }else
+          {
+            Swal.fire(
+              'Atencion',
+              result.name + ' -> ' + result.msj,
+              'error'
             )
           }
           
