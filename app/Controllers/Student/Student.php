@@ -370,12 +370,10 @@ class Student extends BaseController
 
                 if (strlen($hoy['minutes']) == 1) {
                     $hoy['minutes'] = '0' . $hoy['minutes'];
-                    var_dump($hoy['minutes']);
                 }
 
                 if (strlen($hoy['seconds']) == 1) {
                     $hoy['seconds'] = '0' . $hoy['seconds'];
-                    var_dump($hoy['seconds']);
                 }
 
                 $hour_today = $hoy['hours'] . ':' . $hoy['minutes'] . ':' . $hoy['seconds'];
