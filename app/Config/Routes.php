@@ -101,8 +101,11 @@ $routes->group('staff', ['namespace' => 'App\Controllers\Staff'], function ($rou
     $routes->post("staff-ajax-load", "Staff::ajaxLoadDataStaff");
     $routes->post("staff_store", "Staff::store");
     $routes->post("staff_delete", "Staff::delete");
+    $routes->post("day_schedule", "Staff::day_schedule");
+    $routes->post("day_schedule_mod", "Staff::day_schedule_mod");
     $routes->post("get_qr", "Staff::get_qr");
     $routes->post("plan_store", "Staff::store");
+    $routes->post("get_schedule", "Staff::get_schedule");
     $routes->post("staff_update", "Staff::get_staff");
     $routes->post("plan_update", "Staff::update");
     $routes->post("plan_delete", "Staff::delete");

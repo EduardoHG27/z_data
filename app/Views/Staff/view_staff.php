@@ -6,6 +6,119 @@
 
 
 <script type="text/javascript" src="<?php echo base_url(); ?>/select/js/select2.js"></script>
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Staff</li>
+          </ol>
+          <h3 class="font-weight-bolder mb-0"><?php echo $_SESSION['company'] ?></h3>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group input-group-outline">
+
+            </div>
+          </div>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                <span class="d-sm-inline d-none">Sign In</span>
+              </a>
+            </li>
+            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item px-3 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0">
+                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-bell cursor-pointer"></i>
+              </a>
+              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="./assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">New message</span> from Laur
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          13 minutes ago
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="./assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">New album</span> by Travis Scott
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          1 day
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <div class="d-flex py-1">
+                      <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <title>credit-card</title>
+                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                              <g transform="translate(1716.000000, 291.000000)">
+                                <g transform="translate(453.000000, 454.000000)">
+                                  <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                  <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </svg>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          Payment successfully completed
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          2 days
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 <div class="container-fluid">
 
 
@@ -105,13 +218,13 @@
             </div>
         </div>
     </div>
-   
+
 </div>
 
 </div>
 <div class="card">
 
-   
+
 </div>
 
 
@@ -125,77 +238,28 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalTitle"></h4>
+                <div id="ohsnap"></div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <br>
 
-
-            <!--
-                
-    <div class="container">
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link active" href="#login-contents" id="login-tab" data-bs-toggle="tab">Log In</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#register-contents" id="register-tab" data-bs-toggle="tab">Register</a>
-    </li>
-  </ul>
-  <div class="tab-content">
-    <div id="login-contents" class="tab-pane active">
-      <table>
-        <tr>
-          <td>Username :</td>
-          <td><input type="text" id="ip-username" placeholder="Username"></td>
-        </tr>
-        <tr>
-          <td>Password :</td>
-          <td><input type="text" placeholder="Password" id="ip-password"></td>
-        </tr>
-      </table>
-    </div>
-    <div id="register-contents" class="tab-pane fade">
-      <table>
-        <tr>
-          <td>Name :</td>
-          <td><input type="text" placeholder="First Name" id="ip-f-name"></td>
-        </tr>
-        <tr>
-          <td>Last Name :</td>
-          <td><input type="text" placeholder="Last Name" id="ip-l-name"></td>
-        </tr>
-        <tr>
-          <td>E-Mail :</td>
-          <td><input type="text" placeholder="Your E-Mail Id" id="ip-e-mail"></td>
-        </tr>
-        <tr>
-          <td>A OTP will be sent to your mail id for verification.</td>
-          <td>
-            <Button class="btn btn-success" id="register-btn">Register</Button>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</div>  
--->
             <div class="container">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
+
                     <li class="nav-item" role="presentation" id="staff_pestaña">
                         <button class="nav-link pestaña active" id="staff" data-bs-toggle="tab" data-bs-target="#member_form" type="button" role="tab" aria-controls="home" aria-selected="true">Staff</button>
                     </li>
                     <li class="nav-item" role="presentation" id="plan_pestaña">
-                        <button class="nav-link pestaña" style="" id="plan_button" data-bs-toggle="tab" data-bs-target="#plan_form" type="button" role="tab" aria-controls="profile" aria-selected="false">Elegir Horario</button>
+                        <button class="nav-link pestaña" style="" id="plan_button" data-bs-toggle="tab" data-bs-target="#plan_schedule" type="button" role="tab" aria-controls="profile" aria-selected="false">Asignar Horario</button>
                     </li>
-                    <li class="nav-item" role="presentation" id="view_pestaña">
-                        <button class="nav-link pestaña" style="" id="view_button" data-bs-toggle="tab" data-bs-target="#view_form" type="button" role="tab" aria-controls="profile" aria-selected="false">Datos Plan</button>
-                    </li>
+
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="member_form" role="tabpanel" aria-labelledby="home-tab">
                         <div class="container">
                             <br>
+
                             <form action="" id="registration">
                                 <div id="msg"></div>
                                 <input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : '' ?>" class="form-control">
@@ -241,7 +305,7 @@
 
 
                     </div>
-                    <div class="tab-pane fade" id="plan_form" role="tabpanel" aria-labelledby="plan_button">
+                    <div class="tab-pane fade" id="plan_schedule" role="tabpanel" aria-labelledby="plan_button">
                         <div class="container">
                             <br>
                             <h3>Elegir Horario</h3>
@@ -249,56 +313,203 @@
                             <form action="" id="member-plan">
                                 <div id="msg"></div>
                                 <input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : '' ?>" class="form-control">
+
                                 <div class="row form-group">
-                                    <div class="col-md-2">
+                                    <div class="col-md-1" style="float:right;">
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-1" style="float:right;">
+
+                                    </div>
+                                    <div class="col-md-2">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something" checked>
+                                            <label for="">Día</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <label for="">Entrada</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <label for="">Salida</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-1" style="float:right;">
+                                    </div>
+                                    <div class="col-md-1" style="float:right;">
+                                        <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
                                             <label class="form-check-label" for="check1">Lunes</label>
                                         </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="check2" name="option2" value="something">
+                                            <input type="time" id="appt_lun1" name="appt" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input type="time" id="appt_lun2" name="appt" style="display:none" value="12:59:48">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-1" style="float:right;">
+                                    </div>
+                                    <div class="col-md-1" style="float:right;">
+                                        <input type="checkbox" class="form-check-input" id="check2" name="option1" value="something">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
                                             <label class="form-check-label" for="check1">Martes</label>
                                         </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="check3" name="option3" value="something">
+                                            <input type="time" id="appt_mar1" name="appt_mar1" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input type="time" id="appt_mar2" name="appt_mar2" value="12:59:48" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-1" style="float:right;">
+                                    </div>
+                                    <div class="col-md-1" style="float:right;">
+                                        <input type="checkbox" class="form-check-input" id="check3" name="option1" value="something">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
                                             <label class="form-check-label" for="check1">Miercoles</label>
                                         </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="check4" name="option4" value="something">
+                                            <input type="time" id="appt_mier1" name="appt_mar1" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input type="time" id="appt_mier2" name="appt" value="12:59:48" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-1" style="float:right;">
+                                    </div>
+                                    <div class="col-md-1" style="float:right;">
+                                        <input type="checkbox" class="form-check-input" id="check4" name="option1" value="something">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
                                             <label class="form-check-label" for="check1">Jueves</label>
                                         </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="check5" name="option5" value="something">
+                                            <input type="time" id="appt_juev1" name="appt" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input type="time" id="appt_juev2" name="appt" value="12:59:48" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-1" style="float:right;">
+                                    </div>
+                                    <div class="col-md-1" style="float:right;">
+                                        <input type="checkbox" class="form-check-input" id="check5" name="option1" value="something">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
                                             <label class="form-check-label" for="check1">Viernes</label>
                                         </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="check6" name="option6" value="something">
+                                            <input type="time" id="appt_vier1" name="appt" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input type="time" id="appt_vier2" name="appt" value="12:59:48" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-1" style="float:right;">
+                                    </div>
+                                    <div class="col-md-1" style="float:right;">
+                                        <input type="checkbox" class="form-check-input" id="check6" name="option1" value="something">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
                                             <label class="form-check-label" for="check1">Sabado</label>
                                         </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="check7" name="option7" value="something">
+                                            <input type="time" id="appt_sab1" name="appt" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input type="time" id="appt_sab2" name="appt" value="12:59:48" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-1" style="float:right;">
+                                    </div>
+                                    <div class="col-md-1" style="float:right;">
+                                        <input type="checkbox" class="form-check-input" id="check7" name="option1" value="something">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
                                             <label class="form-check-label" for="check1">Domingo</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-
-                                    <div class="container">
-        <div class='col-md-4'>
-         
-        </div>
-        <div class='col-md-4'>
-          <input type="text" id="slider3" class="slider" />
-        </div>
-        <div class='col-md-4'>
-          
-        </div>
-        
-    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input type="time" id="appt_dom1" name="appt" style="display:none">
+                                        </div>
                                     </div>
-                                  
+                                    <div class="col-md-2">
+                                        <div class="form-check">
+                                            <input type="time" id="appt_dom2" name="appt" value="12:59:48" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
                                 </div>
+
+
+
+
 
                                 <div class="row form-group">
                                     <div class="col-md-2">
@@ -317,6 +528,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" id="bthorario" class="btn btn-info">Asignar Horario</button>
+                                    <button type="button" id="bthorario_mod" class="btn btn-info">Modificar Horario</button>
                                 </div>
                             </form>
 
@@ -397,12 +609,12 @@
 
         </div>
 
+
     </div>
-
 </div>
-         
 
-    <div class="modal fade" id="Modalqr" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="Modalqr" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -741,6 +953,150 @@
         });
 
 
+        const checkbox = document.getElementById('check1')
+
+        checkbox.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+
+                document.getElementById('appt_lun1').style.display = 'block';
+                document.getElementById('appt_lun2').style.display = 'block';
+                document.getElementById('appt_lun1').value = '';
+                document.getElementById('appt_lun2').value = '';
+
+            } else {
+
+                document.getElementById('appt_lun1').style.display = 'none';
+                document.getElementById('appt_lun2').style.display = 'none';
+                document.getElementById('appt_lun1').value = '';
+                document.getElementById('appt_lun2').value = '12:59:48';
+            }
+        })
+
+        const checkbox2 = document.getElementById('check2')
+
+        checkbox2.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+
+                document.getElementById('appt_mar1').style.display = 'block';
+                document.getElementById('appt_mar2').style.display = 'block';
+
+                document.getElementById('appt_mar1').value = '';
+                document.getElementById('appt_mar2').value = '';
+            } else {
+
+                document.getElementById('appt_mar1').style.display = 'none';
+                document.getElementById('appt_mar2').style.display = 'none';
+                document.getElementById('appt_mar1').value = '';
+                document.getElementById('appt_mar2').value = '12:59:48';
+            }
+        })
+
+        const checkbox3 = document.getElementById('check3')
+
+        checkbox3.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+
+                document.getElementById('appt_mier1').style.display = 'block';
+                document.getElementById('appt_mier2').style.display = 'block';
+
+
+                document.getElementById('appt_mier1').value = '';
+                document.getElementById('appt_mier2').value = '';
+            } else {
+
+                document.getElementById('appt_mier1').style.display = 'none';
+                document.getElementById('appt_mier2').style.display = 'none';
+
+                document.getElementById('appt_mier1').value = '';
+                document.getElementById('appt_mier2').value = '12:59:48';
+            }
+        })
+
+        const checkbox4 = document.getElementById('check4')
+
+        checkbox4.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+
+                document.getElementById('appt_juev1').style.display = 'block';
+                document.getElementById('appt_juev2').style.display = 'block';
+
+
+                document.getElementById('appt_juev1').value = '';
+                document.getElementById('appt_juev2').value = '';
+            } else {
+
+                document.getElementById('appt_juev1').style.display = 'none';
+                document.getElementById('appt_juev2').style.display = 'none';
+
+
+                document.getElementById('appt_juev1').value = '';
+                document.getElementById('appt_juev2').value = '12:59:48';
+            }
+        })
+
+        const checkbox5 = document.getElementById('check5')
+
+        checkbox5.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+
+                document.getElementById('appt_vier1').style.display = 'block';
+                document.getElementById('appt_vier2').style.display = 'block';
+
+
+                document.getElementById('appt_vier1').value = '';
+                document.getElementById('appt_vier2').value = '';
+            } else {
+
+                document.getElementById('appt_vier1').style.display = 'none';
+                document.getElementById('appt_vier2').style.display = 'none';
+                document.getElementById('appt_vier1').value = '';
+                document.getElementById('appt_vier2').value = '12:59:48';
+            }
+        })
+
+        const checkbox6 = document.getElementById('check6')
+
+        checkbox6.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+
+                document.getElementById('appt_sab1').style.display = 'block';
+                document.getElementById('appt_sab2').style.display = 'block';
+
+
+                document.getElementById('appt_sab1').value = '';
+                document.getElementById('appt_sab2').value = '';
+            } else {
+
+                document.getElementById('appt_sab1').style.display = 'none';
+                document.getElementById('appt_sab2').style.display = 'none';
+
+                document.getElementById('appt_sab1').value = '';
+                document.getElementById('appt_sab2').value = '12:59:48';
+            }
+        })
+
+        const checkbox7 = document.getElementById('check7')
+
+        checkbox7.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+
+                document.getElementById('appt_dom1').style.display = 'block';
+                document.getElementById('appt_dom2').style.display = 'block';
+
+
+                document.getElementById('appt_dom1').value = '';
+                document.getElementById('appt_dom2').value = '';
+            } else {
+
+                document.getElementById('appt_dom1').style.display = 'none';
+                document.getElementById('appt_dom2').style.display = 'none';
+
+                document.getElementById('appt_dom1').value = '';
+                document.getElementById('appt_dom2').value = '12:59:48';
+            }
+        })
+
+
 
         function disable_tabs() {
             document.getElementById("plan_pestaña").classList.remove('enableTab');
@@ -756,6 +1112,7 @@
         var div_3 = document.getElementById("div_3");
         var div_4 = document.getElementById("div_4");
         var div_5 = document.getElementById("div_5");
+
         $("#btn_agregarstaff").click(function() {
             document.getElementById('view_form').style.display = 'none';
             $("#registration").data('validator').resetForm();
@@ -775,17 +1132,14 @@
             $('#btnactializar_est').hide();
 
 
-            document.getElementById("plan_form").classList.remove('show');
-            document.getElementById("plan_form").classList.remove('active');
+            document.getElementById("plan_schedule").classList.remove('show');
+            document.getElementById("plan_schedule").classList.remove('active');
 
             document.getElementById("view_form").classList.remove('show');
             document.getElementById("view_form").classList.remove('active');
 
-            document.getElementById("view_pestaña").classList.remove('active');
-            document.getElementById("view_pestaña").classList.remove('show');
-
+         
             document.getElementById('plan_pestaña').style.display = 'block';
-            document.getElementById('view_pestaña').style.display = 'none';
 
             document.getElementById("member_form").classList.add('active');
             document.getElementById("member_form").classList.add('show');
@@ -969,604 +1323,1099 @@
     });
 
 
+    
+    $("#bthorario_mod").click(function() {
+
+        resp = 1;
+                lunes_1 = $('#appt_lun1').val();
+                lunes_2 = $('#appt_lun2').val();
+
+                martes_1 = $('#appt_mar1').val();
+                martes_2 = $('#appt_mar2').val();
 
 
-    $("#bthorario").click(function() {
-
-        console.log("data");
-        document.getElementById("plan_button").disabled = false;
-        if ($('#plan_select').select2('val') != null) {
-            data = $('#plan_select').select2('data')[0];
-        }
-        var data = {
-            'discount': $('#txt_desc').val(),
-            'month': data['text'],
-            'cost': $('#txt_total').val(),
-            'id': $('#txt_id').val(),
-
-        };
-        $.ajax({
-            url: site_url + '/staff/schedule',
-            method: "post",
-            data: data,
-            success: function(resp) {
+                miercoles_1 = $('#appt_mier1').val();
+                miercoles_2 = $('#appt_mier2').val();
 
 
-                var result = $.parseJSON(resp);
+                jueves_1 = $('#appt_juev1').val();
+                jueves_2 = $('#appt_juev2').val();
 
-                if (result.resp == 1) {
-                    $('#exampleModal').modal('toggle');
-                    table.ajax.reload();
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Plan asignado correctamente',
-                        showConfirmButton: false,
-                        timer: 1500
+
+                viernes_1 = $('#appt_vier1').val();
+                viernes_2 = $('#appt_vier2').val();
+
+
+                sabado_1 = $('#appt_sab1').val();
+                sabado_2 = $('#appt_sab2').val();
+
+
+                domingo_1 = $('#appt_dom1').val();
+                domingo_2 = $('#appt_dom2').val();
+
+                const ban = [];
+
+                if (lunes_2 == '12:59:48' && martes_2 == '12:59:48' && miercoles_2 == '12:59:48' && jueves_2 == '12:59:48' && viernes_2 == '12:59:48' && sabado_2 == '12:59:48' && domingo_2 == '12:59:48') {
+
+                    ohSnap('Aviso!!: No se ha seleccionado ningun dia!', {
+                        color: 'red'
+                    });
+                    resp = 0;
+                } else {
+
+                    if (lunes_2 == '' && lunes_1 == '') {
+                        ohSnap('Aviso!!: Dia Lunes vacio!', {
+                            color: 'red'
+                        });
+                    } else if (lunes_2 == '12:59:48') {
+                        banderal = 'vacio';
+                        ban[0] = banderal;
+                    } else if (lunes_2 == '') {
+                        ohSnap('Aviso!!: Dia Lunes salida Vacio', {
+                            color: 'red'
+                        });
+                    } else if (lunes_1 == '') {
+
+                        ohSnap('Aviso!!: Lunes entrada Vacio', {
+                            color: 'red'
+                        });
+
+                    } else {
+
+                        ban[0] = lunes_1 + '-' + lunes_2 + '-lunes';
+
+                    }
+
+                    if (martes_2 == '' && martes_1 == '') {
+                        ohSnap('Aviso!!: Dia Martes vacio!', {
+                            color: 'red'
+                        });
+                    } else if (martes_2 == '12:59:48') {
+                        ban[1] = 'vacio';
+                    } else if (martes_2 == '') {
+                        ohSnap('Aviso!!: Dia Martes salida Vacio', {
+                            color: 'red'
+                        });
+                    } else if (martes_1 == '') {
+                        ohSnap('Aviso!!: Dia Martes entrada Vacio', {
+                            color: 'red'
+                        });
+                    } else {
+                        ban[1] = martes_1 + '-' + martes_2 + '-martes';;
+                    }
+
+                    if (miercoles_2 == '' && miercoles_1 == '') {
+                        ohSnap('Aviso!!: Dia Miercoles vacio!', {
+                            color: 'red'
+                        });
+                    } else if (miercoles_2 == '12:59:48') {
+                        ban[2] = 'vacio';
+                    } else if (miercoles_2 == '') {
+                        ohSnap('Aviso!!: Dia Miercoles salida Vacio', {
+                            color: 'red'
+                        });
+                    } else if (miercoles_1 == '') {
+                        ohSnap('Aviso!!: Dia Miercoles entrada Vacio', {
+                            color: 'red'
+                        });
+                    } else {
+                        ban[2] = miercoles_1 + '-' + miercoles_2 + '-miercoles';
+                    }
+
+                    if (jueves_2 == '' && jueves_1 == '') {
+                        ohSnap('Aviso!!: Dia Jueves vacio!', {
+                            color: 'red'
+                        });
+                    } else if (jueves_2 == '12:59:48') {
+                        ban[3] = 'vacio';
+                    } else if (jueves_2 == '') {
+                        ohSnap('Aviso!!: Dia Jueves salida Vacio', {
+                            color: 'red'
+                        });
+                    } else if (jueves_1 == '') {
+                        ohSnap('Aviso!!: Dia Jueves entrada Vacio', {
+                            color: 'red'
+                        });
+                    } else {
+                        ban[3] = jueves_1 + '-' + jueves_2 + '-jueves';
+                    }
+
+                    if (viernes_2 == '' && viernes_1 == '') {
+                        ohSnap('Aviso!!: Dia Viernes vacio!', {
+                            color: 'red'
+                        });
+                    } else if (viernes_2 == '12:59:48') {
+                        ban[4] = 'vacio';
+                    } else if (viernes_2 == '') {
+                        ohSnap('Aviso!!: Dia Jueves salida Vacio', {
+                            color: 'red'
+                        });
+                    } else if (viernes_1 == '') {
+                        ohSnap('Aviso!!: Dia Viernes entrada Vacio', {
+                            color: 'red'
+                        });
+                    } else {
+                        ban[4] = viernes_1 + '-' + viernes_2 + '-viernes';;
+                    }
+
+                    if (sabado_2 == '' && sabado_1 == '') {
+                        ohSnap('Aviso!!: Dia Sabado vacio!', {
+                            color: 'red'
+                        });
+                    } else if (sabado_2 == '12:59:48') {
+                        ban[5] = 'vacio';
+                    } else if (sabado_2 == '') {
+                        ohSnap('Aviso!!: Dia Sabado salida Vacio', {
+                            color: 'red'
+                        });
+                    } else if (sabado_1 == '') {
+                        ohSnap('Aviso!!: Dia Sabado entrada Vacio', {
+                            color: 'red'
+                        });
+                    } else {
+                        ban[5] = sabado_1 + '-' + sabado_2 + '-sabado';;
+                    }
+
+                    if (domingo_2 == '' && domingo_1 == '') {
+                        ohSnap('Aviso!!: Dia Domingo vacio!', {
+                            color: 'red'
+                        });
+                    } else if (domingo_2 == '12:59:48') {
+                        ban[6] = 'vacio';
+                    } else if (domingo_2 == '') {
+                        ohSnap('Aviso!!: Dia Domingo salida Vacio', {
+                            color: 'red'
+                        });
+                        banderad = 3;
+                    } else if (domingo_1 == '') {
+                        ohSnap('Aviso!!: Dia Domingo entrada Vacio', {
+                            color: 'red'
+                        });
+                        banderad = 3;
+                    } else {
+                        banderad = 1;
+                        ban[6] = domingo_1 + '-' + domingo_2 + '-domingo';
+                    }
+                }
+
+
+
+
+                for (let index = 0; index < ban.length; index++) {
+
+                    if (ban[index] == null) {
+                        console.log("no pasa");
+                        resp = 0;
+                        break;
+                    }
+                }
+
+
+                id_staff = $('#txt_id').val();
+
+                if (resp == 1) {
+                    document.getElementById("plan_button").disabled = false;
+                    txt_id
+                    var data = {
+                        'data': ban,
+                        'id_staff': id_staff
+                    };
+                    $.ajax({
+                        url: site_url + '/staff/day_schedule_mod',
+                        method: "post",
+                        data: data,
+                        success: function(resp) {
+                            var result = $.parseJSON(resp);
+                            if (result.resp == 0) {
+
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Horario Modificado!!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                table.ajax.reload();
+                                    end_load();
+                            } else if (result.resp == 2) {
+                                data = result.msj_error;
+                                $('#msg').html('<div class="alert alert-danger">Error al enviar correo:' + data + '</div>')
+                                end_load();
+                            } else {
+                                $('#msg').html('<div class="alert alert-danger">Error al Modificar el Horario</div>')
+                            }
+
+                        }
+                    })
+                }               
+    });
+
+            $("#bthorario").click(function() {
+
+                resp = 1;
+                lunes_1 = $('#appt_lun1').val();
+                lunes_2 = $('#appt_lun2').val();
+
+                martes_1 = $('#appt_mar1').val();
+                martes_2 = $('#appt_mar2').val();
+
+
+                miercoles_1 = $('#appt_mier1').val();
+                miercoles_2 = $('#appt_mier2').val();
+
+
+                jueves_1 = $('#appt_juev1').val();
+                jueves_2 = $('#appt_juev2').val();
+
+
+                viernes_1 = $('#appt_vier1').val();
+                viernes_2 = $('#appt_vier2').val();
+
+
+                sabado_1 = $('#appt_sab1').val();
+                sabado_2 = $('#appt_sab2').val();
+
+
+                domingo_1 = $('#appt_dom1').val();
+                domingo_2 = $('#appt_dom2').val();
+
+                const ban = [];
+
+                if (lunes_2 == '12:59:48' && martes_2 == '12:59:48' && miercoles_2 == '12:59:48' && jueves_2 == '12:59:48' && viernes_2 == '12:59:48' && sabado_2 == '12:59:48' && domingo_2 == '12:59:48') {
+
+                    ohSnap('Aviso!!: No se ha seleccionado ningun dia!', {
+                        color: 'red'
+                    });
+                    resp = 0;
+                } else {
+
+                    if (lunes_2 == '' && lunes_1 == '') {
+                        ohSnap('Aviso!!: Dia Lunes vacio!', {
+                            color: 'red'
+                        });
+                    } else if (lunes_2 == '12:59:48') {
+                        banderal = 'vacio';
+                        ban[0] = banderal;
+                    } else if (lunes_2 == '') {
+                        ohSnap('Aviso!!: Dia Lunes salida Vacio', {
+                            color: 'red'
+                        });
+                    } else if (lunes_1 == '') {
+
+                        ohSnap('Aviso!!: Lunes entrada Vacio', {
+                            color: 'red'
+                        });
+
+                    } else {
+
+                        ban[0] = lunes_1 + '-' + lunes_2 + '-lunes';
+
+                    }
+
+                    if (martes_2 == '' && martes_1 == '') {
+                        ohSnap('Aviso!!: Dia Martes vacio!', {
+                            color: 'red'
+                        });
+                    } else if (martes_2 == '12:59:48') {
+                        ban[1] = 'vacio';
+                    } else if (martes_2 == '') {
+                        ohSnap('Aviso!!: Dia Martes salida Vacio', {
+                            color: 'red'
+                        });
+                    } else if (martes_1 == '') {
+                        ohSnap('Aviso!!: Dia Martes entrada Vacio', {
+                            color: 'red'
+                        });
+                    } else {
+                        ban[1] = martes_1 + '-' + martes_2 + '-martes';;
+                    }
+
+                    if (miercoles_2 == '' && miercoles_1 == '') {
+                        ohSnap('Aviso!!: Dia Miercoles vacio!', {
+                            color: 'red'
+                        });
+                    } else if (miercoles_2 == '12:59:48') {
+                        ban[2] = 'vacio';
+                    } else if (miercoles_2 == '') {
+                        ohSnap('Aviso!!: Dia Miercoles salida Vacio', {
+                            color: 'red'
+                        });
+                    } else if (miercoles_1 == '') {
+                        ohSnap('Aviso!!: Dia Miercoles entrada Vacio', {
+                            color: 'red'
+                        });
+                    } else {
+                        ban[2] = miercoles_1 + '-' + miercoles_2 + '-miercoles';
+                    }
+
+                    if (jueves_2 == '' && jueves_1 == '') {
+                        ohSnap('Aviso!!: Dia Jueves vacio!', {
+                            color: 'red'
+                        });
+                    } else if (jueves_2 == '12:59:48') {
+                        ban[3] = 'vacio';
+                    } else if (jueves_2 == '') {
+                        ohSnap('Aviso!!: Dia Jueves salida Vacio', {
+                            color: 'red'
+                        });
+                    } else if (jueves_1 == '') {
+                        ohSnap('Aviso!!: Dia Jueves entrada Vacio', {
+                            color: 'red'
+                        });
+                    } else {
+                        ban[3] = jueves_1 + '-' + jueves_2 + '-jueves';
+                    }
+
+                    if (viernes_2 == '' && viernes_1 == '') {
+                        ohSnap('Aviso!!: Dia Viernes vacio!', {
+                            color: 'red'
+                        });
+                    } else if (viernes_2 == '12:59:48') {
+                        ban[4] = 'vacio';
+                    } else if (viernes_2 == '') {
+                        ohSnap('Aviso!!: Dia Jueves salida Vacio', {
+                            color: 'red'
+                        });
+                    } else if (viernes_1 == '') {
+                        ohSnap('Aviso!!: Dia Viernes entrada Vacio', {
+                            color: 'red'
+                        });
+                    } else {
+                        ban[4] = viernes_1 + '-' + viernes_2 + '-viernes';;
+                    }
+
+                    if (sabado_2 == '' && sabado_1 == '') {
+                        ohSnap('Aviso!!: Dia Sabado vacio!', {
+                            color: 'red'
+                        });
+                    } else if (sabado_2 == '12:59:48') {
+                        ban[5] = 'vacio';
+                    } else if (sabado_2 == '') {
+                        ohSnap('Aviso!!: Dia Sabado salida Vacio', {
+                            color: 'red'
+                        });
+                    } else if (sabado_1 == '') {
+                        ohSnap('Aviso!!: Dia Sabado entrada Vacio', {
+                            color: 'red'
+                        });
+                    } else {
+                        ban[5] = sabado_1 + '-' + sabado_2 + '-sabado';;
+                    }
+
+                    if (domingo_2 == '' && domingo_1 == '') {
+                        ohSnap('Aviso!!: Dia Domingo vacio!', {
+                            color: 'red'
+                        });
+                    } else if (domingo_2 == '12:59:48') {
+                        ban[6] = 'vacio';
+                    } else if (domingo_2 == '') {
+                        ohSnap('Aviso!!: Dia Domingo salida Vacio', {
+                            color: 'red'
+                        });
+                        banderad = 3;
+                    } else if (domingo_1 == '') {
+                        ohSnap('Aviso!!: Dia Domingo entrada Vacio', {
+                            color: 'red'
+                        });
+                        banderad = 3;
+                    } else {
+                        banderad = 1;
+                        ban[6] = domingo_1 + '-' + domingo_2 + '-domingo';
+                    }
+                }
+
+
+
+
+                for (let index = 0; index < ban.length; index++) {
+
+                    if (ban[index] == null) {
+                        console.log("no pasa");
+                        resp = 0;
+                        break;
+                    }
+                }
+
+
+                id_staff = $('#txt_id').val();
+                console.log(id_staff);
+
+                if (resp == 1) {
+                    document.getElementById("plan_button").disabled = false;
+                    txt_id
+                    var data = {
+                        'data': ban,
+                        'id_staff': id_staff
+                    };
+                    $.ajax({
+                        url: site_url + '/staff/day_schedule',
+                        method: "post",
+                        data: data,
+                        success: function(resp) {
+                            var result = $.parseJSON(resp);
+                            console.log(result);
+                            if (result.resp == 1) {
+
+                            } else if (result.resp == 2) {
+                                data = result.msj_error;plan_pestaña
+                                $('#msg').html('<div class="alert alert-danger">Error al enviar correo:' + data + '</div>')
+                                end_load();
+                            } else {
+                                $('#msg').html('<div class="alert alert-danger">Nombre y/o correo ya registrado</div>')
+                            }
+
+                        }
                     })
 
 
-                } else if (resp == 2) {
-                    $('#msg').html('<div class="alert alert-danger">Error al enviar el correo.</div>')
-                    end_load();
                 }
-            }
-        })
-    });
+            });
 
-    $("#btnmodstaff").click(function() {
-        //   $('#txt_valor').val('300');
-        if ($("#registration").valid() == false) {
+            $("#btnmodstaff").click(function() {
+                //   $('#txt_valor').val('300');
+                if ($("#registration").valid() == false) {
 
-            return;
-        } else {
+                    return;
+                } else {
 
-            document.getElementById("plan_button").disabled = false;
+                    document.getElementById("plan_button").disabled = false;
 
-            var data = {
-                'id': $('#txt_id').val(),
-                'name': $('#txt_name').val(),
-                'email': $('#txt_email').val(),
-                'mobile': $('#txt_mobile').val()
-                // 'password': $('#txt_password').val()
-            };
-            $.ajax({
-                url: site_url + '/student/student_update',
-                method: "post",
-                data: data,
-                success: function(resp) {
-                    var result = $.parseJSON(resp);
-                    console.log(result);
-                    if (result.resp == 1) {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Staff registrado correctamente',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
+                    var data = {
+                        'id': $('#txt_id').val(),
+                        'name': $('#txt_name').val(),
+                        'email': $('#txt_email').val(),
+                        'mobile': $('#txt_mobile').val()
+                        // 'password': $('#txt_password').val()
+                    };
+                    $.ajax({
+                        url: site_url + '/student/student_update',
+                        method: "post",
+                        data: data,
+                        success: function(resp) {
+                            var result = $.parseJSON(resp);
+                            console.log(result);
+                            if (result.resp == 1) {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Staff registrado correctamente',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
 
-                        $('#txt_id').val(result.id);
-                        $('#plan_button').attr("style", "");
-                        $('#plan_pestaña').attr("class", "enabledTab");
-                        $('#plan_pestaña').attr("class", "active");
-                        $('#plan_pestaña').attr("class", "show");
+                                $('#txt_id').val(result.id);
+                                $('#plan_button').attr("style", "");
+                                $('#plan_pestaña').attr("class", "enabledTab");
+                                $('#plan_pestaña').attr("class", "active");
+                                $('#plan_pestaña').attr("class", "show");
 
-                        $('#txt_password').val('');
+                                $('#txt_password').val('');
 
-                        table.ajax.reload();
-                        $('#msg').html('')
-                        //	setTimeout(function() {
-                        //		location.reload()
-                        //	}, 1000)
-                    } else if (result.resp == 2) {
-                        data = result.msj_error;
-                        $('#msg').html('<div class="alert alert-danger">Error al enviar correo:' + data + '</div>')
+                                table.ajax.reload();
+                                $('#msg').html('')
+                                //	setTimeout(function() {
+                                //		location.reload()
+                                //	}, 1000)
+                            } else if (result.resp == 2) {
+                                data = result.msj_error;
+                                $('#msg').html('<div class="alert alert-danger">Error al enviar correo:' + data + '</div>')
+                                end_load();
+                            } else {
+                                $('#msg').html('<div class="alert alert-danger">Nombre y/o correo ya registrado</div>')
+                            }
+
+                        }
+                    })
+
+
+                }
+            });
+
+
+            $("#btn_eliminarplan").click(function() {
+
+                document.getElementById("plan_button").disabled = false;
+
+                var data = {
+                    'payid': $('#txt_payid').val(),
+                    'id': $('#txt_id').val()
+                };
+                Swal.fire({
+                    title: 'Esta seguro de eliminar el plan de : ' + $('#txt_name').val() + '  ?',
+                    text: "Una vez eliminado el registro no se podra recuperar!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si Eliminar!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        start_load();
+                        $.ajax({
+                            url: site_url + '/staff/staff_delete',
+                            method: "post",
+                            data: data,
+                            success: function(resp) {
+                                var result = $.parseJSON(resp);
+                                if (result.resp == 1) {
+
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Plan eliminado correctamente',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    $('#exampleModal').modal('toggle');
+                                    table.ajax.reload();
+
+
+                                } else if (resp == 0) {
+                                    $('#msg').html('<div class="alert alert-danger">Error al eliminar el plan.</div>')
+
+                                } else {
+                                    $('#msg').html('<div class="alert alert-danger">Error :Favor de contactar al administrador</div>')
+
+                                }
+
+                            }
+
+                        });
+
+
                         end_load();
-                    } else {
-                        $('#msg').html('<div class="alert alert-danger">Nombre y/o correo ya registrado</div>')
                     }
+                })
+
+            });
+
+
+            $("#btnstaff").click(function() {
+                if ($("#registration").valid() == false) {
+
+                    return;
+                } else {
+
+                    document.getElementById("plan_button").disabled = false;
+
+                    var data = {
+                        'name': $('#txt_name').val(),
+                        'email': $('#txt_email').val(),
+                        'mobile': $('#txt_mobile').val(),
+                        'password': $('#txt_password').val(),
+                        'charge': $('#txt_cargo').val()
+                    };
+                    start_load();
+                    $.ajax({
+                        url: site_url + '/staff/staff_store',
+                        method: "post",
+                        data: data,
+                        success: function(resp) {
+                            var result = $.parseJSON(resp);
+                            if (result.resp == 1) {
+                                end_load();
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Staff registrado correctamente',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+
+                                $('#txt_id').val(result.id);
+                                $('#plan_button').attr("style", "");
+                                $('#plan_pestaña').attr("class", "enabledTab");
+                                $('#plan_pestaña').attr("class", "active");
+                                $('#plan_pestaña').attr("class", "show");
+
+                                $('#txt_password').val('');
+
+                                table.ajax.reload();
+                                $('#msg').html('')
+                                //	setTimeout(function() {
+                                //		location.reload()
+                                //	}, 1000)
+                            } else if (result.resp == 2) {
+                                data = result.msj_error;
+                                $('#msg').html('<div class="alert alert-danger">Error al enviar correo:' + data + '</div>')
+                                end_load();
+                            } else {
+                                $('#msg').html('<div class="alert alert-danger">Nombre y/o correo ya registrado</div>')
+                                end_load();
+                            }
+
+                        }
+                    })
+
 
                 }
-            })
+            });
 
 
-        }
-    });
+            $("#btnactializar_est").click(function() {
+                if ($("#registration").valid() == false) {
+                    disable_tabs();
+                    return;
+                } else {
+
+                    document.getElementById("plan_button").disabled = false;
+
+                    var data = {
+                        'id': $('#txt_id').val(),
+                        'name': $('#txt_name').val(),
+                        'email': $('#txt_email').val(),
+                        'mobile': $('#txt_mobile').val()
+                    };
+                    $.ajax({
+                        url: site_url + '/staff/staff_delete',
+                        method: "post",
+                        data: data,
+                        success: function(resp) {
+                            var result = $.parseJSON(resp);
+                            if (result.resp == 1) {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Staff actualizado correctamente',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                table.ajax.reload();
+                                //	setTimeout(function() {
+                                //		location.reload()
+                                //	}, 1000)
+                            } else if (resp == 2) {
+                                $('#msg').html('<div class="alert alert-danger">ID No already existed.</div>')
+                                end_load();
+                            }
+                        }
+                    })
 
 
-    $("#btn_eliminarplan").click(function() {
+                }
+            });
 
-        document.getElementById("plan_button").disabled = false;
 
-        var data = {
-            'payid': $('#txt_payid').val(),
-            'id': $('#txt_id').val()
-        };
-        Swal.fire({
-            title: 'Esta seguro de eliminar el plan de : ' + $('#txt_name').val() + '  ?',
-            text: "Una vez eliminado el registro no se podra recuperar!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si Eliminar!',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
 
-                start_load();
+
+
+
+            window.start_load = function() {
+                $('body').prepend('<di id="preloader2"></di>')
+            }
+            window.end_load = function() {
+                $('#preloader2').fadeOut('fast', function() {
+                    $(this).remove();
+                })
+            }
+
+            function limpiar() {
+
+                $('#txt_0').val('');
+                $('#txt_1').val('');
+                $('#txt_2').val('');
+                $('#txt_3').val('');
+                $('#txt_4').val('');
+                document.getElementById("status").selectedIndex = 0;
+                $('input[type=search]').val('').change();
+
+                table.columns(0).search('').draw();
+                table.columns(1).search('').draw();
+                table.columns(2).search('').draw();
+                table.columns(3).search('').draw();
+                table.columns(4).search('').draw();
+            }
+
+            function eliminar(id) {
+
+                end_load();
                 $.ajax({
-                    url: site_url + '/staff/staff_delete',
+                    url: site_url + '/staff/chek_delete',
                     method: "post",
-                    data: data,
+                    data: {
+                        id: id
+                    },
+                    success: function(resp) {
+                        var result = $.parseJSON(resp);
+                        if (result.resp == 1) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'Staff con una cuenta activa no es posible eliminar el registro',
+                                showConfirmButton: false,
+                                timer: 3500
+                            })
+                            table.ajax.reload();
+                            end_load();
+                        } else if (result.resp == 0) {
+                            Swal.fire({
+                                title: 'Esta seguro de eliminar el registro con Id : ' + id + ' ?',
+                                text: "Una vez eliminado el registro no se podra recuperar!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Si Eliminar!',
+                                cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+
+                                    start_load();
+                                    $.ajax({
+                                        url: site_url + '/staff/staff_delete',
+                                        method: "post",
+                                        data: {
+                                            id: id
+                                        },
+                                        success: function(resp) {
+                                            var result = $.parseJSON(resp);
+                                            if (result.resp == 1) {
+                                                Swal.fire({
+                                                    position: 'top-end',
+                                                    icon: 'success',
+                                                    title: 'Registro eliminado',
+                                                    showConfirmButton: false,
+                                                    timer: 1500
+                                                })
+                                                table.ajax.reload();
+                                                end_load();
+                                            } else if (resp == 2) {
+                                                Swal.fire({
+                                                    position: 'top-end',
+                                                    icon: 'error',
+                                                    title: 'Error al eliminar el registro',
+                                                    showConfirmButton: false,
+                                                    timer: 1500
+                                                })
+                                                end_load();
+                                            }
+                                        }
+                                    });
+                                }
+                            })
+                            end_load();
+                        }
+                    }
+                });
+
+
+                /*
+                 */
+            }
+
+            function get_qr(id) {
+
+                console.log(id);
+                $('.modal-title').text('Codigo Qr');
+                $.ajax({
+                    url: site_url + '/staff/get_qr',
+                    method: "post",
+                    data: {
+                        id: id
+                    },
+                    success: function(resp) {
+                        var result = $.parseJSON(resp);
+
+                        console.log(result.data);
+                        if (result.resp == '1') {
+                            $('#Modalqr').modal('show');
+                            document.getElementById("image_qr").src = "../" + result.data;
+                        } else {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'warning',
+                                title: 'Usuario no cuenta con código Qr',
+                                showConfirmButton: false,
+                                timer: 2500
+                            })
+                        }
+                    }
+                });
+            }
+
+            function actualizar(id) {
+                enable_tabs();
+                end_load();
+                limpiar_chek();
+                today = new Date();
+                $('#txt_desc').val('');
+                //   $('#txt_valor').val('');
+                $('#txt_total').val('');
+
+                $('.modal-title').text('Modificar | Staff');
+                $("#registration").data('validator').resetForm();
+                div_1.classList.remove("error");
+                div_2.classList.remove("error");
+                div_3.classList.remove("error");
+                div_4.classList.remove("error");
+                div_5.classList.remove("error");
+                let data = table.rows('.selected').data()[0];
+                // $('#exampleModal').modal('toggle');
+
+                $('#exampleModal').modal('show');
+                $('#btnstaff').hide();
+                $('#btnactializar').show();
+                $('#btnmodstaff').show();
+
+                $.ajax({
+                    url: site_url + '/staff/staff_update',
+                    method: "post",
+                    data: {
+                        id: id
+                    },
                     success: function(resp) {
                         var result = $.parseJSON(resp);
                         if (result.resp == 1) {
 
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Plan eliminado correctamente',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                            $('#exampleModal').modal('toggle');
+                            $('#bthorario').show();
+                            $('#bthorario_mod').hide();
+                            document.getElementById("plan_button").classList.remove('active');
+                            document.getElementById("staff_pestaña").classList.remove('enabledTab');
+                            document.getElementById("plan_pestaña").classList.add('disabledTab');
+                            document.getElementById("plan_schedule").classList.remove('active');
+                            document.getElementById("view_form").classList.remove('active');
+
+                            document.getElementById("member_form").classList.add('show');
+                            document.getElementById("member_form").classList.add('active');
+                            document.getElementById("member_form").classList.add('enabledTab');
+                            document.getElementById("staff").classList.add('active');
+
+                            var x = document.getElementById("plan_button");
+                            x.innerHTML = "Asignar Horario";
+
+                            $('#txt_id').val(result.data['id_staff']);
+                            $('#txt_name').val(result.data['name']);
+                            $('#txt_email').val(result.data['email']);
+                            $('#txt_mobile').val(result.data['mobile']);
+                            $('#txt_cargo').val(result.data['position']);
+                            table.ajax.reload();
+                            //	setTimeout(function() {
+                            //		location.reload()
+                            //	}, 1000)
+
+
+
+                        } else if (result.resp == 2) {
+
+
+                            $('#bthorario').hide();
+                            $('#bthorario_mod').show();
+                            document.getElementById("plan_button").classList.remove('active');
+                            document.getElementById("staff_pestaña").classList.remove('enabledTab');
+                            document.getElementById("plan_pestaña").classList.add('disabledTab');
+                            document.getElementById("plan_schedule").classList.remove('active');
+                            document.getElementById("view_form").classList.remove('active');
+
+                            document.getElementById("member_form").classList.add('show');
+                            document.getElementById("member_form").classList.add('active');
+                            document.getElementById("member_form").classList.add('enabledTab');
+                            document.getElementById("staff").classList.add('active');
+                            document.getElementById("plan_button").value = "Full Screen";
+
+                            var x = document.getElementById("plan_button");
+                            x.innerHTML = "Visualzar Horario";
+                            $('#txt_id').val(result.data['id_staff']);
+                            $('#txt_name').val(result.data['name']);
+                            $('#txt_email').val(result.data['email']);
+                            $('#txt_mobile').val(result.data['mobile']);
+                            $('#txt_cargo').val(result.data['position']);
                             table.ajax.reload();
 
-
-                        } else if (resp == 0) {
-                            $('#msg').html('<div class="alert alert-danger">Error al eliminar el plan.</div>')
-
-                        } else {
-                            $('#msg').html('<div class="alert alert-danger">Error :Favor de contactar al administrador</div>')
-
-                        }
-
-                    }
-
-                });
-
-
-                end_load();
-            }
-        })
-
-    });
-
-
-    $("#btnstaff").click(function() {
-        if ($("#registration").valid() == false) {
-
-            return;
-        } else {
-
-            document.getElementById("plan_button").disabled = false;
-
-            var data = {
-                'name': $('#txt_name').val(),
-                'email': $('#txt_email').val(),
-                'mobile': $('#txt_mobile').val(),
-                'password': $('#txt_password').val(),
-                'charge': $('#txt_cargo').val()
-            };
-            start_load();
-            $.ajax({
-                url: site_url + '/staff/staff_store',
-                method: "post",
-                data: data,
-                success: function(resp) {
-                    var result = $.parseJSON(resp);
-                    if (result.resp == 1) {
-                        end_load();
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Staff registrado correctamente',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-
-                        $('#txt_id').val(result.id);
-                        $('#plan_button').attr("style", "");
-                        $('#plan_pestaña').attr("class", "enabledTab");
-                        $('#plan_pestaña').attr("class", "active");
-                        $('#plan_pestaña').attr("class", "show");
-
-                        $('#txt_password').val('');
-
-                        table.ajax.reload();
-                        $('#msg').html('')
-                        //	setTimeout(function() {
-                        //		location.reload()
-                        //	}, 1000)
-                    } else if (result.resp == 2) {
-                        data = result.msj_error;
-                        $('#msg').html('<div class="alert alert-danger">Error al enviar correo:' + data + '</div>')
-                        end_load();
-                    } else {
-                        $('#msg').html('<div class="alert alert-danger">Nombre y/o correo ya registrado</div>')
-                        end_load();
-                    }
-
-                }
-            })
-
-
-        }
-    });
-
-
-    $("#btnactializar_est").click(function() {
-        if ($("#registration").valid() == false) {
-            disable_tabs();
-            return;
-        } else {
-
-            document.getElementById("plan_button").disabled = false;
-
-            var data = {
-                'id': $('#txt_id').val(),
-                'name': $('#txt_name').val(),
-                'email': $('#txt_email').val(),
-                'mobile': $('#txt_mobile').val()
-            };
-            $.ajax({
-                url: site_url + '/staff/staff_delete',
-                method: "post",
-                data: data,
-                success: function(resp) {
-                    var result = $.parseJSON(resp);
-                    if (result.resp == 1) {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Staff actualizado correctamente',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        table.ajax.reload();
-                        //	setTimeout(function() {
-                        //		location.reload()
-                        //	}, 1000)
-                    } else if (resp == 2) {
-                        $('#msg').html('<div class="alert alert-danger">ID No already existed.</div>')
-                        end_load();
-                    }
-                }
-            })
-
-
-        }
-    });
-
-
-
-
-
-
-    window.start_load = function() {
-        $('body').prepend('<di id="preloader2"></di>')
-    }
-    window.end_load = function() {
-        $('#preloader2').fadeOut('fast', function() {
-            $(this).remove();
-        })
-    }
-
-    function limpiar() {
-
-        $('#txt_0').val('');
-        $('#txt_1').val('');
-        $('#txt_2').val('');
-        $('#txt_3').val('');
-        $('#txt_4').val('');
-        document.getElementById("status").selectedIndex = 0;
-        $('input[type=search]').val('').change();
-
-        table.columns(0).search('').draw();
-        table.columns(1).search('').draw();
-        table.columns(2).search('').draw();
-        table.columns(3).search('').draw();
-        table.columns(4).search('').draw();
-    }
-
-    function eliminar(id) {
-
-        end_load();
-        $.ajax({
-            url: site_url + '/staff/chek_delete',
-            method: "post",
-            data: {
-                id: id
-            },
-            success: function(resp) {
-
-
-                var result = $.parseJSON(resp);
-                if (result.resp == 1) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Staff con una cuenta activa no es posible eliminar el registro',
-                        showConfirmButton: false,
-                        timer: 3500
-                    })
-                    table.ajax.reload();
-                    end_load();
-                } else if (result.resp == 0) {
-                    Swal.fire({
-                        title: 'Esta seguro de eliminar el registro con Id : ' + id + ' ?',
-                        text: "Una vez eliminado el registro no se podra recuperar!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Si Eliminar!',
-                        cancelButtonText: 'Cancelar'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-
-                            start_load();
                             $.ajax({
-                                url: site_url + '/staff/staff_delete',
+                                url: site_url + '/staff/get_schedule',
                                 method: "post",
                                 data: {
                                     id: id
                                 },
                                 success: function(resp) {
                                     var result = $.parseJSON(resp);
-                                    if (result.resp == 1) {
-                                        Swal.fire({
-                                            position: 'top-end',
-                                            icon: 'success',
-                                            title: 'Registro eliminado',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        })
-                                        table.ajax.reload();
-                                        end_load();
-                                    } else if (resp == 2) {
-                                        Swal.fire({
-                                            position: 'top-end',
-                                            icon: 'error',
-                                            title: 'Error al eliminar el registro',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        })
-                                        end_load();
+
+                                    for (let index = 0; index < result.resp.length; index++) {
+
+                                        if (result.resp[index]['day'] == 'lunes') {
+                                            document.getElementById("check1").checked = true;
+                                            document.getElementById('appt_lun1').style.display = 'block';
+                                            document.getElementById('appt_lun2').style.display = 'block';
+                                            $('#appt_lun1').val(result.resp[index]['hour_in']);
+                                            $('#appt_lun2').val(result.resp[index]['hour_out']);
+                                        } else if (result.resp[index]['day'] == 'martes') {
+                                            document.getElementById("check2").checked = true;
+                                            document.getElementById('appt_mar1').style.display = 'block';
+                                            document.getElementById('appt_mar2').style.display = 'block';
+                                            $('#appt_mar1').val(result.resp[index]['hour_in']);
+                                            $('#appt_mar2').val(result.resp[index]['hour_out']);
+                                        } else if (result.resp[index]['day'] == 'miercoles') {
+                                            document.getElementById("check3").checked = true;
+                                            document.getElementById('appt_mier1').style.display = 'block';
+                                            document.getElementById('appt_mier2').style.display = 'block';
+                                            $('#appt_mier1').val(result.resp[index]['hour_in']);
+                                            $('#appt_mier2').val(result.resp[index]['hour_out']);
+                                        } else if (result.resp[index]['day'] == 'jueves') {
+                                            document.getElementById('appt_juev1').style.display = 'block';
+                                            document.getElementById('appt_juev2').style.display = 'block';
+                                            $('#appt_juev1').val(result.resp[index]['hour_in']);
+                                            $('#appt_juev2').val(result.resp[index]['hour_out']);
+                                            document.getElementById("check4").checked = true;
+                                        } else if (result.resp[index]['day'] == 'viernes') {
+                                            document.getElementById("check5").checked = true;
+                                            document.getElementById('appt_vier1').style.display = 'block';
+                                            document.getElementById('appt_vier2').style.display = 'block';
+                                            $('#appt_vier1').val(result.resp[index]['hour_in']);
+                                            $('#appt_vier2').val(result.resp[index]['hour_out']);
+                                        } else if (result.resp[index]['day'] == 'sabado') {
+                                            document.getElementById("check6").checked = true;
+                                            document.getElementById('appt_sab1').style.display = 'block';
+                                            document.getElementById('appt_sab2').style.display = 'block';
+                                            $('#appt_sab1').val(result.resp[index]['hour_in']);
+                                            $('#appt_sab2').val(result.resp[index]['hour_out']);
+                                        } else if (result.resp[index]['day'] == 'domingo') {
+                                            document.getElementById("check7").checked = true;
+                                            document.getElementById('appt_dom1').style.display = 'block';
+                                            document.getElementById('appt_dom2').style.display = 'block';
+                                            $('#appt_dom1').val(result.resp[index]['hour_in']);
+                                            $('#appt_dom2').val(result.resp[index]['hour_out']);
+                                        }
                                     }
+
+
                                 }
                             });
+
+
                         }
-                    })
-                    end_load();
-                }
-            }
-        });
-
-
-        /*
-         */
-    }
-
-    function get_qr(id) {
-
-        console.log(id);
-        $('.modal-title').text('Codigo Qr');
-        $.ajax({
-            url: site_url + '/staff/get_qr',
-            method: "post",
-            data: {
-                id: id
-            },
-            success: function(resp) {
-             var result = $.parseJSON(resp);
-
-             console.log(result.data);
-                if (result.resp == '1') {
-                    $('#Modalqr').modal('show');
-                    document.getElementById("image_qr").src = "../" + result.data;
-                } else {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'warning',
-                        title: 'Usuario no cuenta con código Qr',
-                        showConfirmButton: false,
-                        timer: 2500
-                    })
-                }
-            }
-        });  
-    }
-
-    function actualizar(id) {
-        enable_tabs();
-        end_load();
-        today = new Date();
-        $('#txt_desc').val('');
-        //   $('#txt_valor').val('');
-        $('#txt_total').val('');
-
-        $('.modal-title').text('Modificar | Staff');
-        $("#registration").data('validator').resetForm();
-        div_1.classList.remove("error");
-        div_2.classList.remove("error");
-        div_3.classList.remove("error");
-        div_4.classList.remove("error");
-        div_5.classList.remove("error");
-        let data = table.rows('.selected').data()[0];
-        // $('#exampleModal').modal('toggle');
-
-        $('#exampleModal').modal('show');
-        $('#btnstaff').hide();
-        $('#btnactializar').show();
-        $('#btnmodstaff').show();
-
-        $.ajax({
-            url: site_url + '/staff/staff_update',
-            method: "post",
-            data: {
-                id: id
-            },
-            success: function(resp) {
-                var result = $.parseJSON(resp);
-                if (result.resp == 1) {
-
-                    console.log("data_2");
-                    document.getElementById("plan_button").classList.remove('active');
-                    document.getElementById("staff_pestaña").classList.remove('enabledTab');
-                    document.getElementById("plan_pestaña").classList.add('disabledTab');
-                    document.getElementById("plan_form").classList.remove('active');
-                    document.getElementById("view_form").classList.remove('active');
-
-                    document.getElementById("member_form").classList.add('show');
-                    document.getElementById("member_form").classList.add('active');
-                    document.getElementById("member_form").classList.add('enabledTab');
-                    document.getElementById("staff").classList.add('active');
-
-                    $('#txt_id').val(result.data['id_staff']);
-                    $('#txt_name').val(result.data['name']);
-                    $('#txt_email').val(result.data['email']);
-                    $('#txt_mobile').val(result.data['mobile']);
-                    $('#txt_cargo').val(result.data['position']);
-                    table.ajax.reload();
-                    //	setTimeout(function() {
-                    //		location.reload()
-                    //	}, 1000)
-
-                    if (result.pay != null) {
-
-                        //  document.getElementById("plan_pestaña").classList.add('disabledTab');
-                        document.getElementById('plan_pestaña').style.display = 'none';
-                        document.getElementById('view_pestaña').style.display = 'block';
-                        document.getElementById("view_button").classList.remove('active');
-
-                        var today = new Date();
-                        var dd = String(today.getDate()).padStart(2, '0');
-                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                        var yyyy = today.getFullYear();
-                        today = yyyy + '-' + mm + '-' + dd;
-
-
-                        var date1 = new Date(today);
-                        var date2 = new Date(result.pay[0]['date_out']);
-
-                        var Difference_In_Time = date2.getTime() - date1.getTime();
-                        var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-
-                        date_new = addDays(date2, 2);
-                        []
-
-                        $('#txt_payid').val(result.pay[0]['id_pay']);
-                        $('#txt_date_1').val(result.pay[0]['date_in']);
-                        $('#txt_date_2').val(result.pay[0]['date_out']);
-                        $('#txt_days').val(Difference_In_Days);
-                        $('#txt_date_next').val(date_new);
-
-                        if (result.pay[0]['date_in'] === today) {
-                            $('#btn_eliminarplan').show();
-                        } else {
-                            document.getElementById('btn_eliminarplan').style.display = 'none';
-                        }
-
-
-
-                    } else {
-                        console.log("data_1");
-                        document.getElementById('view_pestaña').style.display = 'none';
-                        document.getElementById('plan_pestaña').style.display = 'block';
-
                     }
-
-                } else if (resp == 2) {
-                    console.log("data_3");
-                    $('#msg').html('<div class="alert alert-danger">ID No already existed.</div>')
-                    end_load();
-                }
+                });
             }
-        });
-    }
 
 
-    function addDays(date, days) {
-        var result = new Date(date);
+            function addDays(date, days) {
+                var result = new Date(date);
 
-        ostras = format(new Date(result.setDate(result.getDate() + days)), 'yyyy-MM-dd')
+                ostras = format(new Date(result.setDate(result.getDate() + days)), 'yyyy-MM-dd')
 
-        return ostras;
-    }
-
-
-
-    format = function date2str(x, y) {
-        var z = {
-            M: x.getMonth() + 1,
-            d: x.getDate(),
-            h: x.getHours(),
-            m: x.getMinutes(),
-            s: x.getSeconds()
-        };
-        y = y.replace(/(M+|d+|h+|m+|s+)/g, function(v) {
-            return ((v.length > 1 ? "0" : "") + z[v.slice(-1)]).slice(-2)
-        });
-
-        return y.replace(/(y+)/g, function(v) {
-            return x.getFullYear().toString().slice(-v.length)
-        });
-    }
-
-    function get_plan() {
-        $.ajax({
-            url: site_url + '/student/student_get_plan',
-            method: "post",
-            success: function(resp) {
-                var result = $.parseJSON(resp);
-
-
-
-                if (result.resp == 1) {
-                    $.each(result.data, function(key, value) {
-
-                        $("#plan_select").append('<option value=' + value.id_plan + '>' + value.month + '</option>');
-                    });
-
-                    table.ajax.reload();
-                    //	setTimeout(function() {
-                    //		location.reload()
-                    //	}, 1000)
-                } else if (resp == 2) {
-                    $('#msg').html('<div class="alert alert-danger">ID No already existed.</div>')
-                    end_load();
-                }
+                return ostras;
             }
-        });
-    }
-
-    function enable_tabs() {
 
 
-        document.getElementById("plan_pestaña").classList.add('disabledTab');
-        document.getElementById("staff").classList.remove('disabledTab');
-        document.getElementById("plan_pestaña").classList.add('enableTab');
-        document.getElementById("plan_pestaña").classList.add('active');
-        //document.getElementById("member_form").classList.remove('active');
-        // document.getElementById("plan_form").classList.add('active');
-        // document.getElementById("plan_form").classList.add('show');
 
-        $('#plan_button').attr("style", " ");
+            format = function date2str(x, y) {
+                var z = {
+                    M: x.getMonth() + 1,
+                    d: x.getDate(),
+                    h: x.getHours(),
+                    m: x.getMinutes(),
+                    s: x.getSeconds()
+                };
+                y = y.replace(/(M+|d+|h+|m+|s+)/g, function(v) {
+                    return ((v.length > 1 ? "0" : "") + z[v.slice(-1)]).slice(-2)
+                });
+
+                return y.replace(/(y+)/g, function(v) {
+                    return x.getFullYear().toString().slice(-v.length)
+                });
+            }
+
+            function get_plan() {
+                $.ajax({
+                    url: site_url + '/student/student_get_plan',
+                    method: "post",
+                    success: function(resp) {
+                        var result = $.parseJSON(resp);
 
 
-    }
 
-    function remove_red() {
-        div_1.classList.remove("error");
-        div_2.classList.remove("error");
-        div_3.classList.remove("error");
-        div_4.classList.remove("error");
-        div_5.classList.remove("error");
+                        if (result.resp == 1) {
+                            $.each(result.data, function(key, value) {
 
-    }
+                                $("#plan_select").append('<option value=' + value.id_plan + '>' + value.month + '</option>');
+                            });
+
+                            table.ajax.reload();
+                            //	setTimeout(function() {
+                            //		location.reload()
+                            //	}, 1000)
+                        } else if (resp == 2) {
+                            $('#msg').html('<div class="alert alert-danger">ID No already existed.</div>')
+                            end_load();
+                        }
+                    }
+                });
+            }
+
+            function enable_tabs() {
+
+
+                document.getElementById("plan_pestaña").classList.add('disabledTab');
+                document.getElementById("staff").classList.remove('disabledTab');
+                document.getElementById("plan_pestaña").classList.add('enableTab');
+                document.getElementById("plan_pestaña").classList.add('active');
+                //document.getElementById("member_form").classList.remove('active');
+                // document.getElementById("plan_schedule").classList.add('active');
+                // document.getElementById("plan_schedule").classList.add('show');
+
+                $('#plan_button').attr("style", " ");
+
+
+            }
+
+            function remove_red() {
+                div_1.classList.remove("error");
+                div_2.classList.remove("error");
+                div_3.classList.remove("error");
+                div_4.classList.remove("error");
+                div_5.classList.remove("error");
+
+            }
+
+            function limpiar_chek() {
+                // Check
+                document.getElementById("check1").checked = false;
+                document.getElementById('appt_lun1').style.display = 'none';
+                document.getElementById('appt_lun2').style.display = 'none';
+                document.getElementById("appt_lun2").value = "12:59:48";
+
+                document.getElementById("check2").checked = false;
+
+                document.getElementById('appt_mar1').style.display = 'none';
+                document.getElementById('appt_mar2').style.display = 'none';
+                document.getElementById("appt_mar2").value = "12:59:48";
+
+                document.getElementById("check3").checked = false;
+
+                document.getElementById('appt_mier1').style.display = 'none';
+                document.getElementById('appt_mier2').style.display = 'none';
+
+                document.getElementById("appt_mier2").value = "12:59:48";
+
+                document.getElementById("check4").checked = false;
+
+
+                document.getElementById('appt_juev1').style.display = 'none';
+                document.getElementById('appt_juev2').style.display = 'none';
+                document.getElementById("appt_juev2").value = "12:59:48";
+
+                document.getElementById("check5").checked = false;
+
+                document.getElementById('appt_vier1').style.display = 'none';
+                document.getElementById('appt_vier2').style.display = 'none';
+                document.getElementById("appt_vier2").value = "12:59:48";
+
+                document.getElementById("check6").checked = false;
+
+
+                document.getElementById('appt_sab1').style.display = 'none';
+                document.getElementById('appt_sab2').style.display = 'none';
+                document.getElementById("appt_sab2").value = "12:59:48";
+
+
+                document.getElementById("check7").checked = false;
+
+                document.getElementById('appt_dom1').style.display = 'none';
+                document.getElementById('appt_dom2').style.display = 'none';
+                document.getElementById("appt_dom2").value = "12:59:48";
+            }
 </script>
 
 <style>
@@ -1716,6 +2565,55 @@
         text-decoration: none;
         color: #00969b;
         font-size: 16px;
+    }
+
+    label {
+        display: block;
+        font: 1rem 'Fira Sans', sans-serif;
+    }
+
+    input,
+    label {
+        margin: .4rem 0;
+    }
+
+    .alert {
+        padding: 15px;
+        margin-bottom: 0px;
+        border: 1px solid #eed3d7;
+        border-radius: 4px;
+        position: absolute;
+        bottom: 380px;
+        right: 0px;
+        /* Each alert has its own width */
+        float: right;
+        clear: right;
+        background-color: white;
+    }
+
+    .alert-red {
+        color: white;
+        background-color: #DA4453;
+    }
+
+    .alert-green {
+        color: white;
+        background-color: #37BC9B;
+    }
+
+    .alert-blue {
+        color: white;
+        background-color: #4A89DC;
+    }
+
+    .alert-yellow {
+        color: white;
+        background-color: #F6BB42;
+    }
+
+    .alert-orange {
+        color: white;
+        background-color: #E9573F;
     }
 </style>
 

@@ -12,7 +12,7 @@ class InformativoModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
     protected $useSoftDeletes = true;
-    protected $allowedFields = ['date_in', 'date_out','cost','id_member'];
+    protected $allowedFields = ['date_in', 'date_out','cost','id_member','year_act','company'];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

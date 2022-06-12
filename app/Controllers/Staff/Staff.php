@@ -262,11 +262,112 @@ class Staff extends BaseController
         }
     }
 
-    public function schedule()
+    public function day_schedule()
     {
+        $staffchedule= new StaffscheduleModel();
+        $data=$this->request->getPost('data');
+        $id_staff=$this->request->getPost('id_staff');
+        $i=0;
+        foreach ($data as $key => $value) {
+            # code...
+           
+            if($value!='vacio')
+            {
+                
+                $porciones[$i] = explode("-", $value);
+                $i++;
+            }
+        }
 
-        $staffModel = new StaffscheduleModel();
-        var_dump("data");
+        foreach ($porciones as $key => $value) {
+            # code...
+            
+            $data_plan = [
+                'id_staff' => $id_staff,
+                'day' => $value[2],
+                'hour_in' => $value[0],
+                'hour_out' => $value[1],
+                'status_day' => 'true',
+                'year_act' => $_SESSION['year_act'],
+                'company' => $_SESSION['company']
+            ];
+
+            $staffchedule->save($data_plan);
+           
+        }
+
+            $staffmodel = new StaffModel();
+            $data = [
+                'status' => 'true'
+            ];
+            if($staffmodel->update($id_staff, $data)){
+
+                $consulta['resp'] = '0';
+                echo json_encode($consulta);
+            }
+            
+
+            
+
+    }
+
+
+    public function day_schedule_mod()
+    {
+        $staffchedule= new StaffscheduleModel();
+        $data=$this->request->getPost('data');
+        $id_staff=$this->request->getPost('id_staff');
+        $i=0;
+        foreach ($data as $key => $value) {
+            # code...
+           
+            if($value!='vacio')
+            {
+                
+                $porciones[$i] = explode("-", $value);
+                $i++;
+            }
+        }
+         $staffchedule->where('id_staff', $id_staff);
+
+         if ($staffchedule->delete()) {
+            foreach ($porciones as $key => $value) {
+                # code...
+                
+                $data_plan = [
+                    'id_staff' => $id_staff,
+                    'day' => $value[2],
+                    'hour_in' => $value[0],
+                    'hour_out' => $value[1],
+                    'status_day' => 'true',
+                    'year_act' => $_SESSION['year_act'],
+                    'company' => $_SESSION['company']
+                ];
+    
+                $staffchedule->save($data_plan);
+               
+            }
+    
+                $staffmodel = new StaffModel();
+                $data = [
+                    'status' => 'true'
+                ];
+                if($staffmodel->update($id_staff, $data)){
+    
+                    $consulta['resp'] = '0';
+                    echo json_encode($consulta);
+                }
+        } else {
+
+            $consulta['resp'] = '1';
+            echo json_encode($consulta);
+        }
+
+      
+            
+
+            
+
     }
 
     public function ajaxLoadDataStaff()
@@ -310,34 +411,20 @@ class Staff extends BaseController
         ]);
 
         $json_data['data']=$data;
-        /*
-
-
-       
-        $json_data = array(
-            "draw" => intval($params['draw']),
-            "length" => $_REQUEST['length'],
-            "start" => $_REQUEST['start'],
-            "recordsTotal" => count($total_count),
-            "recordsFiltered" => count($total_count),
-            "data" => $data   // total data array
-        );
-
-
-   /*
-        $json_data = array(
-            "draw" => intval($params['draw']),
-            "recordsTotal" => count($total_count),
-            "recordsFiltered" => count($total_count),
-            "data" => $data   // total data array
-        );
- */
-
+  
         echo json_encode($json_data);
     }
 
+    
 
-
+    public function get_schedule()
+    {
+        $staffschedule= new StaffscheduleModel();
+        $data = $staffschedule->find();
+        $data =$staffschedule->where('id_staff', $this->request->getPost('id'))->findAll();
+        $consulta['resp'] = $data;
+        echo json_encode($consulta);
+    }
 
     public function get_staff()
     {
@@ -347,9 +434,19 @@ class Staff extends BaseController
         ];
         if($data = $staffModel->find($data['id']))
         {
-            $consulta['resp'] = '1';
-            $consulta['data'] = $data;
-            echo json_encode($consulta);
+        
+            if($data['status']=='true')
+            {
+                $consulta['resp'] = '2';
+                $consulta['data'] = $data;
+                echo json_encode($consulta);
+            }else
+            {
+                $consulta['resp'] = '1';
+                $consulta['data'] = $data;
+                echo json_encode($consulta);
+            }
+          
         }
         else
         {

@@ -12,8 +12,8 @@ class StaffscheduleModel extends Model
     protected $primaryKey = 'id_schedule';
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
-    protected $useSoftDeletes = true;
-    protected $allowedFields = ['id_schedule','id_staff','day','status_day','year_act','company'];
+    protected $useSoftDeletes = false;
+    protected $allowedFields = ['id_schedule','id_staff','day','hour_in','hour_out','status_day','year_act','company'];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

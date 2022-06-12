@@ -15,7 +15,7 @@
 
 <?= $this->extend('Front/layout/main') ?>
 <?= $this->section('content') ?>
-<?php $session = session(); ?>
+<?php $session = session();?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +51,7 @@
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+          <h3 class="font-weight-bolder mb-0"><?php echo $_SESSION['company'] ?></h3>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -661,9 +661,8 @@
                 © <script>
                   document.write(new Date().getFullYear())
                 </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
+                Hecho con <i class="fa fa-heart"></i> por
+                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">HerCas Creative Team.</a>
               </div>
             </div>
             <div class="col-lg-6">
