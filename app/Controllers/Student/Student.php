@@ -375,16 +375,16 @@ class Student extends BaseController
                 $query = $schedulestaffModel->get();
                 $data_schedule = $query->getResult('array');
 
-                $datetime = DateTime::createFromFormat('Ymd', '20151102');
-
-                var_dump($datetime->format('D'));
-
-
-                $date = strtotime('2016-2-3');
-                $date = date('l', $date);
-                var_dump($date);
+               
+                $hoy = getdate();
+                $date_today=$hoy['hours'].':'.$hoy['minutes'].':'.$hoy['seconds'];
+                var_dump($date_today);
+                
 
                 
+              
+
+
                 $log = new LogStaffModel();
 
 
