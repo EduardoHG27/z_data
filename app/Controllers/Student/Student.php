@@ -357,7 +357,7 @@ class Student extends BaseController
             if ($user['status'] != 'true') {
                 $consulta['resp'] = '2';
                 $consulta['name'] = $user['name'];
-                $consulta['msj'] = 'Usuario se agoto su membresia';
+                $consulta['msj'] = 'Miembro de Staff no tiene un horario asignado!!';
                 echo json_encode($consulta);
             } else {
                 $consulta['resp'] = '1';
