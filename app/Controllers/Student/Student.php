@@ -52,7 +52,7 @@ class Student extends BaseController
             $paysModel->select();
             $paysModel->where('id_member', $data['id']);
             $paysModel->where('year_act', $_SESSION['year_act']);
-            $paysModel->where('company',$_SESSION['company']);
+            $paysModel->where('company', $_SESSION['company']);
             $paysModel->where('pay_status', 'true');
             $query = $paysModel->get();
             $pay_data = $query->getResult('array');
@@ -133,7 +133,7 @@ class Student extends BaseController
         $studetsModel = new StudetsModel();
 
         $id = $this->request->getPost('id');
-        $data=$studetsModel->find($id);
+        $data = $studetsModel->find($id);
         unlink($data['qr_location']);
         $studetsModel->where('id', $id);
         if ($studetsModel->delete()) {
@@ -158,28 +158,28 @@ class Student extends BaseController
         $password = md5($data['password']);
 
         $studetsModel = new StudetsModel();
-       
+
         $studetsModel->select('*');
-        $studetsModel->where('name',$nombre);
-        $studetsModel->where('password',$password);
+        $studetsModel->where('name', $nombre);
+        $studetsModel->where('password', $password);
         $studetsModel->where('year_act', $_SESSION['year_act']);
-        $studetsModel->where('company',$_SESSION['company']);
-         $query_student = $studetsModel->get();
+        $studetsModel->where('company', $_SESSION['company']);
+        $query_student = $studetsModel->get();
         $data_validation_student = $query_student->getResult('array');
-        
-       
+
+
         $staffModel = new StaffModel();
         $staffModel->select('*');
-        $staffModel->where('name',$nombre);
-        $staffModel->where('password',$password);
+        $staffModel->where('name', $nombre);
+        $staffModel->where('password', $password);
         $staffModel->where('year_act', $_SESSION['year_act']);
-        $staffModel->where('company',$_SESSION['company']);
-	    $query = $staffModel->get();
-        $data_validation = $query->getResult('array');   
+        $staffModel->where('company', $_SESSION['company']);
+        $query = $staffModel->get();
+        $data_validation = $query->getResult('array');
 
-        
-       
-        if(!empty($data_validation)){
+
+
+        if (!empty($data_validation)) {
 
             if ($data_validation[0]['position'] == 'manager') {
                 if ($password != $data_validation[0]['password']) {
@@ -188,14 +188,13 @@ class Student extends BaseController
                     $consulta['msj'] = 'Contraseña Incorrecta';
                     echo json_encode($consulta);
                 } else {
-                    
+
                     $consulta['data'] = '5';
                     $consulta['msj'] = 'Admin';
                     echo json_encode($consulta);
                 }
             }
-        } else if(!empty($data_validation_student))
-        {
+        } else if (!empty($data_validation_student)) {
             if ($password != $data_validation_student[0]['password']) {
                 $consulta['data'] = '1';
                 $consulta['msj'] = 'Contraseña Incorrecta';
@@ -211,28 +210,28 @@ class Student extends BaseController
                 $consulta['msj'] = 'Usuario Activo';
                 echo json_encode($consulta);
             }
-        }else {
+        } else {
             $consulta['data'] = '0';
             $consulta['msj'] = 'Este usuario no se encuentra registrado en el sistema';
             echo json_encode($consulta);
         }
     }
 
-   
+
     public function store()
     {
-        include RUTA_APP. '/ThirdParty/phpqrcode/qrlib.php';
+        include RUTA_APP . '/ThirdParty/phpqrcode/qrlib.php';
         $mail = new PHPMailer_lib();
         $year = date("Y");
         $studetsModel = new StudetsModel();
         $studetsModel->select('*');
         $studetsModel->where('name', $this->request->getPost('name'));
         $studetsModel->where('year_act', $_SESSION['year_act']);
-        $studetsModel->where('company',$_SESSION['company']);
+        $studetsModel->where('company', $_SESSION['company']);
         $studetsModel->where('email', $this->request->getPost('email'));
         $query = $studetsModel->get();
         $data_validation = $query->getResult('array');
- 
+
         if (empty($data_validation)) {
 
             $correo = $mail->load();
@@ -273,15 +272,14 @@ class Student extends BaseController
             } else {
                 $number = rand();
                 $dir = 'temp/';
-                if(!file_exists($dir))
-                {
+                if (!file_exists($dir)) {
                     mkdir($dir);
                 }
-                $filename = $dir.''.$number.'.png';
+                $filename = $dir . '' . $number . '.png';
                 $tamanio = 15;
                 $level = 'H';
                 $frameSize = 1;
-                $contenido = md5($this->request->getPost('password')).$number;
+                $contenido = md5($this->request->getPost('password')) . $number;
                 QRcode::png($contenido, $filename, $level, $tamanio, $frameSize);
 
                 $data = [
@@ -290,7 +288,7 @@ class Student extends BaseController
                     'mobile' => $this->request->getPost('mobile'),
                     'password' => md5($this->request->getPost('password')),
                     'qr_location' => $filename,
-                    'password_qr' => md5($this->request->getPost('password')).$number,
+                    'password_qr' => md5($this->request->getPost('password')) . $number,
                     'year_act' => $_SESSION['year_act'],
                     'company' => $_SESSION['company']
                 ];
@@ -302,7 +300,7 @@ class Student extends BaseController
                 ];
                 $studetsModel->update($consulta['id'], $data);
                 $consulta['resp'] = '1';
-               // $consulta['img'] =  $img;
+                // $consulta['img'] =  $img;
                 echo json_encode($consulta);
             }
         } else {
@@ -324,27 +322,33 @@ class Student extends BaseController
         $studetsModel->select('name,matricula');
         $studetsModel->where('password_qr', $this->request->getPost('id'));
         $studetsModel->where('year_act', $_SESSION['year_act']);
-        $studetsModel->where('company',$_SESSION['company']);
+        $studetsModel->where('company', $_SESSION['company']);
         $query = $studetsModel->get();
         $data_validation = $query->getResult('array');
 
-       
-        $dat=count($data_validation);
-        if ($dat=='0') {
-            $consulta['resp'] = '0';
-            $consulta['msj'] = 'Código QR no reconocido';
-            echo json_encode($consulta);
-        } else {
-            
+
+        $staffModel = new StaffModel();
+        $staffModel->select('name,matricula');
+        $staffModel->where('password_qr', $this->request->getPost('id'));
+        $staffModel->where('year_act', $_SESSION['year_act']);
+        $staffModel->where('company', $_SESSION['company']);
+        $query = $staffModel->get();
+        $data_validation_staff = $query->getResult('array');
+
+        $dat = count($data_validation);
+        $dat_staff = count($data_validation_staff);
+
+        if (!$dat == '0') {
             $user = $model->getUserBy('matricula', $data_validation[0]['matricula']);
+
+            var_dump($user);
             if ($user['status'] != 'true') {
 
-               
+
                 $consulta['resp'] = '2';
                 $consulta['name'] = $user['name'];
                 $consulta['msj'] = 'Usuario se agoto su membresia';
                 echo json_encode($consulta);
-
             } else {
 
 
@@ -352,9 +356,14 @@ class Student extends BaseController
                 $consulta['name'] = $user['name'];
                 $consulta['msj'] = 'Usuario Activo';
                 echo json_encode($consulta);
-
             }
-            
+        } else if (!$dat_staff == '0') {
+
+        } else {
+
+            $consulta['resp'] = '0';
+            $consulta['msj'] = 'Código QR no reconocido';
+            echo json_encode($consulta);
         }
     }
 
@@ -461,7 +470,7 @@ class Student extends BaseController
         );
 
 
-        $data = $studetsModel->where('company',$_SESSION['company'])->findAll();
+        $data = $studetsModel->where('company', $_SESSION['company'])->findAll();
         $total_count = $data;
 
         $lib = new Datatable($studetsModel, 'gp1', ['id', 'matricula', 'name', 'email', 'mobile', 'status', 'password', 'year_act', 'company', 'created_at', 'updated_at', 'deleted_at']);
@@ -475,7 +484,7 @@ class Student extends BaseController
             'search' => $_REQUEST['search']['value'],
             'like' => $like
         ]);
-            $json_data['data']=$data;
+        $json_data['data'] = $data;
         /*
 
 
@@ -507,7 +516,7 @@ class Student extends BaseController
         $paysModel = new PaysModel();
         $paysModel->select('cost,date_in');
         $paysModel->where('year_act', $_SESSION['year_act']);
-        $paysModel->where('company',$_SESSION['company']);
+        $paysModel->where('company', $_SESSION['company']);
         $paysModel->orderBy('date_in', 'ASC');
         $query = $paysModel->get();
         $get_total = $query->getResult('array');
@@ -639,11 +648,11 @@ class Student extends BaseController
             }
         }
 
-        $k=0;
+        $k = 0;
         foreach ($mes as $key => $value) {
-         
-          $mes_res[$k++]=$value;
-        } 
+
+            $mes_res[$k++] = $value;
+        }
         $data = [100, 100, 100, 100, 100, 100, 40];
         $consulta['datos_entrada'] = $data;
         $consulta['datos_ingresos'] = $arr_dat;
@@ -661,7 +670,7 @@ class Student extends BaseController
         $planModel->select('*');
         $planModel->where('status', 'true');
         $planModel->where('year_act', $_SESSION['year_act']);
-        $planModel->where('company',$_SESSION['company']);
+        $planModel->where('company', $_SESSION['company']);
         $query = $planModel->get();
 
         if ($data = $query->getResult('array')) {
