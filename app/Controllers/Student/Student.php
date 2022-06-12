@@ -376,13 +376,13 @@ class Student extends BaseController
         //->find($data['id']);
 
 
-        if ($data['qr_location'] == '') {
+        if ($data[0]['qr_location'] == '') {
             $consulta['resp'] = '0';
             echo json_encode($consulta);
         } else {
 
             $consulta['resp'] = '1';
-            $consulta['data'] = $data['qr_location'];
+            $consulta['data'] = $data[0]['qr_location'];
             echo json_encode($consulta);
         }
     }
