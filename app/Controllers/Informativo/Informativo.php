@@ -17,6 +17,7 @@ class Informativo extends BaseController
     {
 
         $this->db = \Config\Database::connect();
+         $session = session();
     }
 
     public function listStudent()
@@ -168,6 +169,8 @@ class Informativo extends BaseController
 
         if (!empty($search_value)) {
             $infoModel->join('tbl_students', 'tbl_students.id = tbl_members_pay.id_member');
+            $infoModel->where('tbl_students.year_act', $_SESSION['year_act']);
+            $infoModel->where('tbl_students.company',$_SESSION['company']);
             $infoModel->like('date_in', $search_value);
             $infoModel->orLike('date_out', $search_value);
             $infoModel->orLike('cost', $search_value);
@@ -178,29 +181,39 @@ class Informativo extends BaseController
             $total_count = $data;
         } else if (!empty($id)) {
             $infoModel->join('tbl_students', 'tbl_students.id = tbl_members_pay.id_member');
+            $infoModel->where('tbl_students.year_act', $_SESSION['year_act']);
+            $infoModel->where('tbl_students.company',$_SESSION['company']);
             $infoModel->like($like);
             $query = $infoModel->get();
             $data = $query->getResult('array');
             $total_count = $data;
         } else if (!empty($id_member)) {
             $infoModel->join('tbl_students', 'tbl_students.id = tbl_members_pay.id_member');
+            $infoModel->where('tbl_students.year_act', $_SESSION['year_act']);
+            $infoModel->where('tbl_students.company',$_SESSION['company']);
             $infoModel->like($like);
             $query = $infoModel->get();
             $data = $query->getResult('array');
             $total_count = $data;
         } else if (!empty($usuario)) {
             $infoModel->join('tbl_students', 'tbl_students.id = tbl_members_pay.id_member');
+            $infoModel->where('tbl_students.year_act', $_SESSION['year_act']);
+            $infoModel->where('tbl_students.company',$_SESSION['company']);
             $infoModel->like($like);
             $query = $infoModel->get();
             $data = $query->getResult('array');
             $total_count = $data;
         } else if (!empty($fecha_final)) {
             $infoModel->like($like);
+            $infoModel->where('tbl_students.year_act', $_SESSION['year_act']);
+            $infoModel->where('tbl_students.company',$_SESSION['company']);
             $query = $infoModel->get();
             $data = $query->getResult('array');
             $total_count = $data;
         } else {
             $infoModel->join('tbl_students', 'tbl_students.id = tbl_members_pay.id_member');
+            $infoModel->where('tbl_students.year_act', $_SESSION['year_act']);
+            $infoModel->where('tbl_students.company',$_SESSION['company']);
             $data = $infoModel->findAll();
             $total_count = $data;
         }

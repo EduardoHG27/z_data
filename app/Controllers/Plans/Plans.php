@@ -13,7 +13,7 @@ class Plans extends BaseController
 
     public function __construct()
     {
-
+        $session = session();
         $this->db = \Config\Database::connect();
     }
 
@@ -130,7 +130,9 @@ class Plans extends BaseController
         $data = [
             'month' => $this->request->getPost('month'),
             'discount' => $this->request->getPost('desc'),
-            'status' => $this->request->getPost('status')
+            'status' => $this->request->getPost('status'),
+            'year_act' => $_SESSION['year_act'],
+            'company' => $_SESSION['company']
         ];
         
   
@@ -253,10 +255,11 @@ class Plans extends BaseController
             'status' => $columns[3]['search']['value']
         );
 
-        $data = $plansModel->findAll();
+        $data = $plansModel->where('company',$_SESSION['company'])->findAll();
+  
         $total_count = $data;
 
-        $lib = new Datatable($plansModel, 'gp1', ['id_plan', 'id_planshow', 'name', 'month', 'discount', 'status', 'created_at', 'updated_at', 'deleted_at']);
+        $lib = new Datatable($plansModel, 'gp1', ['id_plan', 'id_planshow', 'name', 'month', 'discount', 'status','year_act','company','created_at', 'updated_at', 'deleted_at']);
         $json_data = $lib->getResponse([
             'draw' => $_REQUEST['draw'],
             'length' => $_REQUEST['length'],
@@ -267,8 +270,7 @@ class Plans extends BaseController
             'search' => $_REQUEST['search']['value'],
             'like' => $like
         ]);
-
-
+        $json_data['data']=$data;
         echo json_encode($json_data);
     }
 }

@@ -217,10 +217,11 @@ class Student extends BaseController
         $studetsModel->where('name', $this->request->getPost('name'));
         $studetsModel->where('year_act', $_SESSION['year_act']);
         $studetsModel->where('company',$_SESSION['company']);
-        $studetsModel->orWhere('email', $this->request->getPost('email'));
+        $studetsModel->where('email', $this->request->getPost('email'));
         $query = $studetsModel->get();
+  
         $data_validation = $query->getResult('array');
-
+ 
         if (empty($data_validation)) {
 
             $correo = $mail->load();
@@ -423,53 +424,6 @@ class Student extends BaseController
 
     public function ajaxLoadData()
     {
-        // $params['draw'] = $_REQUEST['draw'];
-
-        /*
-        $id = $columns[0]['search']['value'];
-        $name = $columns[1]['search']['value'];
-        $email = $columns[2]['search']['value'];
-        $mobile = $columns[3]['search']['value'];
-*/
-
-        /*
-        $search_value = $_REQUEST['search']['value'];
-
-
-        if (!empty($search_value)) {
-
-            $studetsModel->like('name', $search_value);
-            $studetsModel->orLike('email', $search_value);
-            $studetsModel->orLike('mobile', $search_value);
-            $query = $studetsModel->get();
-            $data = $query->getResult('array');
-            $total_count = $data;
-        } else if (!empty($id)) {
-            $studetsModel->like($like);
-            $query = $studetsModel->get();
-            $data = $query->getResult('array');
-            $total_count = $data;
-        } else if (!empty($name)) {
-            $studetsModel->like($like);
-            $query = $studetsModel->get();
-            $data = $query->getResult('array');
-            $total_count = $data;
-        } else if (!empty($email)) {
-            $studetsModel->like($like);
-            $query = $studetsModel->get();
-            $data = $query->getResult('array');
-            $total_count = $data;
-        } else if (!empty($mobile)) {
-            $studetsModel->like($like);
-            $query = $studetsModel->get();
-            $data = $query->getResult('array');
-            $total_count = $data;
-        } else {
-            $data = $studetsModel->findAll();
-            $total_count = $data;
-        }
-*/
-
         $studetsModel = new StudetsModel();
         $order = $_REQUEST['order'];
         $order = array_shift($_REQUEST['order']);
@@ -539,6 +493,8 @@ class Student extends BaseController
     {
         $paysModel = new PaysModel();
         $paysModel->select('cost,date_in');
+        $paysModel->where('year_act', $_SESSION['year_act']);
+        $paysModel->where('company',$_SESSION['company']);
         $paysModel->orderBy('date_in', 'ASC');
         $query = $paysModel->get();
         $get_total = $query->getResult('array');
@@ -691,6 +647,8 @@ class Student extends BaseController
 
         $planModel->select('*');
         $planModel->where('status', 'true');
+        $planModel->where('year_act', $_SESSION['year_act']);
+        $planModel->where('company',$_SESSION['company']);
         $query = $planModel->get();
 
         if ($data = $query->getResult('array')) {
@@ -711,19 +669,9 @@ class Student extends BaseController
     {
 
         $paysModel = new PaysModel();
-        $data = [
-            'discount' => $this->request->getPost('discount'),
-            'month' => $this->request->getPost('month'),
-            'cost' => $this->request->getPost('cost'),
-            'id' => $this->request->getPost('id')
-
-        ];
-
-
-
         $date = date('Y-m-d');
 
-        $newDate = date('Y-m-d', strtotime($date . ' + ' . $data['month'] . ' months'));
+        $newDate = date('Y-m-d', strtotime($date . ' + ' .  $this->request->getPost('month') . ' months'));
 
 
         $data_plan = [
@@ -732,7 +680,10 @@ class Student extends BaseController
             'date_out' => $newDate,
             'id_member' => $this->request->getPost('id'),
             'cost' => $this->request->getPost('cost'),
-            'pay_status' => 'true'
+            'pay_status' => 'true',
+            'year_act' => $_SESSION['year_act'],
+            'company' => $_SESSION['company']
+
         ];
 
 
@@ -744,9 +695,6 @@ class Student extends BaseController
                 'status' => 'true'
             ];
 
-
-
-
             $studetsModel->update($this->request->getPost('id'), $data);
 
             $consulta['resp'] = '1';
@@ -756,14 +704,5 @@ class Student extends BaseController
             $consulta['resp'] = '0';
             echo json_encode($consulta);
         }
-
-        /*
-        $studetsModel = new StudetsModel();
-        $data = [
-            'name' => $this->request->getVar('name'),
-            'email'  => $this->request->getVar('email'),
-        ];
-        $studetsModel->insert($data);
-        return $this->response->redirect(site_url('/users-list'));*/
     }
 }

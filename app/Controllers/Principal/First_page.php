@@ -14,9 +14,9 @@ class First_page extends BaseController
     {
         $session = session();
   
-        $data = $this->get_dash();
-
+       
         if ($session->get('usuario')) {
+            $data = $this->get_dash();
             return view('Principal/view_dash', $data);
         } else {
             return view('Auth/Home');
@@ -38,9 +38,10 @@ class First_page extends BaseController
     {
         $session = session();
 
-        $data = $this->get_dash();
 
         if ($session->get('usuario')) {
+            
+            $data = $this->get_dash();
             return view('Principal/view_dash', $data);
         } else {
             return view('Auth/Home');
@@ -129,7 +130,7 @@ class First_page extends BaseController
         $paysModel = new PaysModel();
         $studetsModel->select();
         $studetsModel->where('status', 'true');
-        $studetsModel->where('year_act', $_SESSION['year_act']);
+        $studetsModel->where('year_act',$_SESSION['year_act']);
         $studetsModel->where('company',$_SESSION['company']);
         $query = $studetsModel->get();
         $miembros_activos = $query->getResult('array');
