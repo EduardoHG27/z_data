@@ -374,6 +374,7 @@ class Student extends BaseController
                     var_dump($hoy['minutes']);
                 }
                 $hour_today = $hoy['hours'] . ':' . $hoy['minutes'] . ':' . $hoy['seconds'];
+                $day_today = $hoy['mday'] . '-' . $hoy['mon'] . '-' . $hoy['year'];
 
 
                 if ($hoy['weekday'] == 'Monday') {
@@ -401,23 +402,33 @@ class Student extends BaseController
                 $query = $schedulestaffModel->get();
                 $data_schedule = $query->getResult('array');
 
-                var_dump($data_schedule);
+                $log = new LogStaffModel();
 
+                $log = new StaffscheduleModel();
+                $log->select('id_entrada');
+                $log->where('id_staff', $data_validation_staff[0]['id_staff']);
+                $log->where('day', $dia);
+                $log->where('day_save', $day_today);
+                $log->where('company', $_SESSION['company']);
+                $log->where('year_act', $_SESSION['year_act']);
+                $query_log = $log->get();
+                $data_log = $query_log->getResult('array');
 
-              
+                var_dump($data_log);
+                
                 $bandera=0;
                 foreach ($data_schedule as $key => $value) {
                     # code...
                     if ($value['day'] == $dia) {
 
-                        $log = new LogStaffModel();
+                       
 
                         $data = [
                             'id_staff' => $data_validation_staff[0]['id_staff'],
                             'hour_in' => $hour_today,
                             'hour_in_save' => $value['hour_in'],
                             'day' => $dia,
-                            'day_save' => $value['day'],
+                            'day_save' => $day_today,
                             'year_act' => $_SESSION['year_act'],
                             'company' => $_SESSION['company']
                         ];
