@@ -417,9 +417,6 @@ class Student extends BaseController
                 $query_log = $log->get();
                 $data_log = $query_log->getResult('array');
 
-                var_dump($data_log);
-
-
                 if (count($data_log) == 0) {
                     $bandera = 0;
                     foreach ($data_schedule as $key => $value) {
@@ -437,7 +434,7 @@ class Student extends BaseController
 
                             $log->save($data);
                             $bandera = 0;
-                            $consulta['resp'] = '1';
+                            $consulta['resp'] = '3';
                             $consulta['name'] = $user['name'];
                             $consulta['msj'] = 'Se registro tu Entrada con exito!!';
                             echo json_encode($consulta);
@@ -454,20 +451,22 @@ class Student extends BaseController
                             ];
 
                             $log->update($data_log[0]['id_entrada'], $data);
-                            $consulta['resp'] = '1';
+                            $consulta['resp'] = '4';
                             $consulta['name'] = $user['name'];
                             $consulta['msj'] = 'Se registro tu Salida con exito!!';
                             echo json_encode($consulta);
                         }
                     }
                 } else if($data_log[0]['hour_out'] != '') {
-                    $consulta['resp'] = '2';
+                    $consulta['resp'] = '5';
                     $consulta['name'] = $user['name'];
                     $consulta['msj'] = 'Se ha registrado Su entrada y salida por hoy';
+                    echo json_encode($consulta);
                 }else {
-                    $consulta['resp'] = '3';
+                    $consulta['resp'] = '6';
                     $consulta['name'] = $user['name'];
                     $consulta['msj'] = 'No se tiene registrado hoy su ingreso';
+                    echo json_encode($consulta);
                 }
             }
         } else {
