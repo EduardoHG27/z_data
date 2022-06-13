@@ -58,6 +58,13 @@ var app = new Vue({
               result.name + ' -> ' + result.msj,
               'warning'
             )
+          }else if (result.resp=='6')
+          {
+            Swal.fire(
+              'Staff',
+              result.name + ' -> ' + result.msj,
+              'warning'
+            )
           }else
           {
             Swal.fire(
