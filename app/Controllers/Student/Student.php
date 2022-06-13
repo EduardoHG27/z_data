@@ -405,69 +405,75 @@ class Student extends BaseController
                 $query = $schedulestaffModel->get();
                 $data_schedule = $query->getResult('array');
 
-                $log = new LogStaffModel();
+                if(count($data_schedule)!=0)
+                {
+                    $log = new LogStaffModel();
 
                
-                $log->select('id_entrada,hour_out');
-                $log->where('id_staff', $data_validation_staff[0]['id_staff']);
-                $log->where('day', $dia);
-                $log->where('day_save', $day_today);
-                $log->where('company', $_SESSION['company']);
-                $log->where('year_act', $_SESSION['year_act']);
-                $query_log = $log->get();
-                $data_log = $query_log->getResult('array');
-
-                if (count($data_log) == 0) {
-                    $bandera = 0;
-                    foreach ($data_schedule as $key => $value) {
-                        # code...
-                        if ($value['day'] == $dia) {
-                            $data = [
-                                'id_staff' => $data_validation_staff[0]['id_staff'],
-                                'hour_in' => $hour_today,
-                                'hour_in_save' => $value['hour_in'],
-                                'day' => $dia,
-                                'day_save' => $day_today,
-                                'year_act' => $_SESSION['year_act'],
-                                'company' => $_SESSION['company']
-                            ];
-
-                            $log->save($data);
-                            $bandera = 0;
-                            $consulta['resp'] = '3';
-                            $consulta['name'] = $user['name'];
-                            $consulta['msj'] = 'Se registro tu Entrada con exito!!';
-                            echo json_encode($consulta);
+                    $log->select('id_entrada,hour_out');
+                    $log->where('id_staff', $data_validation_staff[0]['id_staff']);
+                    $log->where('day', $dia);
+                    $log->where('day_save', $day_today);
+                    $log->where('company', $_SESSION['company']);
+                    $log->where('year_act', $_SESSION['year_act']);
+                    $query_log = $log->get();
+                    $data_log = $query_log->getResult('array');
+    
+                    if (count($data_log) == 0) {
+                        $bandera = 0;
+                        foreach ($data_schedule as $key => $value) {
+                            # code...
+                            if ($value['day'] == $dia) {
+                                $data = [
+                                    'id_staff' => $data_validation_staff[0]['id_staff'],
+                                    'hour_in' => $hour_today,
+                                    'hour_in_save' => $value['hour_in'],
+                                    'day' => $dia,
+                                    'day_save' => $day_today,
+                                    'year_act' => $_SESSION['year_act'],
+                                    'company' => $_SESSION['company']
+                                ];
+    
+                                $log->save($data);
+                                $bandera = 0;
+                                $consulta['resp'] = '3';
+                                $consulta['name'] = $user['name'];
+                                $consulta['msj'] = 'Se registro tu Entrada con exito!!';
+                                echo json_encode($consulta);
+                            }
                         }
-                    }
-                } else if ($data_log[0]['hour_out'] == '') {
-          
-                    foreach ($data_schedule as $key => $value) {
-                        # code...
-                        if ($value['day'] == $dia) {
-                            $data = [
-                                'hour_out' => $hour_today,
-                                'hour_out_save' => $value['hour_out']
-                            ];
-
-                            $log->update($data_log[0]['id_entrada'], $data);
-                            $consulta['resp'] = '4';
-                            $consulta['name'] = $user['name'];
-                            $consulta['msj'] = 'Se registro tu Salida con exito!!';
-                            echo json_encode($consulta);
+                    } else if ($data_log[0]['hour_out'] == '') {
+              
+                        foreach ($data_schedule as $key => $value) {
+                            # code...
+                            if ($value['day'] == $dia) {
+                                $data = [
+                                    'hour_out' => $hour_today,
+                                    'hour_out_save' => $value['hour_out']
+                                ];
+    
+                                $log->update($data_log[0]['id_entrada'], $data);
+                                $consulta['resp'] = '4';
+                                $consulta['name'] = $user['name'];
+                                $consulta['msj'] = 'Se registro tu Salida con exito!!';
+                                echo json_encode($consulta);
+                            }
                         }
+                    } else if($data_log[0]['hour_out'] != '') {
+                        $consulta['resp'] = '5';
+                        $consulta['name'] = $user['name'];
+                        $consulta['msj'] = 'Se ha registrado Su entrada y salida por hoy';
+                        echo json_encode($consulta);
                     }
-                } else if($data_log[0]['hour_out'] != '') {
-                    $consulta['resp'] = '5';
-                    $consulta['name'] = $user['name'];
-                    $consulta['msj'] = 'Se ha registrado Su entrada y salida por hoy';
-                    echo json_encode($consulta);
-                }else {
+                }
+                else
+                {
                     $consulta['resp'] = '6';
                     $consulta['name'] = $user['name'];
                     $consulta['msj'] = 'No se tiene registrado hoy su ingreso';
                     echo json_encode($consulta);
                 }
+               
             }
         } else {
 
