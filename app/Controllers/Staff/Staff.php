@@ -131,10 +131,9 @@ class Staff extends BaseController
         $staffModel->where('name', $this->request->getPost('name'));
         $staffModel->where('year_act', $_SESSION['year_act']);
         $staffModel->where('company',$_SESSION['company']);
-        $staffModel->orWhere('email', $this->request->getPost('email'));
+        $staffModel->Where('email', $this->request->getPost('email'));
         $query = $staffModel->get();
         $data_validation = $query->getResult('array');
-
         if (empty($data_validation)) {
 
             $correo = $mail->load();
@@ -224,11 +223,7 @@ class Staff extends BaseController
         $data = [
             'id' => $this->request->getPost('id')
         ];
-
-
         $data = $staffModel->find($data['id']);
-
-
         if ($data['qr_location'] == '') {
             $consulta['resp'] = '0';
             echo json_encode($consulta);
@@ -249,8 +244,6 @@ class Staff extends BaseController
             'email'  => $this->request->getVar('email'),
             'mobile'  => $this->request->getVar('mobile')
         ];
-
-
         if ($studetsModel->update($id, $data)) {
 
             $consulta['resp'] = '1';
@@ -362,12 +355,6 @@ class Staff extends BaseController
             $consulta['resp'] = '1';
             echo json_encode($consulta);
         }
-
-      
-            
-
-            
-
     }
 
     public function ajaxLoadDataStaff()
@@ -453,8 +440,6 @@ class Staff extends BaseController
             $consulta['resp'] = '0';
             echo json_encode($consulta);
         }
-        
-       
        
     }
 
@@ -470,14 +455,8 @@ class Staff extends BaseController
             'id' => $this->request->getPost('id')
 
         ];
-
-
-
         $date = date('Y-m-d');
-
         $newDate = date('Y-m-d', strtotime($date . ' + ' . $data['month'] . ' months'));
-
-
         $data_plan = [
             'discount' => $this->request->getPost('discount'),
             'date_in' => $date,
@@ -506,13 +485,5 @@ class Staff extends BaseController
             echo json_encode($consulta);
         }
 
-        /*
-        $studetsModel = new StudetsModel();
-        $data = [
-            'name' => $this->request->getVar('name'),
-            'email'  => $this->request->getVar('email'),
-        ];
-        $studetsModel->insert($data);
-        return $this->response->redirect(site_url('/users-list'));*/
     }
 }
