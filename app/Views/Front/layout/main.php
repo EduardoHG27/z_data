@@ -18,6 +18,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
 <script type="text/javascript" src="<?php echo base_url(); ?>/js/ohsnap.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>/js/moment.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/select/css/select2.min.css">
