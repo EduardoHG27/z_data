@@ -360,7 +360,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                    <div class="form-check">
+                                        <div class="form-check">
                                             <label id="lblstats_lun" style="color:green; display:none;"></label>
                                         </div>
                                     </div>
@@ -387,7 +387,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                    <div class="form-check">
+                                        <div class="form-check">
                                             <label id="lblstats_mar" style="color:green; display:none;"></label>
                                         </div>
                                     </div>
@@ -414,7 +414,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                    <div class="form-check">
+                                        <div class="form-check">
                                             <label id="lblstats_mier" style="color:green; display:none;"></label>
                                         </div>
                                     </div>
@@ -432,7 +432,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-check">
-                                            <input type="time" id="appt_juev1" name="appt"  style="display:none" onchange="startTimeInput(event,'juev');" >
+                                            <input type="time" id="appt_juev1" name="appt" style="display:none" onchange="startTimeInput(event,'juev');">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -441,7 +441,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                    <div class="form-check">
+                                        <div class="form-check">
                                             <label id="lblstats_juev" style="color:green; display:none;"></label>
                                         </div>
                                     </div>
@@ -468,7 +468,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                    <div class="form-check">
+                                        <div class="form-check">
                                             <label id="lblstats_vier" style="color:green; display:none;"></label>
                                         </div>
                                     </div>
@@ -495,7 +495,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                    <div class="form-check">
+                                        <div class="form-check">
                                             <label id="lblstats_sab" style="color:green; display:none;"></label>
                                         </div>
                                     </div>
@@ -550,6 +550,7 @@
                                 <div class="modal-footer">
                                     <button type="button" id="bthorario" class="btn btn-info">Asignar Horario</button>
                                     <button type="button" id="bthorario_mod" class="btn btn-info">Modificar Horario</button>
+                                <!--    <button type="button" id="btn_copiar_horario" class="btn btn-info">Copiar Horario</button>-->
                                 </div>
                             </form>
 
@@ -959,12 +960,21 @@
 
 
             if (data === undefined) {
-                Swal.fire({
+                const Toast = Swal.mixin({
+                    toast: true,
                     position: 'top-end',
-                    icon: 'error',
-                    title: 'Debes seleccionar un registro de la tabla',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Debes seleccionar un registro de la tabla'
                 })
                 end_load();
             } else {
@@ -995,9 +1005,9 @@
                 document.getElementById('appt_lun1').value = '';
                 document.getElementById('appt_lun2').value = '12:59:48';
 
-                
+
                 var labelText = document.getElementById('lblstats_lun');
-                 labelText.innerHTML = '';
+                labelText.innerHTML = '';
             }
         })
 
@@ -1020,7 +1030,7 @@
                 document.getElementById('appt_mar2').value = '12:59:48';
 
                 var labelText = document.getElementById('lblstats_mar');
-                 labelText.innerHTML = '';
+                labelText.innerHTML = '';
             }
         })
 
@@ -1044,7 +1054,7 @@
                 document.getElementById('appt_mier2').value = '12:59:48';
 
                 var labelText = document.getElementById('lblstats_mier');
-                 labelText.innerHTML = '';
+                labelText.innerHTML = '';
             }
         })
 
@@ -1069,7 +1079,7 @@
                 document.getElementById('appt_juev2').value = '12:59:48';
 
                 var labelText = document.getElementById('lblstats_juev');
-                 labelText.innerHTML = '';
+                labelText.innerHTML = '';
             }
         })
 
@@ -1092,7 +1102,7 @@
                 document.getElementById('appt_vier2').value = '12:59:48';
 
                 var labelText = document.getElementById('lblstats_vier');
-                 labelText.innerHTML = '';
+                labelText.innerHTML = '';
             }
         })
 
@@ -1116,7 +1126,7 @@
                 document.getElementById('appt_sab2').value = '12:59:48';
 
                 var labelText = document.getElementById('lblstats_sab');
-                 labelText.innerHTML = '';
+                labelText.innerHTML = '';
             }
         })
 
@@ -1140,7 +1150,7 @@
                 document.getElementById('appt_dom2').value = '12:59:48';
 
                 var labelText = document.getElementById('lblstats_dom');
-                 labelText.innerHTML = '';
+                labelText.innerHTML = '';
             }
         })
 
@@ -1213,12 +1223,21 @@
             //  $('#miembro_pestaña').attr("class", "enabledTab");
             let data = table.rows('.selected').data()[0];
             if (data === undefined) {
-                Swal.fire({
+                const Toast = Swal.mixin({
+                    toast: true,
                     position: 'top-end',
-                    icon: 'error',
-                    title: 'Debes seleccionar un registro de la tabla',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Debes seleccionar un registro de la tabla'
                 })
             } else {
                 actualizar(data['id_staff']);
@@ -1377,30 +1396,38 @@
         resp = 1;
         lunes_1 = $('#appt_lun1').val();
         lunes_2 = $('#appt_lun2').val();
+        lunes_lbl = $('#lblstats_lun').val();
+        lunes_lbl = document.getElementById('lblstats_lun').textContent
 
         martes_1 = $('#appt_mar1').val();
         martes_2 = $('#appt_mar2').val();
-
+        martes_lbl = $('#lblstats_mar').val();
+        martes_lbl = document.getElementById('lblstats_mar').textContent
 
         miercoles_1 = $('#appt_mier1').val();
         miercoles_2 = $('#appt_mier2').val();
-
+        miercoles_lbl = $('#lblstats_mier').val();
+        miercoles_lbl = document.getElementById('lblstats_mier').textContent
 
         jueves_1 = $('#appt_juev1').val();
         jueves_2 = $('#appt_juev2').val();
-
+        jueves_lbl = $('#lblstats_juev').val();
+        jueves_lbl = document.getElementById('lblstats_juev').textContent
 
         viernes_1 = $('#appt_vier1').val();
         viernes_2 = $('#appt_vier2').val();
-
+        viernes_lbl = document.getElementById('lblstats_vier').textContent
 
         sabado_1 = $('#appt_sab1').val();
         sabado_2 = $('#appt_sab2').val();
-
+        sabado_lbl = document.getElementById('lblstats_sab').textContent
 
         domingo_1 = $('#appt_dom1').val();
         domingo_2 = $('#appt_dom2').val();
+        domingo_lbl = document.getElementById('lblstats_dom').textContent
 
+
+        console.log(sabado_lbl);
         const ban = [];
 
         if (lunes_2 == '12:59:48' && martes_2 == '12:59:48' && miercoles_2 == '12:59:48' && jueves_2 == '12:59:48' && viernes_2 == '12:59:48' && sabado_2 == '12:59:48' && domingo_2 == '12:59:48') {
@@ -1430,7 +1457,7 @@
 
             } else {
 
-                ban[0] = lunes_1 + '-' + lunes_2 + '-lunes';
+                ban[0] = lunes_1 + '/' + lunes_2 + '/lunes/' + lunes_lbl;
 
             }
 
@@ -1449,7 +1476,7 @@
                     color: 'red'
                 });
             } else {
-                ban[1] = martes_1 + '-' + martes_2 + '-martes';;
+                ban[1] = martes_1 + '/' + martes_2 + '/martes/' + martes_lbl;
             }
 
             if (miercoles_2 == '' && miercoles_1 == '') {
@@ -1467,7 +1494,7 @@
                     color: 'red'
                 });
             } else {
-                ban[2] = miercoles_1 + '-' + miercoles_2 + '-miercoles';
+                ban[2] = miercoles_1 + '/' + miercoles_2 + '/miercoles/' + miercoles_lbl;
             }
 
             if (jueves_2 == '' && jueves_1 == '') {
@@ -1485,7 +1512,7 @@
                     color: 'red'
                 });
             } else {
-                ban[3] = jueves_1 + '-' + jueves_2 + '-jueves';
+                ban[3] = jueves_1 + '/' + jueves_2 + '/jueves/' + jueves_lbl;
             }
 
             if (viernes_2 == '' && viernes_1 == '') {
@@ -1503,7 +1530,7 @@
                     color: 'red'
                 });
             } else {
-                ban[4] = viernes_1 + '-' + viernes_2 + '-viernes';;
+                ban[4] = viernes_1 + '/' + viernes_2 + '/viernes/' + viernes_lbl;
             }
 
             if (sabado_2 == '' && sabado_1 == '') {
@@ -1521,13 +1548,14 @@
                     color: 'red'
                 });
             } else {
-                ban[5] = sabado_1 + '-' + sabado_2 + '-sabado';;
+                ban[5] = sabado_1 + '/' + sabado_2 + '/sabado/' + sabado_lbl;
             }
 
             if (domingo_2 == '' && domingo_1 == '') {
                 ohSnap('Aviso!!: Dia Domingo vacio!', {
                     color: 'red'
                 });
+                ban[6] = null;
             } else if (domingo_2 == '12:59:48') {
                 ban[6] = 'vacio';
             } else if (domingo_2 == '') {
@@ -1542,12 +1570,9 @@
                 banderad = 3;
             } else {
                 banderad = 1;
-                ban[6] = domingo_1 + '-' + domingo_2 + '-domingo';
+                ban[6] = domingo_1 + '/' + domingo_2 + '/domingo/' + domingo_lbl;
             }
         }
-
-
-
 
         for (let index = 0; index < ban.length; index++) {
 
@@ -1574,14 +1599,25 @@
                 data: data,
                 success: function(resp) {
                     var result = $.parseJSON(resp);
+
+                    console.log(result);
                     if (result.resp == 0) {
 
-                        Swal.fire({
+                        const Toast = Swal.mixin({
+                            toast: true,
                             position: 'top-end',
-                            icon: 'success',
-                            title: 'Horario Modificado!!',
                             showConfirmButton: false,
-                            timer: 1500
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Horario asignado correctamente!!'
                         })
                         table.ajax.reload();
                         end_load();
@@ -1589,6 +1625,10 @@
                         data = result.msj_error;
                         $('#msg').html('<div class="alert alert-danger">Error al enviar correo:' + data + '</div>')
                         end_load();
+                    } else if (result.resp == 7) {
+                        ohSnap('Aviso!!: Revisar Horario asignado al Staff', {
+                            color: 'red'
+                        });
                     } else {
                         $('#msg').html('<div class="alert alert-danger">Error al Modificar el Horario</div>')
                     }
@@ -1941,6 +1981,24 @@
     });
 
 
+
+
+    $("#btn_copiar_horario").click(function() {
+        const {
+            value: email
+        } = await Swal.fire({
+            title: 'Input email address',
+            input: 'email',
+            inputLabel: 'Your email address',
+            inputPlaceholder: 'Enter your email address'
+        })
+
+        if (email) {
+            Swal.fire(`Entered email: ${email}`)
+        }
+    });
+
+
     $("#btnstaff").click(function() {
         if ($("#registration").valid() == false) {
 
@@ -1965,12 +2023,23 @@
                     var result = $.parseJSON(resp);
                     if (result.resp == 1) {
                         end_load();
-                        Swal.fire({
+
+
+                        const Toast = Swal.mixin({
+                            toast: true,
                             position: 'top-end',
-                            icon: 'success',
-                            title: 'Staff registrado correctamente',
                             showConfirmButton: false,
-                            timer: 1500
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Staff registrado correctamente'
                         })
 
                         $('#txt_id').val(result.id);
@@ -2418,20 +2487,18 @@
 
     }
 
-    function startTimeInput(e,day) {
+    function startTimeInput(e, day) {
         var mindate = e.target.value;
 
 
-        domingo_1 = $('#appt_'+day+'1').val();
-        domingo_2 = $('#appt_'+day+'2').val();
+        domingo_1 = $('#appt_' + day + '1').val();
+        domingo_2 = $('#appt_' + day + '2').val();
 
-        if(domingo_1==null)
-        {
+        if (domingo_1 == null) {
             console.log('vacio domingo 1');
         }
 
-        if(domingo_2==null)
-        {
+        if (domingo_2 == null) {
             console.log('vacio domingo 2');
         }
 
@@ -2440,43 +2507,42 @@
         var duration = moment.duration(endTime.diff(startTime));
         var hours = parseInt(duration.asHours());
         var minutes = parseInt(duration.asMinutes()) - hours * 60;
-        document.getElementById('lblstats_'+day).style.display = 'block';
-        var labelText = document.getElementById('lblstats_'+day);
-            labelText.innerHTML = hours+' Hrs' + minutes+' Mins';
-        
+        document.getElementById('lblstats_' + day).style.display = 'block';
+        var labelText = document.getElementById('lblstats_' + day);
+        labelText.innerHTML = hours + ' Hrs' + minutes + ' Mins';
+
 
         if (!isNaN(hours)) {
 
-            if(hours<0||minutes<0)
-            {
-                document.getElementById("lblstats_"+day).style.color = 'red';
-            }else
-            {
-                document.getElementById("lblstats_"+day).style.color = 'green';
+            if (hours < 0 || minutes < 0) {
+                ohSnap('Aviso!!: El horario ingresado no esta permitido!', {
+                    color: 'red'
+                });
+                document.getElementById("lblstats_" + day).style.color = 'red';
+            } else {
+                document.getElementById("lblstats_" + day).style.color = 'green';
             }
-            document.getElementById('lblstats_'+day).style.display = 'block';
-            var labelText = document.getElementById('lblstats_'+day);
-            labelText.innerHTML = hours+' Hrs ' + minutes+' Mins';
+            document.getElementById('lblstats_' + day).style.display = 'block';
+            var labelText = document.getElementById('lblstats_' + day);
+            labelText.innerHTML = hours + ' Hrs ' + minutes + ' Mins';
         } else {
-            document.getElementById('lblstats_'+day).style.display = 'none';
+            document.getElementById('lblstats_' + day).style.display = 'none';
         }
 
     }
 
-    function endsTimeInput(e,day) {
+    function endsTimeInput(e, day) {
         var mindate = e.target.value;
 
 
-        domingo_1 = $('#appt_'+day+'1').val();
-        domingo_2 = $('#appt_'+day+'2').val();
+        domingo_1 = $('#appt_' + day + '1').val();
+        domingo_2 = $('#appt_' + day + '2').val();
 
-        if(domingo_1==null)
-        {
+        if (domingo_1 == null) {
             console.log('vacio domingo 1');
         }
 
-        if(domingo_2==null)
-        {
+        if (domingo_2 == null) {
             console.log('vacio domingo 2');
         }
         var startTime = moment(domingo_1, "HH:mm:ss a");
@@ -2485,23 +2551,25 @@
         var hours = parseInt(duration.asHours());
         var minutes = parseInt(duration.asMinutes()) - hours * 60;
 
-        
-    
+
+
         if (!isNaN(hours)) {
 
-            if(hours<0||minutes<0)
-            {
-                document.getElementById("lblstats_"+day).style.color = 'red';
-            }else
-            {
-                document.getElementById("lblstats_"+day).style.color = 'green';
+            if (hours < 0 || minutes < 0) {
+                ohSnap('Aviso!!: El horario ingresado no esta permitido!', {
+                    color: 'red'
+                });
+                document.getElementById("lblstats_" + day).style.color = 'red';
+
+            } else {
+                document.getElementById("lblstats_" + day).style.color = 'green';
             }
 
-            document.getElementById('lblstats_'+day).style.display = 'block';
-            var labelText = document.getElementById('lblstats_'+day);
-            labelText.innerHTML = hours+' Hrs ' + minutes+' Mins';
+            document.getElementById('lblstats_' + day).style.display = 'block';
+            var labelText = document.getElementById('lblstats_' + day);
+            labelText.innerHTML = hours + ' Hrs ' + minutes + ' Mins';
         } else {
-            document.getElementById('lblstats_'+day).style.display = 'none';
+            document.getElementById('lblstats_' + day).style.display = 'none';
         }
 
 
@@ -2513,19 +2581,20 @@
         document.getElementById('appt_lun1').style.display = 'none';
         document.getElementById('appt_lun2').style.display = 'none';
         document.getElementById("appt_lun2").value = "12:59:48";
+        document.getElementById('lblstats_lun').style.display = 'none';
 
         document.getElementById("check2").checked = false;
 
         document.getElementById('appt_mar1').style.display = 'none';
         document.getElementById('appt_mar2').style.display = 'none';
         document.getElementById("appt_mar2").value = "12:59:48";
+        document.getElementById('lblstats_mar').style.display = 'none';
 
         document.getElementById("check3").checked = false;
-
         document.getElementById('appt_mier1').style.display = 'none';
         document.getElementById('appt_mier2').style.display = 'none';
-
         document.getElementById("appt_mier2").value = "12:59:48";
+        document.getElementById('lblstats_mier').style.display = 'none';
 
         document.getElementById("check4").checked = false;
 
@@ -2533,12 +2602,14 @@
         document.getElementById('appt_juev1').style.display = 'none';
         document.getElementById('appt_juev2').style.display = 'none';
         document.getElementById("appt_juev2").value = "12:59:48";
+        document.getElementById('lblstats_juev').style.display = 'none';
 
         document.getElementById("check5").checked = false;
 
         document.getElementById('appt_vier1').style.display = 'none';
         document.getElementById('appt_vier2').style.display = 'none';
         document.getElementById("appt_vier2").value = "12:59:48";
+        document.getElementById('lblstats_vier').style.display = 'none';
 
         document.getElementById("check6").checked = false;
 
@@ -2546,6 +2617,7 @@
         document.getElementById('appt_sab1').style.display = 'none';
         document.getElementById('appt_sab2').style.display = 'none';
         document.getElementById("appt_sab2").value = "12:59:48";
+        document.getElementById('lblstats_sab').style.display = 'none';
 
 
         document.getElementById("check7").checked = false;
@@ -2553,6 +2625,7 @@
         document.getElementById('appt_dom1').style.display = 'none';
         document.getElementById('appt_dom2').style.display = 'none';
         document.getElementById("appt_dom2").value = "12:59:48";
+        document.getElementById('lblstats_dom').style.display = 'none';
     }
 </script>
 

@@ -13,6 +13,8 @@ use App\Entities\Student_ent;
 use App\Libraries\Datatable;
 use App\Libraries\PHPMailer_lib;
 use QRcode;
+use DateTime;
+
 class Staff extends BaseController
 {
     public $db;
@@ -104,9 +106,9 @@ class Staff extends BaseController
     public function delete()
     {
         $staffModel = new StaffModel();
-       
+
         $id = $this->request->getPost('id');
-        $data=$staffModel->find($id);
+        $data = $staffModel->find($id);
         unlink($data['qr_location']);
         $staffModel->where('id_staff', $id);
 
@@ -122,15 +124,15 @@ class Staff extends BaseController
     }
 
     public function store()
-    {   
-        include RUTA_APP. '/ThirdParty/phpqrcode/qrlib.php';
+    {
+        include RUTA_APP . '/ThirdParty/phpqrcode/qrlib.php';
         $mail = new PHPMailer_lib();
         $year = date("Y");
         $staffModel = new StaffModel();
         $staffModel->select('*');
         $staffModel->where('name', $this->request->getPost('name'));
         $staffModel->where('year_act', $_SESSION['year_act']);
-        $staffModel->where('company',$_SESSION['company']);
+        $staffModel->where('company', $_SESSION['company']);
         $staffModel->Where('email', $this->request->getPost('email'));
         $query = $staffModel->get();
         $data_validation = $query->getResult('array');
@@ -165,25 +167,23 @@ class Staff extends BaseController
 
             $correo->Body = $mailcontent;
 
-            if(!$correo->send()) {
-           
+            if (!$correo->send()) {
+
 
                 $consulta['resp'] = '2';
                 $consulta['msj_error'] = $correo->ErrorInfo;
                 echo json_encode($consulta);
-
             } else {
                 $number = rand();
                 $dir = 'temp/';
-                if(!file_exists($dir))
-                {
+                if (!file_exists($dir)) {
                     mkdir($dir);
                 }
-                $filename = $dir.''.$number.'.png';
+                $filename = $dir . '' . $number . '.png';
                 $tamanio = 15;
                 $level = 'H';
                 $frameSize = 1;
-                $contenido = md5($this->request->getPost('password')).$number;
+                $contenido = md5($this->request->getPost('password')) . $number;
                 QRcode::png($contenido, $filename, $level, $tamanio, $frameSize);
                 $data = [
                     'name' => $this->request->getPost('name'),
@@ -192,14 +192,14 @@ class Staff extends BaseController
                     'position' => $this->request->getPost('charge'),
                     'password' => md5($this->request->getPost('password')),
                     'qr_location' => $filename,
-                    'password_qr' => md5($this->request->getPost('password')).$number,
+                    'password_qr' => md5($this->request->getPost('password')) . $number,
                     'year_act' => $_SESSION['year_act'],
                     'company' => $_SESSION['company']
                 ];
 
                 $staffModel->save($data);
                 $consulta['id'] = $staffModel->insertID();
-              
+
                 $data = [
                     'matricula_staff' =>  $year . $consulta['id']
                 ];
@@ -207,13 +207,11 @@ class Staff extends BaseController
                 $consulta['resp'] = '1';
                 echo json_encode($consulta);
             }
-
         } else {
 
             $consulta['resp'] = '3';
             echo json_encode($consulta);
         }
-
     }
 
 
@@ -257,16 +255,15 @@ class Staff extends BaseController
 
     public function day_schedule()
     {
-        $staffchedule= new StaffscheduleModel();
-        $data=$this->request->getPost('data');
-        $id_staff=$this->request->getPost('id_staff');
-        $i=0;
+        $staffchedule = new StaffscheduleModel();
+        $data = $this->request->getPost('data');
+        $id_staff = $this->request->getPost('id_staff');
+        $i = 0;
         foreach ($data as $key => $value) {
             # code...
-           
-            if($value!='vacio')
-            {
-                
+
+            if ($value != 'vacio') {
+
                 $porciones[$i] = explode("-", $value);
                 $i++;
             }
@@ -274,7 +271,7 @@ class Staff extends BaseController
 
         foreach ($porciones as $key => $value) {
             # code...
-            
+
             $data_plan = [
                 'id_staff' => $id_staff,
                 'day' => $value[2],
@@ -286,75 +283,90 @@ class Staff extends BaseController
             ];
 
             $staffchedule->save($data_plan);
-           
         }
 
-            $staffmodel = new StaffModel();
-            $data = [
-                'status' => 'true'
-            ];
-            if($staffmodel->update($id_staff, $data)){
+        $staffmodel = new StaffModel();
+        $data = [
+            'status' => 'true'
+        ];
+        if ($staffmodel->update($id_staff, $data)) {
 
-                $consulta['resp'] = '0';
-                echo json_encode($consulta);
-            }
-            
-
-            
-
+            $consulta['resp'] = '0';
+            echo json_encode($consulta);
+        }
     }
 
 
     public function day_schedule_mod()
     {
-        $staffchedule= new StaffscheduleModel();
-        $data=$this->request->getPost('data');
-        $id_staff=$this->request->getPost('id_staff');
-        $i=0;
+        $staffchedule = new StaffscheduleModel();
+        $data = $this->request->getPost('data');
+
+
+        $bandera_hor = 0;
         foreach ($data as $key => $value) {
             # code...
-           
-            if($value!='vacio')
-            {
-                
-                $porciones[$i] = explode("-", $value);
-                $i++;
+
+            $porciones = explode("/", $value);
+
+            if (isset($porciones[3])) {
+
+
+                if (strpos($porciones[3], '-') !== false) {
+
+                    $bandera_hor = 1;
+                }
             }
         }
-         $staffchedule->where('id_staff', $id_staff);
 
-         if ($staffchedule->delete()) {
-            foreach ($porciones as $key => $value) {
-                # code...
-                
-                $data_plan = [
-                    'id_staff' => $id_staff,
-                    'day' => $value[2],
-                    'hour_in' => $value[0],
-                    'hour_out' => $value[1],
-                    'status_day' => 'true',
-                    'year_act' => $_SESSION['year_act'],
-                    'company' => $_SESSION['company']
-                ];
-    
-                $staffchedule->save($data_plan);
-               
+        if ($bandera_hor == '1') {
+            $consulta['resp'] = '7';
+            echo json_encode($consulta);
+        } else {
+
+            $id_staff = $this->request->getPost('id_staff');
+            $i = 0;
+            foreach ($data as $key => $value) {
+                if ($value != 'vacio') {
+                    $porciones[$i] = explode("/", $value);
+                    $i++;
+                }
             }
+            $staffchedule->where('id_staff', $id_staff);
+
+            if ($staffchedule->delete()) {
+                foreach ($porciones as $key => $value) {
+                    # code...
+    
+                    $data_plan = [
+                        'id_staff' => $id_staff,
+                        'day' => $value[2],
+                        'hour_in' => $value[0],
+                        'hour_out' => $value[1],
+                        'status_day' => 'true',
+                        'year_act' => $_SESSION['year_act'],
+                        'company' => $_SESSION['company']
+                    ];
+    
+                    $staffchedule->save($data_plan);
+                }
     
                 $staffmodel = new StaffModel();
                 $data = [
                     'status' => 'true'
                 ];
-                if($staffmodel->update($id_staff, $data)){
+                if ($staffmodel->update($id_staff, $data)) {
     
                     $consulta['resp'] = '0';
                     echo json_encode($consulta);
                 }
-        } else {
-
-            $consulta['resp'] = '1';
-            echo json_encode($consulta);
+            } else {
+    
+                $consulta['resp'] = '1';
+                echo json_encode($consulta);
+            }
         }
+        
     }
 
     public function ajaxLoadDataStaff()
@@ -382,7 +394,7 @@ class Staff extends BaseController
             'status' => $columns[4]['search']['value']
         );
 
-        $data = $staffModel->where('company',$_SESSION['company'])->findAll();
+        $data = $staffModel->where('company', $_SESSION['company'])->findAll();
         $total_count = $data;
 
         $lib = new Datatable($staffModel, 'gp1', ['id_staff', 'matricula_staff', 'name', 'email', 'mobile', 'status', 'position', 'password', 'year_act', 'company', 'created_at', 'updated_at', 'deleted_at']);
@@ -397,18 +409,18 @@ class Staff extends BaseController
             'like' => $like
         ]);
 
-        $json_data['data']=$data;
-  
+        $json_data['data'] = $data;
+
         echo json_encode($json_data);
     }
 
-    
+
 
     public function get_schedule()
     {
-        $staffschedule= new StaffscheduleModel();
+        $staffschedule = new StaffscheduleModel();
         $data = $staffschedule->find();
-        $data =$staffschedule->where('id_staff', $this->request->getPost('id'))->findAll();
+        $data = $staffschedule->where('id_staff', $this->request->getPost('id'))->findAll();
         $consulta['resp'] = $data;
         echo json_encode($consulta);
     }
@@ -419,28 +431,21 @@ class Staff extends BaseController
         $data = [
             'id' => $this->request->getPost('id')
         ];
-        if($data = $staffModel->find($data['id']))
-        {
-        
-            if($data['status']=='true')
-            {
+        if ($data = $staffModel->find($data['id'])) {
+
+            if ($data['status'] == 'true') {
                 $consulta['resp'] = '2';
                 $consulta['data'] = $data;
                 echo json_encode($consulta);
-            }else
-            {
+            } else {
                 $consulta['resp'] = '1';
                 $consulta['data'] = $data;
                 echo json_encode($consulta);
             }
-          
-        }
-        else
-        {
+        } else {
             $consulta['resp'] = '0';
             echo json_encode($consulta);
         }
-       
     }
 
 
@@ -484,6 +489,5 @@ class Staff extends BaseController
             $consulta['resp'] = '0';
             echo json_encode($consulta);
         }
-
     }
 }
