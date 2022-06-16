@@ -326,7 +326,7 @@ class Student extends BaseController
         }
 
         $hour_today = $hoy['hours'] . ':' . $hoy['minutes'] . ':' . $hoy['seconds'];
-        $day_today = $hoy['mday'] . '-' . $hoy['mon'] . '-' . $hoy['year'];
+        $day_today = $hoy['year'] . '-' . $hoy['mon'] . '-' . $hoy['mday'];
 
 
 
@@ -357,7 +357,7 @@ class Student extends BaseController
         if (!$dat == '0') {
             $user = $studetsModel->getUserBy('matricula', $data_validation[0]['matricula']);
 
-            $log=new LogMemberModel();
+            $log = new LogMemberModel();
 
 
             if ($user['status'] != 'true') {
@@ -373,19 +373,16 @@ class Student extends BaseController
                     'year_act' => $_SESSION['year_act'],
                     'company' => $_SESSION['company']
                 ];
-                if($log->save($data))
-                {
+                if ($log->save($data)) {
                     echo json_encode($consulta);
-                }else
-                {
+                } else {
                     var_dump("error al guardar datos de logueo miembro");
                 }
-                
             } else {
                 $consulta['resp'] = '1';
                 $consulta['name'] = $user['name'];
                 $consulta['msj'] = 'Usuario Activo';
-                
+
                 $data = [
                     'id_member' => $user['id'],
                     'hour_in' => $hour_today,
@@ -395,11 +392,9 @@ class Student extends BaseController
                     'company' => $_SESSION['company']
                 ];
 
-                if( $log->save($data))
-                {
+                if ($log->save($data)) {
                     echo json_encode($consulta);
-                }else
-                {
+                } else {
                     var_dump("error al guardar datos de logueo miembro");
                 }
             }
@@ -436,11 +431,10 @@ class Student extends BaseController
                 $query = $schedulestaffModel->get();
                 $data_schedule = $query->getResult('array');
 
-                if(count($data_schedule)!=0)
-                {
+                if (count($data_schedule) != 0) {
                     $log = new LogStaffModel();
 
-               
+
                     $log->select('id_entrada,hour_out');
                     $log->where('id_staff', $data_validation_staff[0]['id_staff']);
                     $log->where('day', $dia);
@@ -449,7 +443,7 @@ class Student extends BaseController
                     $log->where('year_act', $_SESSION['year_act']);
                     $query_log = $log->get();
                     $data_log = $query_log->getResult('array');
-    
+
                     if (count($data_log) == 0) {
                         $bandera = 0;
                         foreach ($data_schedule as $key => $value) {
@@ -464,7 +458,7 @@ class Student extends BaseController
                                     'year_act' => $_SESSION['year_act'],
                                     'company' => $_SESSION['company']
                                 ];
-    
+
                                 $log->save($data);
                                 $bandera = 0;
                                 $consulta['resp'] = '3';
@@ -474,7 +468,7 @@ class Student extends BaseController
                             }
                         }
                     } else if ($data_log[0]['hour_out'] == '') {
-              
+
                         foreach ($data_schedule as $key => $value) {
                             # code...
                             if ($value['day'] == $dia) {
@@ -482,7 +476,7 @@ class Student extends BaseController
                                     'hour_out' => $hour_today,
                                     'hour_out_save' => $value['hour_out']
                                 ];
-    
+
                                 $log->update($data_log[0]['id_entrada'], $data);
                                 $consulta['resp'] = '4';
                                 $consulta['name'] = $user['name'];
@@ -490,21 +484,18 @@ class Student extends BaseController
                                 echo json_encode($consulta);
                             }
                         }
-                    } else if($data_log[0]['hour_out'] != '') {
+                    } else if ($data_log[0]['hour_out'] != '') {
                         $consulta['resp'] = '5';
                         $consulta['name'] = $user['name'];
                         $consulta['msj'] = 'Se ha registrado Su entrada y salida por hoy';
                         echo json_encode($consulta);
                     }
-                }
-                else
-                {
+                } else {
                     $consulta['resp'] = '6';
                     $consulta['name'] = $user['name'];
                     $consulta['msj'] = 'No se tiene registrado hoy su ingreso';
                     echo json_encode($consulta);
                 }
-               
             }
         } else {
 
