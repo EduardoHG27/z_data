@@ -203,10 +203,20 @@ class Informativo extends BaseController
             $query = $infoModel->get();
             $data = $query->getResult('array');
             $total_count = $data;
-        } else if (!empty($fecha_final)) {
-            $infoModel->like($like);
+        }
+        else if (!empty($fecha_inicio)) {
+            $infoModel->join('tbl_students', 'tbl_students.id = tbl_members_pay.id_member');
             $infoModel->where('tbl_students.year_act', $_SESSION['year_act']);
             $infoModel->where('tbl_students.company',$_SESSION['company']);
+            $infoModel->like($like);
+            $query = $infoModel->get();
+            $data = $query->getResult('array');
+            $total_count = $data;
+        }  else if (!empty($fecha_final)) {
+            $infoModel->join('tbl_students', 'tbl_students.id = tbl_members_pay.id_member');
+            $infoModel->where('tbl_students.year_act', $_SESSION['year_act']);
+            $infoModel->where('tbl_students.company',$_SESSION['company']);
+            $infoModel->like($like);
             $query = $infoModel->get();
             $data = $query->getResult('array');
             $total_count = $data;

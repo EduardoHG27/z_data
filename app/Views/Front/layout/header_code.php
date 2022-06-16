@@ -8,7 +8,7 @@
     <ul class="nav-links">
       <li>
         <a href="<?php echo base_url(); ?>/principal/dashboard">
-          <i class='bx bx-home' ></i>
+          <i class='fa fa-home' ></i>
           <span class="link_name">Inicio</span>
         </a>
         <ul class="sub-menu blank">
@@ -17,7 +17,7 @@
       </li>
       <li>
         <a href="<?php echo base_url(); ?>/principal/student">
-          <i class='bx bx-user'></i>
+          <i class='fa fa-users'></i>
           <span class="link_name">Miembros</span>
         </a>
         <ul class="sub-menu blank">
@@ -26,7 +26,7 @@
       </li>
       <li>
         <a href="<?php echo base_url(); ?>/principal/staff">
-          <i class='bx bx-user'></i>
+          <i class='fa fa-address-card-o'></i>
           <span class="link_name">Staff</span>
         </a>
         <ul class="sub-menu blank">
@@ -34,17 +34,8 @@
         </ul>
       </li>
       <li>
-        <a href="<?php echo base_url(); ?>/principal/plans">
-          <i class='bx bx-edit'></i>
-          <span class="link_name">Planes</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="">Planes</a></li>
-        </ul>
-      </li>
-      <li>
         <a href="<?php echo base_url(); ?>/principal/data">
-          <i class='bx bx-tab'></i>
+          <i class='fa fa-address-book-o'></i>
           <span class="link_name">Datos</span>
         </a>
         <ul class="sub-menu blank">
@@ -60,18 +51,10 @@
           <li><a class="link_name" href="">Boot</a></li>
         </ul>
       </li>
-      <li>
-        <a href="<?php echo base_url(); ?>/principal/session_out">
-          <i class='bx bx-x-circle'></i>
-          <span class="link_name">Salir</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="">Salir</a></li>
-        </ul>
-      </li>
+    
       <li>
         <a href="<?php echo base_url(); ?>/principal/inicio">
-          <i class='bx bx-x-circle'></i>
+          <i class='fa fa-bar-chart'></i>
           <span class="link_name">Dash</span>
         </a>
         <ul class="sub-menu blank">
@@ -83,19 +66,27 @@
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-collection' ></i>
+            <i class='fa fa-cog' ></i>
             <span class="link_name">Category</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
         </div>
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Category</a></li>
-          <li><a href="#">HTML & CSS</a></li>
-          <li><a href="#">JavaScript</a></li>
+          <li><a href="<?php echo base_url(); ?>/principal/plans">Planes</a></li>
+          <li><a href="#">Cuota</a></li>
           <li><a href="#">PHP & MySQL</a></li>
         </ul>
       </li>
-    
+      <li>
+        <a href="<?php echo base_url(); ?>/principal/session_out">
+          <i class='fa fa-times-circle-o'></i>
+          <span class="link_name">Salir</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" href="">Salir</a></li>
+        </ul>
+      </li>
 
       <!--
     <div class="profile-details">

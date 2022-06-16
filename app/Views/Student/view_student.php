@@ -139,7 +139,7 @@
                                 </button>
                                 <button id="btn_agregarmiembro" class="ejemplo1 btn-info" data-toggle="modal" data-target="#addForma_Adq">
                                     <div class="icono">
-                                        <i class="fa fa-plus"></i>
+                                        <i class="fa fa-user-plus"></i>
                                     </div>
                                     <a class="small-box-footere">Agregar Miembro<i class="fa fa-arrow-circle-right"></i></a>
                                 </button>

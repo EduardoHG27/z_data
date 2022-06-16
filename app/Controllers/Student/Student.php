@@ -4,14 +4,13 @@
 namespace App\Controllers\Student;
 
 use App\Controllers\BaseController;
-use App\Database\Migrations\TblStaffSchedule;
 use App\Models\StudetsModel;
 use App\Models\StaffModel;
 use App\Models\PlansModel;
 use App\Models\PaysModel;
 use App\Models\StaffscheduleModel;
 use App\Models\LogStaffModel;
-use App\Entities\Student_ent;
+use App\Models\LogMemberModel;
 use App\Libraries\Datatable;
 use App\Libraries\PHPMailer_lib;
 use App\Libraries\qr;
@@ -316,7 +315,20 @@ class Student extends BaseController
 
     public function qr_log()
     {
-        $model = model('StudetsModel');
+        $hoy = getdate();
+
+        if (strlen($hoy['minutes']) == 1) {
+            $hoy['minutes'] = '0' . $hoy['minutes'];
+        }
+
+        if (strlen($hoy['seconds']) == 1) {
+            $hoy['seconds'] = '0' . $hoy['seconds'];
+        }
+
+        $hour_today = $hoy['hours'] . ':' . $hoy['minutes'] . ':' . $hoy['seconds'];
+        $day_today = $hoy['mday'] . '-' . $hoy['mon'] . '-' . $hoy['year'];
+
+
 
         $studetsModel = new StudetsModel();
         $data = [
@@ -345,16 +357,51 @@ class Student extends BaseController
         if (!$dat == '0') {
             $user = $studetsModel->getUserBy('matricula', $data_validation[0]['matricula']);
 
+            $log=new LogMemberModel();
+
+
             if ($user['status'] != 'true') {
                 $consulta['resp'] = '2';
                 $consulta['name'] = $user['name'];
                 $consulta['msj'] = 'Usuario se agoto su membresia';
-                echo json_encode($consulta);
+
+                $data = [
+                    'id_member' => $user['id'],
+                    'hour_in' => $hour_today,
+                    'date' => $day_today,
+                    'status_log' => $consulta['msj'],
+                    'year_act' => $_SESSION['year_act'],
+                    'company' => $_SESSION['company']
+                ];
+                if($log->save($data))
+                {
+                    echo json_encode($consulta);
+                }else
+                {
+                    var_dump("error al guardar datos de logueo miembro");
+                }
+                
             } else {
                 $consulta['resp'] = '1';
                 $consulta['name'] = $user['name'];
                 $consulta['msj'] = 'Usuario Activo';
-                echo json_encode($consulta);
+                
+                $data = [
+                    'id_member' => $user['id'],
+                    'hour_in' => $hour_today,
+                    'date' => $day_today,
+                    'status_log' => $consulta['msj'],
+                    'year_act' => $_SESSION['year_act'],
+                    'company' => $_SESSION['company']
+                ];
+
+                if( $log->save($data))
+                {
+                    echo json_encode($consulta);
+                }else
+                {
+                    var_dump("error al guardar datos de logueo miembro");
+                }
             }
         } else if (!$dat_staff == '0') {
             $user = $staffModel->getUserBy('matricula_staff', $data_validation_staff[0]['matricula_staff']);
@@ -364,22 +411,6 @@ class Student extends BaseController
                 $consulta['msj'] = 'Miembro de Staff no tiene un horario asignado!!';
                 echo json_encode($consulta);
             } else {
-
-
-                $hoy = getdate();
-
-                if (strlen($hoy['minutes']) == 1) {
-                    $hoy['minutes'] = '0' . $hoy['minutes'];
-                }
-
-                if (strlen($hoy['seconds']) == 1) {
-                    $hoy['seconds'] = '0' . $hoy['seconds'];
-                }
-
-                $hour_today = $hoy['hours'] . ':' . $hoy['minutes'] . ':' . $hoy['seconds'];
-                $day_today = $hoy['mday'] . '-' . $hoy['mon'] . '-' . $hoy['year'];
-
-
                 if ($hoy['weekday'] == 'Monday') {
                     $dia = 'lunes';
                 } else if ($hoy['weekday'] == 'Tuesday') {
