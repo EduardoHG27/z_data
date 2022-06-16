@@ -369,7 +369,8 @@ class Student extends BaseController
                     'id_member' => $user['id'],
                     'hour_in' => $hour_today,
                     'date' => $day_today,
-                    'status_log' => $consulta['msj'],
+                    'status_log' => 'false',
+                    'desc_status_log' => $consulta['msj'],
                     'year_act' => $_SESSION['year_act'],
                     'company' => $_SESSION['company']
                 ];
@@ -387,7 +388,8 @@ class Student extends BaseController
                     'id_member' => $user['id'],
                     'hour_in' => $hour_today,
                     'date' => $day_today,
-                    'status_log' => $consulta['msj'],
+                    'status_log' => 'true',
+                    'desc_status_log' => $consulta['msj'],
                     'year_act' => $_SESSION['year_act'],
                     'company' => $_SESSION['company']
                 ];
