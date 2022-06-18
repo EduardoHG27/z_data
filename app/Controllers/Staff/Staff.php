@@ -6,6 +6,7 @@ namespace App\Controllers\Staff;
 use App\Controllers\BaseController;
 use App\Models\StudetsModel;
 use App\Models\PlansModel;
+use App\Models\PositionModel;
 use App\Models\PaysModel;
 use App\Models\StaffModel;
 use App\Models\StaffscheduleModel;
@@ -409,8 +410,6 @@ class Staff extends BaseController
             'like' => $like
         ]);
 
-        $json_data['data'] = $data;
-
         echo json_encode($json_data);
     }
 
@@ -448,6 +447,28 @@ class Staff extends BaseController
         }
     }
 
+    public function get_rol()
+    {
+        $positionModel = new PositionModel();
+
+        $positionModel->select('*');
+        $positionModel->where('status_position', 'true');
+        $positionModel->where('year_act', $_SESSION['year_act']);
+        $positionModel->where('company', $_SESSION['company']);
+        $query = $positionModel->get();
+
+        if ($data = $query->getResult('array')) {
+
+            //var_dump($data);
+            $consulta['data'] = $data;
+            $consulta['resp'] = '1';
+            echo json_encode($consulta);
+        } else {
+
+            $consulta['resp'] = '0';
+            echo json_encode($consulta);
+        }
+    }
 
     public function store_planmember()
     {

@@ -53,6 +53,7 @@ $routes->group('principal', ['namespace' => 'App\Controllers\Principal'], functi
     $routes->get('member', 'First_page::member');
     $routes->get('student', 'First_page::student');
     $routes->get('plans', 'First_page::plans');
+    $routes->get('position', 'First_page::position');
     $routes->get('data', 'First_page::data');
     $routes->get('staff', 'First_page::staff');
     $routes->get('boot', 'First_page::boot');
@@ -93,8 +94,16 @@ $routes->group('plans', ['namespace' => 'App\Controllers\Plans'], function ($rou
     $routes->post("plan_update", "Plans::update");
     $routes->post("plan_delete", "Plans::delete");
     $routes->post("plan_status_up", "Plans::status_up");
-    
+});
 
+
+$routes->group('position', ['namespace' => 'App\Controllers\Position'], function ($routes) {
+    $routes->post("position-ajax-load", "Position::ajaxLoadData");
+    $routes->post("position_store", "Position::store");
+    $routes->post("position_get", "Position::get_position");
+    $routes->post("position_update", "Position::update");
+    $routes->post("position_delete", "Position::delete");
+    $routes->post("position_status_up", "Position::status_up");
 });
 
 $routes->group('staff', ['namespace' => 'App\Controllers\Staff'], function ($routes) {
@@ -112,6 +121,7 @@ $routes->group('staff', ['namespace' => 'App\Controllers\Staff'], function ($rou
     $routes->post("plan_status_up", "Staff::status_up");
     $routes->post("schedule", "Staff::schedule");
     $routes->post("chek_delete", "Staff::chek_delete");
+    $routes->post("staff_get_rol", "Staff::get_rol");
 });
 
 $routes->group('informativo', ['namespace' => 'App\Controllers\Informativo'], function ($routes) {

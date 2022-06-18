@@ -285,9 +285,23 @@
                                     </div>
 
                                     <div id="div_5" class="col-md-4">
-                                        <label id="label_4" class="control-label">Cargo</label>
-                                        <input type="text" class="form-control" name="txt_cargo" id="txt_cargo" placeholder="Cargo" />
+                                        <label id="label_4" class="control-label">Puesto</label>
+                                        <select class="js-select2" id="plan_select" name='plan_select' style="width: 100%;">
+                                                <option value="">Selecciona</option>
+                                            </select>
                                     </div>
+                                  <!--  <div id="div_5" class="col-md-4">
+                                        
+                                        <select class="js-select2" id="plan_select_1" name='item1' tyle="width: 100%;">
+                                            <option value=''>Selecciona</option>
+                                        </select>
+                                     <div class="form-group">
+                                        <label id="label_4" class="control-label">Cargo</label>
+                                            <select class="js-select2" id="plan_select" name='plan_select' style="width: 100%;">
+                                                <option value="">Selecciona</option>
+                                            </select>
+                                        </div>
+                                    </div>-->
 
                                     <div id="div_4" class="col-md-4">
                                         <label id="label_4" class="control-label">Contraseña</label>
@@ -550,7 +564,7 @@
                                 <div class="modal-footer">
                                     <button type="button" id="bthorario" class="btn btn-info">Asignar Horario</button>
                                     <button type="button" id="bthorario_mod" class="btn btn-info">Modificar Horario</button>
-                                <!--    <button type="button" id="btn_copiar_horario" class="btn btn-info">Copiar Horario</button>-->
+                                    <!--    <button type="button" id="btn_copiar_horario" class="btn btn-info">Copiar Horario</button>-->
                                 </div>
                             </form>
 
@@ -628,7 +642,6 @@
             <div class="modal-footer">
 
             </div>
-
         </div>
 
 
@@ -756,7 +769,7 @@
 
     $(document).ready(function() {
 
-        get_plan();
+        get_rol();
         $("#plan_select").select2({
             dropdownParent: $("#exampleModal"),
             theme: "classic"
@@ -1293,6 +1306,17 @@
         });
     });
 
+    $(function() {
+        $("#myform").validate({
+            rules: {
+                item: {
+                    required: true
+                }
+            }
+        });
+    });
+
+
     var $registrationForm = $('#registration');
     if ($registrationForm.length) {
         $registrationForm.validate({
@@ -1310,26 +1334,26 @@
                 txt_password: {
                     required: true
                 },
-                txt_cargo: {
+                plan_select: {
                     required: true
                 }
             },
             messages: {
                 txt_name: {
-                    required: 'Please enter username!',
+                    required: 'El campo Nombre esta vacio!',
                 },
                 txt_email: {
-                    required: 'Please enter email!',
+                    required: 'El campo Email esta vacio!',
                     email: 'Please enter valid email!'
                 },
                 txt_mobile: {
-                    required: 'Please enter mobile!'
+                    required: 'El campo Telefono esta vacio!!'
                 },
                 txt_password: {
-                    required: 'Please enter the password!'
+                    required: 'Ingrese contraseña!'
                 },
-                txt_cargo: {
-                    required: 'Please enter the charge!'
+                plan_select: {
+                    required: 'El campo Puesto esta vacio!!'
                 }
             },
             highlight: function(element) {
@@ -1341,6 +1365,9 @@
 
         });
     }
+
+
+
 
     var $planForm = $('#member-plan');
     if ($planForm.length) {
@@ -1981,10 +2008,35 @@
     });
 
 
+    function get_rol() {
+        $.ajax({
+            url: site_url + '/staff/staff_get_rol',
+            method: "post",
+            success: function(resp) {
+                var result = $.parseJSON(resp);
 
+
+
+                if (result.resp == 1) {
+                    $.each(result.data, function(key, value) {
+
+                        $("#plan_select").append('<option value=' + value.id_position + '>' + value.name_position + '</option>');
+                    });
+
+                    table.ajax.reload();
+                    //	setTimeout(function() {
+                    //		location.reload()
+                    //	}, 1000)
+                } else if (resp == 2) {
+                    $('#msg').html('<div class="alert alert-danger">ID No already existed.</div>')
+                    end_load();
+                }
+            }
+        });
+    }
 
     $("#btn_copiar_horario").click(function() {
-      
+
     });
 
 
@@ -1995,13 +2047,15 @@
         } else {
 
             document.getElementById("plan_button").disabled = false;
-
+            if ($('#plan_select').select2('val') != null) {
+                data = $('#plan_select').select2('data')[0];
+            }
             var data = {
                 'name': $('#txt_name').val(),
                 'email': $('#txt_email').val(),
                 'mobile': $('#txt_mobile').val(),
                 'password': $('#txt_password').val(),
-                'charge': $('#txt_cargo').val()
+                'charge': data['text']
             };
             start_load();
             $.ajax({
@@ -2814,6 +2868,15 @@
     .alert-orange {
         color: white;
         background-color: #E9573F;
+    }
+
+    body {
+        font-family: Arial, Sans-serif;
+    }
+
+    label.error {
+        color: red;
+        font-family: verdana, Helvetica;
     }
 </style>
 

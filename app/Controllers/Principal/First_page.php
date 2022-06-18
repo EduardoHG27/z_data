@@ -70,6 +70,15 @@ class First_page extends BaseController
         }
     }
 
+    public function position()
+    {
+        $session = session();
+        if ($session->get('usuario')) {
+            return view('Position/view_position');
+        } else {
+            return view('Auth/Home');
+        }
+    }
     public function boot()
     {
         $session = session();

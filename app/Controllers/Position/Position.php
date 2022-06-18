@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controllers\Plans;
+namespace App\Controllers\Position;
 
 use App\Controllers\BaseController;
-use App\Models\PlansModel;
+use App\Models\PositionModel;
 use App\Models\StudetsModel;
 use App\Libraries\Datatable;
 
-class Plans extends BaseController
+class Position extends BaseController
 {
     public $db;
 
@@ -28,9 +28,9 @@ class Plans extends BaseController
     }
 
 
-    public function get_plan()
+    public function get_position()
     {
-        $plansModel = new PlansModel();
+        $positionModel = new PositionModel();
 
         $data = [
             'id' => $this->request->getPost('id')
@@ -38,7 +38,7 @@ class Plans extends BaseController
 
         
 
-        if ($data = $plansModel->find($data['id'])) {
+        if ($data = $positionModel->find($data['id'])) {
             $consulta['resp'] = '1';
             $consulta['data'] = $data;
             echo json_encode($consulta);
@@ -52,18 +52,18 @@ class Plans extends BaseController
 
     public function status_up()
     {
-        $plansModel = new PlansModel();
+        $positionModel = new PositionModel();
         $id = $this->request->getVar('id');
 
        
-        $data = $plansModel->find($id);
+        $data = $positionModel->find($id);
         if($data['status']=='true')
         {
             $data = [
                 'status' => 'false'
             ];
 
-            if ($plansModel->update($id, $data)) {
+            if ($positionModel->update($id, $data)) {
 
                 $consulta['resp'] = '1';
                 echo json_encode($consulta);
@@ -79,7 +79,7 @@ class Plans extends BaseController
                 'status' => 'true'
             ];
 
-            if ($plansModel->update($id, $data)) {
+            if ($positionModel->update($id, $data)) {
 
                 $consulta['resp'] = '1';
                 echo json_encode($consulta);
@@ -95,15 +95,15 @@ class Plans extends BaseController
 
     public function delete()
     {
-        $plansModel = new PlansModel();
+        $positionModel = new PositionModel();
         $studentModel = new StudetsModel();
 
         $id = $this->request->getPost('planid');
         $id_member = $this->request->getPost('id');
 
         
-        $plansModel->where('id', $id);
-        if ($plansModel->delete()) {
+        $positionModel->where('id', $id);
+        if ($positionModel->delete()) {
 
             $data = [
                 'status' => 'false'
@@ -126,18 +126,19 @@ class Plans extends BaseController
 
     public function store()
     {
-        $plansModel = new PlansModel();
+        $positionModel = new PositionModel();
+
+       
         $data = [
-            'month' => $this->request->getPost('month'),
-            'discount' => $this->request->getPost('desc'),
-            'status' => $this->request->getPost('status'),
+            'name_position' => $this->request->getPost('rol'),
+            'status_position' => $this->request->getPost('status'),
             'year_act' => $_SESSION['year_act'],
             'company' => $_SESSION['company']
         ];
-        
+    
+
   
-  
-        if ($plansModel->save($data)) {
+        if ($positionModel->save($data)) {
 
             $consulta['resp'] = '1';
             echo json_encode($consulta);
@@ -148,18 +149,18 @@ class Plans extends BaseController
         }
 
         /*
-        $plansModel = new plansModel();
+        $positionModel = new positionModel();
         $data = [
             'name' => $this->request->getVar('name'),
             'email'  => $this->request->getVar('email'),
         ];
-        $plansModel->insert($data);
+        $positionModel->insert($data);
         return $this->response->redirect(site_url('/users-list'));*/
     }
 
     public function update()
     {
-        $plansModel = new PlansModel();
+        $positionModel = new PositionModel();
         $id = $this->request->getVar('id');
         $data = [
             'month' => $this->request->getVar('month'),
@@ -167,7 +168,7 @@ class Plans extends BaseController
             'status'  => $this->request->getVar('status')
         ];
 
-        if ($plansModel->update($id, $data)) {
+        if ($positionModel->update($id, $data)) {
 
             $consulta['resp'] = '1';
             echo json_encode($consulta);
@@ -183,7 +184,7 @@ class Plans extends BaseController
     public function ajaxLoadData()
     {
         /*
-        $plansModel = new PlansModel();
+        $positionModel = new positionModel();
         $params['draw'] = $_REQUEST['draw'];
         $columns = $_REQUEST['columns'];
         
@@ -204,35 +205,35 @@ class Plans extends BaseController
         
         if (!empty($search_value)) {
 
-            $plansModel->like('month', $search_value);
-            $plansModel->orLike('discount', $search_value);
-            $plansModel->orLike('status', $search_value);
-            $query = $plansModel->get();
+            $positionModel->like('month', $search_value);
+            $positionModel->orLike('discount', $search_value);
+            $positionModel->orLike('status', $search_value);
+            $query = $positionModel->get();
             $data = $query->getResult('array');
             $total_count = $data;
 
         } else if (!empty($id)) {
-            $plansModel->like($like);
-            $query = $plansModel->get();
+            $positionModel->like($like);
+            $query = $positionModel->get();
             $data = $query->getResult('array');
             $total_count = $data;
         }else if (!empty($name)) {
-            $plansModel->like($like);
-            $query = $plansModel->get();
+            $positionModel->like($like);
+            $query = $positionModel->get();
             $data = $query->getResult('array');
             $total_count = $data;
         } else if (!empty($email)) {
-            $plansModel->like($like);
-            $query = $plansModel->get();
+            $positionModel->like($like);
+            $query = $positionModel->get();
             $data = $query->getResult('array');
             $total_count = $data;
         } else if (!empty($mobile)) {
-            $plansModel->like($like);
-            $query = $plansModel->get();
+            $positionModel->like($like);
+            $query = $positionModel->get();
             $data = $query->getResult('array');
             $total_count = $data;
         } else {
-            $data=$plansModel->findAll();
+            $data=$positionModel->findAll();
             $total_count = $data;
         }
         $json_data = array(
@@ -244,22 +245,21 @@ class Plans extends BaseController
         */
 
 
-        $plansModel = new PlansModel();
+        $positionModel = new PositionModel();
         $order = $_REQUEST['order'];
         $order = array_shift($_REQUEST['order']);
         $columns = $_REQUEST['columns'];
         $like = array(
-            'id_plan' => $columns[0]['search']['value'],
-            'month' => $columns[1]['search']['value'],
-            'discount' => $columns[2]['search']['value'],
-            'status' => $columns[3]['search']['value']
+            'id_position' => $columns[0]['search']['value'],
+            'name_position' => $columns[1]['search']['value'],
+            'status_position' => $columns[2]['search']['value']
         );
 
-        $data = $plansModel->where('company',$_SESSION['company'])->findAll();
+        $data = $positionModel->where('company',$_SESSION['company'])->findAll();
   
         $total_count = $data;
 
-        $lib = new Datatable($plansModel, 'gp1', ['id_plan', 'id_planshow', 'name', 'month', 'discount', 'status','year_act','company','created_at', 'updated_at', 'deleted_at']);
+        $lib = new Datatable($positionModel, 'gp1', ['id_position', 'name_position', 'status_position','year_act','company','created_at', 'updated_at', 'deleted_at']);
         $json_data = $lib->getResponse([
             'draw' => $_REQUEST['draw'],
             'length' => $_REQUEST['length'],
@@ -270,7 +270,7 @@ class Plans extends BaseController
             'search' => $_REQUEST['search']['value'],
             'like' => $like
         ]);
-       
+      
         echo json_encode($json_data);
     }
 }

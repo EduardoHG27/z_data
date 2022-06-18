@@ -624,7 +624,7 @@ class Student extends BaseController
             'search' => $_REQUEST['search']['value'],
             'like' => $like
         ]);
-        $json_data['data'] = $data;
+       
 
         echo json_encode($json_data);
     }

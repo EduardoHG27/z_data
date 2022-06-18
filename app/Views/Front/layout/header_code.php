@@ -67,14 +67,14 @@
         <div class="iocn-link">
           <a href="#">
             <i class='fa fa-cog' ></i>
-            <span class="link_name">Category</span>
+            <span class="link_name">Ajustes</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
         </div>
         <ul class="sub-menu">
-          <li><a class="link_name" href="#">Category</a></li>
+          <li><a class="link_name" href="#">Ajustes</a></li>
           <li><a href="<?php echo base_url(); ?>/principal/plans">Planes</a></li>
-          <li><a href="#">Cuota</a></li>
+          <li><a href="<?php echo base_url(); ?>/principal/position">Rol</a></li>
           <li><a href="#">PHP & MySQL</a></li>
         </ul>
       </li>

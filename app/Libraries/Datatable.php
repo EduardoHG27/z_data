@@ -15,6 +15,7 @@ class Datatable
         $this->model = $model;
         $this->group = $group;
         $this->columns = $columns;
+        $session = session();
     }
 
     public function getResponse(array $filters)
@@ -45,6 +46,8 @@ class Datatable
         }
 
         $data = $this->model
+            ->where('year_act', $_SESSION['year_act'])
+            ->where('company', $_SESSION['company'])
             ->orderBy($this->getColumn($order), $direction)
             ->paginate($length, $this->group, $page);
         return [

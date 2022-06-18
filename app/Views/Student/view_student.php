@@ -836,7 +836,7 @@
             },
             messages: {
                 txt_total: {
-                    required: 'Please enter username!'
+                    required: 'Seleccione numero de meses!'
                 }
             },
             highlight: function(element) {
