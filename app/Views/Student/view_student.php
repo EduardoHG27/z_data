@@ -156,7 +156,6 @@
                                     </div>
                                     <a class="small-box-footere">Eliminar Miembro <i class="fa fa-arrow-circle-right"></i></a>
                                 </button>
-
                             </div>
                         </div>
 
@@ -730,6 +729,7 @@
                 })
             } else {
                 actualizar(data['id']);
+              
             }
         });
 
@@ -742,8 +742,6 @@
             } else {
                 table.$('tr.selected').removeClass('selected');
                 data = table.row(this).data();
-
-                console.log(data);
                 document.getElementById('lbltipAddedComment').innerHTML = data.id;
                 $(this).addClass('selected')
                 $('#update_button').prop('disabled', false)
@@ -927,6 +925,7 @@
 
     $("#btnmodmiembro").click(function() {
         //   $('#txt_valor').val('300');
+        start_load(); 
         if ($("#registration").valid() == false) {
 
             return;
@@ -947,12 +946,13 @@
                 data: data,
                 success: function(resp) {
                     var result = $.parseJSON(resp);
-                    console.log(result);
+                  
                     if (result.resp == 1) {
+                        end_load();
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: 'Miembro registrado correctamente',
+                            title: 'Miembro se actualizo correctamente',
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -971,10 +971,12 @@
                         //		location.reload()
                         //	}, 1000)
                     } else if (result.resp == 2) {
+                        end_load();
                         data = result.msj_error;
                         $('#msg').html('<div class="alert alert-danger">Error al enviar correo:' + data + '</div>')
                         end_load();
                     } else {
+                        end_load();
                         $('#msg').html('<div class="alert alert-danger">Nombre y/o correo ya registrado</div>')
                     }
 
@@ -1183,8 +1185,6 @@
 
     function eliminar(id) {
 
-
-
         end_load();
         $.ajax({
             url: site_url + '/student/student_chek_delete',
@@ -1194,7 +1194,7 @@
             },
             success: function(resp) {
 
-            
+                end_load();
                 var result = $.parseJSON(resp);
                 if (result.resp == 1) {
                     Swal.fire({
@@ -1205,7 +1205,7 @@
                         timer: 3500
                     })
                     table.ajax.reload();
-                    end_load();
+                    
                 } else if (result.resp == 0) {
                     Swal.fire({
                         title: 'Esta seguro de eliminar el registro con Id : ' + id + ' ?',
@@ -1270,7 +1270,7 @@
             success: function(resp) {
              var result = $.parseJSON(resp);
 
-             console.log(result.data);
+      
                 if (result.resp == '1') {
                     $('#Modalqr').modal('show');
                     document.getElementById("image_qr").src = "../" + result.data;
@@ -1293,7 +1293,6 @@
 
     function actualizar(id) {
         enable_tabs();
-        end_load();
         today = new Date();
         $('#txt_desc').val('');
         //   $('#txt_valor').val('');
@@ -1323,7 +1322,8 @@
                 var result = $.parseJSON(resp);
                 if (result.resp == 1) {
 
-                    console.log("data_2");
+                    end_load();
+                  
                     document.getElementById("plan_button").classList.remove('active');
                     document.getElementById("miembro_pestaña").classList.remove('enabledTab');
                     document.getElementById("plan_pestaña").classList.add('disabledTab');
@@ -1382,14 +1382,13 @@
 
 
                     } else {
-                        console.log("data_1");
+                        
                         document.getElementById('view_pestaña').style.display = 'none';
                         document.getElementById('plan_pestaña').style.display = 'block';
 
                     }
 
                 } else if (resp == 2) {
-                    console.log("data_3");
                     $('#msg').html('<div class="alert alert-danger">ID No already existed.</div>')
                     end_load();
                 }

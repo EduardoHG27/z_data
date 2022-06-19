@@ -221,12 +221,6 @@
 
 </div>
 
-</div>
-<div class="card">
-
-
-</div>
-
 
 
 
@@ -287,10 +281,10 @@
                                     <div id="div_5" class="col-md-4">
                                         <label id="label_4" class="control-label">Puesto</label>
                                         <select class="js-select2" id="plan_select" name='plan_select' style="width: 100%;">
-                                                <option value="">Selecciona</option>
-                                            </select>
+                                            <option value="">Selecciona</option>
+                                        </select>
                                     </div>
-                                  <!--  <div id="div_5" class="col-md-4">
+                                    <!--  <div id="div_5" class="col-md-4">
                                         
                                         <select class="js-select2" id="plan_select_1" name='item1' tyle="width: 100%;">
                                             <option value=''>Selecciona</option>
@@ -677,6 +671,25 @@
     </div>
 </div>
 
+
+<div class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
 <link rel="stylesheet" href="<?php echo base_url(); ?>/select/css/rSlider.min.css">
 
 
@@ -684,6 +697,7 @@
 <script src="<?php echo base_url(); ?>/select/js/rSlider.min.js"></script>
 
 <script>
+    $(".modal").modal("show");
     (function() {
         'use strict';
 
@@ -695,9 +709,7 @@
                 range: false,
                 set: [5],
                 tooltip: false,
-                onChange: function(vals) {
-                    console.log(vals);
-                }
+                onChange: function(vals) {}
             });
 
             var slider3 = new rSlider({
@@ -917,7 +929,7 @@
                 {
                     data: "mobile"
                 }, {
-                    data: "position"
+                    data: "name_position"
                 },
                 {
 
@@ -995,7 +1007,6 @@
                 eliminar(data['id_staff']);
             }
         });
-
 
         const checkbox = document.getElementById('check1')
 
@@ -1183,6 +1194,30 @@
         var div_3 = document.getElementById("div_3");
         var div_4 = document.getElementById("div_4");
         var div_5 = document.getElementById("div_5");
+
+
+        $(".exampleModal").draggable({
+        handle: ".modal-header"
+    });
+
+    $(".modal-header").on("mousedown", function(mousedownEvt) {
+        var $draggable = $(this);
+        var x = mousedownEvt.pageX - $draggable.offset().left,
+            y = mousedownEvt.pageY - $draggable.offset().top;
+        $("body").on("mousemove.draggable", function(mousemoveEvt) {
+            $draggable.closest(".modal-dialog").offset({
+                "left": mousemoveEvt.pageX - x,
+                "top": mousemoveEvt.pageY - y
+            });
+        });
+        $("body").one("mouseup", function() {
+            $("body").off("mousemove.draggable");
+        });
+        $draggable.closest(".modal").one("bs.modal.hide", function() {
+            $("body").off("mousemove.draggable");
+        });
+    });
+
 
         $("#btn_agregarstaff").click(function() {
             document.getElementById('view_form').style.display = 'none';
@@ -1391,24 +1426,6 @@
 
         });
     }
-
-    /*
-        var $planForm = $('#member-plan');
-        if ($planForm.length) {
-            $planForm.validate({
-                rules: {
-                    txt_total: {
-                        required: true,
-                    }
-                },
-                messages: {
-                    txt_total: {
-                        required: 'Please enter username!'
-                    }
-                }
-            });
-        }
-    */
 
     $("#btn-refresh").click(function() {
         start_load();
@@ -1895,21 +1912,23 @@
         } else {
 
             document.getElementById("plan_button").disabled = false;
-
+            if ($('#plan_select').select2('val') != null) {
+                data = $('#plan_select').select2('data')[0];
+            }
             var data = {
                 'id': $('#txt_id').val(),
                 'name': $('#txt_name').val(),
                 'email': $('#txt_email').val(),
-                'mobile': $('#txt_mobile').val()
-                // 'password': $('#txt_password').val()
+                'mobile': $('#txt_mobile').val(),
+                'position': data['id'],
+                'password': $('#txt_password').val()
             };
             $.ajax({
-                url: site_url + '/student/student_update',
+                url: site_url + '/staff/staff_up_date',
                 method: "post",
                 data: data,
                 success: function(resp) {
                     var result = $.parseJSON(resp);
-                    console.log(result);
                     if (result.resp == 1) {
                         Swal.fire({
                             position: 'top-end',
@@ -2048,14 +2067,14 @@
 
             document.getElementById("plan_button").disabled = false;
             if ($('#plan_select').select2('val') != null) {
-                data = $('#plan_select').select2('data')[0];
+                data_select = $('#plan_select').select2('data')[0];
             }
             var data = {
                 'name': $('#txt_name').val(),
                 'email': $('#txt_email').val(),
                 'mobile': $('#txt_mobile').val(),
                 'password': $('#txt_password').val(),
-                'charge': data['text']
+                'charge': data_select['id']
             };
             start_load();
             $.ajax({
@@ -2187,6 +2206,7 @@
         table.columns(2).search('').draw();
         table.columns(3).search('').draw();
         table.columns(4).search('').draw();
+        table.columns(5).search('').draw();
     }
 
     function eliminar(id) {
@@ -2268,7 +2288,6 @@
 
     function get_qr(id) {
 
-        console.log(id);
         $('.modal-title').text('Codigo Qr');
         $.ajax({
             url: site_url + '/staff/get_qr',
@@ -2279,7 +2298,6 @@
             success: function(resp) {
                 var result = $.parseJSON(resp);
 
-                console.log(result.data);
                 if (result.resp == '1') {
                     $('#Modalqr').modal('show');
                     document.getElementById("image_qr").src = "../" + result.data;
@@ -2329,7 +2347,6 @@
             success: function(resp) {
                 var result = $.parseJSON(resp);
                 if (result.resp == 1) {
-
                     $('#bthorario').show();
                     $('#bthorario_mod').hide();
                     document.getElementById("plan_button").classList.remove('active');
@@ -2350,7 +2367,8 @@
                     $('#txt_name').val(result.data['name']);
                     $('#txt_email').val(result.data['email']);
                     $('#txt_mobile').val(result.data['mobile']);
-                    $('#txt_cargo').val(result.data['position']);
+                    $('#plan_select').val(result.data['position']).change();
+
                     table.ajax.reload();
                     //	setTimeout(function() {
                     //		location.reload()
@@ -2381,7 +2399,7 @@
                     $('#txt_name').val(result.data['name']);
                     $('#txt_email').val(result.data['email']);
                     $('#txt_mobile').val(result.data['mobile']);
-                    $('#txt_cargo').val(result.data['position']);
+                    $('#plan_select').val(result.data['position']).change();
                     table.ajax.reload();
 
                     $.ajax({
@@ -2737,16 +2755,6 @@
         padding-bottom: 0;
     }
 
-
-
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        margin: 0;
-        padding: 0 0 50px;
-        color: #333;
-        font-size: 14px;
-    }
-
     p {
         margin: 0;
     }
@@ -2877,6 +2885,10 @@
     label.error {
         color: red;
         font-family: verdana, Helvetica;
+    }
+
+    .modal-header {
+        cursor: move;
     }
 </style>
 

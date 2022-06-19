@@ -182,9 +182,13 @@ class Student extends BaseController
 
 
 
+        var_dump($data_validation_student);
+        var_dump($data_validation);
         if (!empty($data_validation)) {
-
-            if ($data_validation[0]['position'] == 'manager') {
+          
+         
+            if ($data_validation[0]['position'] == '1') {
+            
                 if ($password != $data_validation[0]['password']) {
 
                     $consulta['data'] = '1';
@@ -192,10 +196,17 @@ class Student extends BaseController
                     echo json_encode($consulta);
                 } else {
 
+             
                     $consulta['data'] = '5';
                     $consulta['msj'] = 'Admin';
+
+                    
                     echo json_encode($consulta);
                 }
+            }
+            else
+            {
+                var_dump("error al validar admin");
             }
         } else if (!empty($data_validation_student)) {
             if ($password != $data_validation_student[0]['password']) {
@@ -544,7 +555,7 @@ class Student extends BaseController
 
         $correo = $mail->load();
         $correo->isSMTP();
-        $correo->Host = 'smtp.hostinger.com';
+        $correo->Host = 'smtp.gmail.com';
         $correo->Port = 465;
         $correo->SMTPOptions = array(
             'ssl' => array(
@@ -555,11 +566,11 @@ class Student extends BaseController
         );
 
         $correo->SMTPAuth = true;
-        $correo->Username  = 'gym_service@gym-system.ecommerce343.com';
-        $correo->Password = 'Hergut27!';
+        $correo->Username  = 'eduardoenrique.hernandez@gmail.com';
+        $correo->Password = 'xgquztnppmjzgwuw';
         $correo->SMTPSecure = 'ssl';
 
-        $correo->setFrom('gym_service@gym-system.ecommerce343.com', 'CodexWorld');
+        $correo->setFrom('eduardoenrique.hernandez@gmail.com', 'CodexWorld');
         $correo->addReplyTo($this->request->getPost('email'), 'Codexworld');
         $correo->addAddress($this->request->getPost('email'));
         $correo->Subject = 'Registro de Usuario Exitoso';

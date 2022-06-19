@@ -236,14 +236,18 @@ class Staff extends BaseController
 
     public function update()
     {
-        $studetsModel = new StudetsModel();
+
+      
+        $staffModel = new StaffModel();
         $id = $this->request->getVar('id');
         $data = [
             'name' => $this->request->getVar('name'),
             'email'  => $this->request->getVar('email'),
-            'mobile'  => $this->request->getVar('mobile')
+            'mobile'  => $this->request->getVar('mobile'),
+            'position' =>$this->request->getVar('position'),
+            'password' => md5($this->request->getPost('password'))
         ];
-        if ($studetsModel->update($id, $data)) {
+        if ($staffModel->update($id, $data)) {
 
             $consulta['resp'] = '1';
             echo json_encode($consulta);
@@ -380,26 +384,27 @@ class Staff extends BaseController
         $columns = $_REQUEST['columns'];
 
 
-        if ($columns[4]['search']['value'] == '2') {
-            $columns[4]['search']['value'] = 'false';
-        } else if ($columns[4]['search']['value'] == '1') {
-            $columns[4]['search']['value'] = 'true';
+        if ($columns[5]['search']['value'] == '2') {
+            $columns[5]['search']['value'] = 'false';
+        } else if ($columns[5]['search']['value'] == '1') {
+            $columns[5]['search']['value'] = 'true';
         } else {
-            $columns[4]['search']['value'] = '';
+            $columns[5]['search']['value'] = '';
         }
         $like = array(
-            'matricula' => $columns[0]['search']['value'],
+            'matricula_staff' => $columns[0]['search']['value'],
             'name' => $columns[1]['search']['value'],
             'email' => $columns[2]['search']['value'],
             'mobile' => $columns[3]['search']['value'],
-            'status' => $columns[4]['search']['value']
+            'position' => $columns[4]['search']['value'],
+            'status' => $columns[5]['search']['value']
         );
 
-        $data = $staffModel->where('company', $_SESSION['company'])->findAll();
+        $data = $staffModel->where('tab_staff.company', $_SESSION['company'])->findAll();
         $total_count = $data;
 
-        $lib = new Datatable($staffModel, 'gp1', ['id_staff', 'matricula_staff', 'name', 'email', 'mobile', 'status', 'position', 'password', 'year_act', 'company', 'created_at', 'updated_at', 'deleted_at']);
-        $json_data = $lib->getResponse([
+        $lib = new Datatable($staffModel, 'gp1', ['id_staff', 'matricula_staff', 'name', 'email', 'mobile', 'status', 'position', 'password', 'year_act', 'company', 'created_at', 'updated_at', 'deleted_at','name_position']);
+        $json_data = $lib->getResponse_staff([
             'draw' => $_REQUEST['draw'],
             'length' => $_REQUEST['length'],
             'start' => $_REQUEST['start'],

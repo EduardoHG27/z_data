@@ -11,8 +11,13 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
+<!--
+JQUERY SCRIPT CAMBIO -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--JQUERY SCRIPT CAMBIO-->
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
@@ -26,7 +31,13 @@
 <script src="https://kit.fontawesome.com/e131073142.js" crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link href="<?php echo base_url(); ?>/css/bootstrap/estilos.css" rel="stylesheet">
+
  <!--<link href="<?php echo base_url(); ?>/css/bootstrap/estilos_tablas.css" rel="stylesheet">
+
+ <script src="https://code.jquery.com/jquery-3.5.1.js"></script>  JQUERY SCRIPT CAMBIO
+
+
+
 
  <link href="<?php echo base_url(); ?>/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 

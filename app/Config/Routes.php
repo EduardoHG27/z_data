@@ -116,6 +116,7 @@ $routes->group('staff', ['namespace' => 'App\Controllers\Staff'], function ($rou
     $routes->post("plan_store", "Staff::store");
     $routes->post("get_schedule", "Staff::get_schedule");
     $routes->post("staff_update", "Staff::get_staff");
+    $routes->post("staff_up_date", "Staff::update");
     $routes->post("plan_update", "Staff::update");
     $routes->post("plan_delete", "Staff::delete");
     $routes->post("plan_status_up", "Staff::status_up");

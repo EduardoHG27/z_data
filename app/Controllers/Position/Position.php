@@ -249,6 +249,14 @@ class Position extends BaseController
         $order = $_REQUEST['order'];
         $order = array_shift($_REQUEST['order']);
         $columns = $_REQUEST['columns'];
+
+        if ($columns[2]['search']['value'] == '1') {
+            $columns[2]['search']['value'] = 'false';
+        } else if ($columns[2]['search']['value'] == '2') {
+            $columns[2]['search']['value'] = 'true';
+        } else {
+            $columns[2]['search']['value'] = '';
+        }
         $like = array(
             'id_position' => $columns[0]['search']['value'],
             'name_position' => $columns[1]['search']['value'],
