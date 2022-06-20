@@ -635,7 +635,7 @@
 
 
             if (data === undefined) {
-
+                Toast();
                 Toast.fire({
                     icon: 'error',
                     title: 'Debes seleccionar un registro de la tabla'
@@ -718,7 +718,7 @@
             //  $('#miembro_pestaña').attr("class", "enabledTab");
             let data = table.rows('.selected').data()[0];
             if (data === undefined) {
-
+                Toast();
                 Toast.fire({
                     icon: 'error',
                     title: 'Debes seleccionar un registro de la tabla'
@@ -899,6 +899,7 @@
                     if (result.resp == 1) {
                         $('#exampleModal').modal('toggle');
                         table.ajax.reload();
+                        Toast();
                         Toast.fire({
                             icon: 'success',
                             title: 'Plan asignado correctamente'
@@ -942,7 +943,7 @@
 
                     if (result.resp == 1) {
                         end_load();
-
+                        Toast();
                         Toast.fire({
                             icon: 'success',
                             title: 'Miembro se actualizo correctamente'
@@ -1007,7 +1008,7 @@
                     success: function(resp) {
                         var result = $.parseJSON(resp);
                         if (result.resp == 1) {
-
+                            Toast();
                             Toast.fire({
                                 icon: 'success',
                                 title: 'Plan eliminado correctamente'
@@ -1059,7 +1060,7 @@
                     var result = $.parseJSON(resp);
                     if (result.resp == 1) {
                         end_load();
-
+                        Toast();
                         Toast.fire({
                             icon: 'success',
                             title: 'Miembro registrado correctamente'
@@ -1117,7 +1118,7 @@
                 success: function(resp) {
                     var result = $.parseJSON(resp);
                     if (result.resp == 1) {
-
+                        Toast();
                         Toast.fire({
                             icon: 'success',
                             title: 'Miembro actualizado correctamente'
@@ -1181,7 +1182,7 @@
                 end_load();
                 var result = $.parseJSON(resp);
                 if (result.resp == 1) {
-
+                    Toast();
                     Toast.fire({
                         icon: 'error',
                         title: 'Miembro con una cuenta activa no es posible eliminar el registro'
@@ -1211,6 +1212,7 @@
                                 success: function(resp) {
                                     var result = $.parseJSON(resp);
                                     if (result.resp == 1) {
+                                        Toast();
                                         Toast.fire({
                                             icon: 'error',
                                             title: 'Registro eliminado'
@@ -1218,7 +1220,7 @@
                                         table.ajax.reload();
                                         end_load();
                                     } else if (resp == 2) {
-
+                                        Toast();
                                         Toast.fire({
                                             icon: 'error',
                                             title: 'Error al eliminar el registro'
@@ -1252,7 +1254,7 @@
                     $('#Modalqr').modal('show');
                     document.getElementById("image_qr").src = "../" + result.data;
                 } else {
-                   
+                    Toast();
                     Toast.fire({
                         icon: 'warning',
                         title: 'Usuario no cuenta con código Qr'
@@ -1448,6 +1450,20 @@
         div_3.classList.remove("error");
         div_4.classList.remove("error");
         div_5.classList.remove("error");
+    }
+
+    function Toast() {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
     }
 </script>
 

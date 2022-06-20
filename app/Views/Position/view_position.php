@@ -426,7 +426,7 @@
 
 
             if (data === undefined) {
-
+                Toast();
                 Toast.fire({
                     icon: 'error',
                     title: 'Debes seleccionar un registro de la tabla'
@@ -459,6 +459,7 @@
             $('.modal-title').text('Modificar | Rol');
             // enable_tabs();
             if (data === undefined) {
+                Toast()
                 Toast.fire({
                     icon: 'error',
                     title: 'Debes seleccionar un registro de la tabla'
@@ -550,6 +551,7 @@
         $('.modal-title').text('Modificar | Rol');
         // enable_tabs();
         if (data === undefined) {
+            Toast();
             Toast.fire({
                 icon: 'error',
                 title: 'Debes seleccionar un registro de la tabla'
@@ -587,7 +589,7 @@
                 success: function(resp) {
                     var result = $.parseJSON(resp);
                     if (result.resp == 1) {
-                       
+                        Toast();
                         Toast.fire({
                             icon: 'success',
                             title: 'Rol registrado correctamente'
@@ -635,7 +637,7 @@
                 success: function(resp) {
                     var result = $.parseJSON(resp);
                     if (result.resp == 1) {
-                        
+                        Toast();
                         Toast.fire({
                             icon: 'success',
                             title: 'Rol actualizado correctamente'
@@ -709,7 +711,7 @@
                     success: function(resp) {
                         var result = $.parseJSON(resp);
                         if (result.resp == 1) {
-                          
+                            Toast();
                             Toast.fire({
                             icon: 'success',
                             title: 'Registro eliminado'
@@ -717,7 +719,7 @@
                             table.ajax.reload();
                             end_load();
                         } else if (resp == 2) {
-                           
+                            Toast();
                             Toast.fire({
                             icon: 'error',
                             title: 'Error al eliminar el registro'
@@ -784,7 +786,7 @@
                 var result = $.parseJSON(resp);
 
                 if (result.resp == 1) {
-
+                    Toast();
                     Toast.fire({
                             icon: 'success',
                             title: 'Se modifico el estatus correctamente'
@@ -794,6 +796,7 @@
                     //		location.reload()
                     //	}, 1000)
                 } else if (resp == 2) {
+                    Toast();
                     Toast.fire({
                             icon: 'error',
                             title: 'Error al modificar el estatus'
@@ -801,6 +804,20 @@
                 }
             }
         });
+    }
+
+    function Toast() {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
     }
 </script>
 
