@@ -118,7 +118,7 @@
 						position: 'center',
 						icon: 'error',
 						title: 'Aviso!!',
-						content: result.msj,,
+						content: result.msj,
 						showConfirmButton: false,
 						timer: 2500
 					})
