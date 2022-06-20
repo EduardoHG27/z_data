@@ -24,54 +24,87 @@ var app = new Vue({
           var result = $.parseJSON(resp);
          if (result.resp=='2')
           {
-            Swal.fire(
-              'Atencion!!',
-              result.name + ' -> ' + result.msj,
-              'warning'
-            )
+           
+
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              title: 'Atencion!!',  
+              text: result.name + ' -> ' + result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
           }
           else if (result.resp=='1')
           {
-            Swal.fire(
-              'Bienvenido',
-              result.name + ' -> ' + result.msj,
-              'success'
-            )
+           
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Bienvenido!!',  
+              text:  result.name + ' -> ' + result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
           }else if (result.resp=='3')
           {
-            Swal.fire(
-              'Staff',
-              result.name + ' -> ' + result.msj,
-              'success'
-            )
+           
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Registro Staff',  
+              text:  result.name + ' -> ' + result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
           }else if (result.resp=='4')
           {
-            Swal.fire(
-              'Staff',
-              result.name + ' -> ' + result.msj,
-              'success'
-            )
+           
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Registro Staff',  
+              text:  result.name + ' -> ' + result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
           }else if (result.resp=='5')
           {
-            Swal.fire(
-              'Staff',
-              result.name + ' -> ' + result.msj,
-              'warning'
-            )
+          
+
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              title: 'Registro Staff',  
+              text:  result.name + ' -> ' + result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
           }else if (result.resp=='6')
           {
-            Swal.fire(
-              'Staff',
-              result.name + ' -> ' + result.msj,
-              'warning'
-            )
+
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              title: 'Registro Staff',  
+              text:  result.name + ' -> ' + result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
+           
           }else
           {
-            Swal.fire(
-              'Atencion',
-              result.name + ' -> ' + result.msj,
-              'error'
-            )
+
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Registro Staff!!',  
+              text: result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
+
+           
           }
           
         }

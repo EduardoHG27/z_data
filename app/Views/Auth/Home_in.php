@@ -120,7 +120,7 @@
 						title: 'Aviso!!',
 						text: result.msj,
 						showConfirmButton: false,
-						timer: 2500
+						timer: 3500
 					})
 				} else if (result.data == 1) {
 					Swal.fire({
@@ -129,7 +129,7 @@
 						title: 'Aviso!!',
 						text: result.msj,
 						showConfirmButton: false,
-						timer: 2500
+						timer: 3500
 					})
 				} else if (result.data == 2) {
 					
@@ -139,7 +139,7 @@
 						title: 'Aviso!!',
 						text: result.msj,
 						showConfirmButton: false,
-						timer: 2500
+						timer: 3500
 					})
 
 				} else if (result.data == 5) {
@@ -154,7 +154,7 @@
 						title: 'Bienvenido!!',
 						text: result.msj,
 						showConfirmButton: false,
-						timer: 2500
+						timer: 3500
 					})
 					$('#username').val('');
 
