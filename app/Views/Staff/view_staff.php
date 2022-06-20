@@ -2104,7 +2104,7 @@
 
                         Toast.fire({
                             icon: 'success',
-                            title: 'Staff registrado correctamente'
+                            title: 'Staff registrado correctamente11111'
                         })
 
                         $('#txt_id').val(result.id);
