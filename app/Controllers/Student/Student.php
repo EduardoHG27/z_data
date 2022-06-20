@@ -181,9 +181,6 @@ class Student extends BaseController
         $data_validation = $query->getResult('array');
 
 
-
-        var_dump($data_validation_student);
-        var_dump($data_validation);
         if (!empty($data_validation)) {
           
          

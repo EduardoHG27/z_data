@@ -27,10 +27,7 @@ var app = new Vue({
             Swal.fire(
               'Atencion!!',
               result.name + ' -> ' + result.msj,
-              'warning',
-              {
-              timer: 3500
-              }
+              'warning'
             )
           }
           else if (result.resp=='1')
@@ -38,60 +35,42 @@ var app = new Vue({
             Swal.fire(
               'Bienvenido',
               result.name + ' -> ' + result.msj,
-              'success',
-              {
-              timer: 3500
-              }
+              'success'
             )
           }else if (result.resp=='3')
           {
             Swal.fire(
               'Staff',
               result.name + ' -> ' + result.msj,
-              'success',
-              {
-              timer: 3500
-              }
+              'success'
             )
           }else if (result.resp=='4')
           {
             Swal.fire(
               'Staff',
               result.name + ' -> ' + result.msj,
-              'success',
-              {
-              timer: 3500
-              }
+              'success'
             )
           }else if (result.resp=='5')
           {
             Swal.fire(
               'Staff',
               result.name + ' -> ' + result.msj,
-              'warning',
-              {
-              timer: 3500
-              }
+              'warning'
             )
           }else if (result.resp=='6')
           {
             Swal.fire(
               'Staff',
               result.name + ' -> ' + result.msj,
-              'warning',
-              {
-              timer: 3500
-              }
+              'warning'
             )
           }else
           {
             Swal.fire(
               'Atencion',
               result.name + ' -> ' + result.msj,
-              'error',
-              {
-              timer: 3500
-              }
+              'error'
             )
           }
           
