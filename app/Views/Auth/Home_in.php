@@ -114,37 +114,48 @@
 				var result = $.parseJSON(resp);
 
 				if (result.data == 0) {
-
-					Swal.fire(
-						'Aviso!',
-						result.msj,
-						'warning'
-					)
+					Swal.fire({
+						position: 'center',
+						icon: 'error',
+						title: 'Aviso!!',
+						content: result.msj,,
+						showConfirmButton: false,
+						timer: 2500
+					})
 				} else if (result.data == 1) {
-					Swal.fire(
-						'Aviso!',
-						result.msj,
-						'error'
-					)
-
+					Swal.fire({
+						position: 'center',
+						icon: 'error',
+						title: 'Aviso!!',
+						content: result.msj,
+						showConfirmButton: false,
+						timer: 2500
+					})
 				} else if (result.data == 2) {
-					Swal.fire(
-						'Atencion!',
-						result.msj,
-						'warning'
-					)
+					
+					Swal.fire({
+						position: 'center',
+						icon: 'warning',
+						title: 'Aviso!!',
+						content: result.msj,
+						showConfirmButton: false,
+						timer: 2500
+					})
 
 				} else if (result.data == 5) {
 
 					window.location.href = site_url + "/principal/inicio";
 
 				} else {
-					Swal.fire(
-						'Bienvenido',
-						result.msj,
-						'success'
-					)
 
+					Swal.fire({
+						position: 'center',
+						icon: 'success',
+						title: 'Bienvenido!!',
+						content: result.msj,
+						showConfirmButton: false,
+						timer: 2500
+					})
 					$('#username').val('');
 
 					$('#password').val('')
