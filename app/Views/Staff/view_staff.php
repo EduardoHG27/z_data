@@ -697,62 +697,72 @@
 <script src="<?php echo base_url(); ?>/select/js/rSlider.min.js"></script>
 
 <script>
-    $(".modal").modal("show");
-    (function() {
-        'use strict';
+    const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        (function() {
+            'use strict';
 
-        var init = function() {
+            var init = function() {
 
-            var slider2 = new rSlider({
-                target: '#slider2',
-                values: [0, 1, 2, 3, 4, 5, 6, '7', 8],
-                range: false,
-                set: [5],
-                tooltip: false,
-                onChange: function(vals) {}
-            });
+                var slider2 = new rSlider({
+                    target: '#slider2',
+                    values: [0, 1, 2, 3, 4, 5, 6, '7', 8],
+                    range: false,
+                    set: [5],
+                    tooltip: false,
+                    onChange: function(vals) {}
+                });
 
-            var slider3 = new rSlider({
-                target: '#slider3',
-                values: {
-                    min: 7,
-                    max: 24
-                },
-                step: 1,
-                range: true,
-                set: [10],
-                scale: false,
-                labels: false,
-                onChange: function(vals) {
+                var slider3 = new rSlider({
+                    target: '#slider3',
+                    values: {
+                        min: 7,
+                        max: 24
+                    },
+                    step: 1,
+                    range: true,
+                    set: [10],
+                    scale: false,
+                    labels: false,
+                    onChange: function(vals) {
 
-                }
-            });
-            var slider4 = new rSlider({
-                target: '#slider4',
-                values: {
-                    min: 7,
-                    max: 24
-                },
-                step: 1,
-                range: true,
-                set: [10, 40],
-                scale: false,
-                labels: false,
+                    }
+                });
+                var slider4 = new rSlider({
+                    target: '#slider4',
+                    values: {
+                        min: 7,
+                        max: 24
+                    },
+                    step: 1,
+                    range: true,
+                    set: [10, 40],
+                    scale: false,
+                    labels: false,
 
-            });
+                });
 
-            var slider = new rSlider({
-                target: '#slider',
-                values: [2014, 2015, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, ],
-                range: true,
-                set: [2010, 2013],
-                onChange: function(vals) {
-                    console.log(vals);
-                }
-            });
-        };
-        window.onload = init;
-    })();
+                var slider = new rSlider({
+                    target: '#slider',
+                    values: [2014, 2015, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, ],
+                    range: true,
+                    set: [2010, 2013],
+                    onChange: function(vals) {
+                        console.log(vals);
+                    }
+                });
+            };
+            window.onload = init;
+        })();
 </script>
 
 
@@ -2090,17 +2100,7 @@
                         end_load();
 
 
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        })
+
 
                         Toast.fire({
                             icon: 'success',
