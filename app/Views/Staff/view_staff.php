@@ -986,7 +986,17 @@
 
 
             if (data === undefined) {
-                Toast();
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
                 Toast.fire({
                     icon: 'error',
                     title: 'Debes seleccionar un registro de la tabla'
@@ -1261,8 +1271,18 @@
             //  $('#miembro_pestaña').attr("class", "enabledTab");
             let data = table.rows('.selected').data()[0];
             if (data === undefined) {
-                
-                Toast();
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
                 Toast.fire({
                     icon: 'error',
                     title: 'Debes seleccionar un registro de la tabla'
@@ -1627,8 +1647,18 @@
                     console.log(result);
                     if (result.resp == 0) {
 
-                       
-                        Toast();
+
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
                         Toast.fire({
                             icon: 'success',
                             title: 'Horario asignado correctamente!!'
@@ -1857,7 +1887,17 @@
                     var result = $.parseJSON(resp);
                     console.log(result);
                     if (result.resp == 1) {
-                        Toast();
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
                         Toast.fire({
                             icon: 'success',
                             title: 'Horario de Staff registrado correctamente'
@@ -1905,7 +1945,17 @@
                 success: function(resp) {
                     var result = $.parseJSON(resp);
                     if (result.resp == 1) {
-                        Toast();
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
                         Toast.fire({
                             icon: 'success',
                             title: 'Staff registrado correctamente'
@@ -2058,7 +2108,17 @@
                     var result = $.parseJSON(resp);
                     if (result.resp == 1) {
                         end_load();
-                        Toast();
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
                         Toast.fire({
                             icon: 'success',
                             title: 'Staff registrado correctamente'
@@ -2116,7 +2176,17 @@
                     var result = $.parseJSON(resp);
                     if (result.resp == 1) {
 
-                        Toast();
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
                         Toast.fire({
                             icon: 'success',
                             title: 'Staff actualizado correctamente'
@@ -2181,7 +2251,17 @@
                 var result = $.parseJSON(resp);
                 if (result.resp == 1) {
 
-                    Toast();
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
                     Toast.fire({
                         icon: 'error',
                         title: 'Staff con una cuenta activa no es posible eliminar el registro'
@@ -2212,7 +2292,17 @@
                                     var result = $.parseJSON(resp);
                                     if (result.resp == 1) {
 
-                                        Toast();
+                                        const Toast = Swal.mixin({
+                                            toast: true,
+                                            position: 'top-end',
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProgressBar: true,
+                                            didOpen: (toast) => {
+                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                        })
                                         Toast.fire({
                                             icon: 'success',
                                             title: 'Registro eliminado'
@@ -2221,7 +2311,17 @@
                                         end_load();
                                     } else if (resp == 2) {
 
-                                        Toast();
+                                        const Toast = Swal.mixin({
+                                            toast: true,
+                                            position: 'top-end',
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProgressBar: true,
+                                            didOpen: (toast) => {
+                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                        })
                                         Toast.fire({
                                             icon: 'error',
                                             title: 'Error al eliminar el registro'
@@ -2258,8 +2358,18 @@
                     $('#Modalqr').modal('show');
                     document.getElementById("image_qr").src = "../" + result.data;
                 } else {
-                    
-                    Toast();
+
+                    const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
                     Toast.fire({
                         icon: 'warning',
                         title: 'Usuario no cuenta con código Qr'
@@ -2642,22 +2752,6 @@
         document.getElementById('appt_dom2').style.display = 'none';
         document.getElementById("appt_dom2").value = "12:59:48";
         document.getElementById('lblstats_dom').style.display = 'none';
-    }
-
-
-    function Toast()
-    {
-        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        })
     }
 </script>
 
