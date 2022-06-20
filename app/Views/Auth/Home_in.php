@@ -118,7 +118,7 @@
 						position: 'center',
 						icon: 'error',
 						title: 'Aviso!!',
-						content: result.msj,
+						text: result.msj,
 						showConfirmButton: false,
 						timer: 2500
 					})
@@ -127,7 +127,7 @@
 						position: 'center',
 						icon: 'error',
 						title: 'Aviso!!',
-						content: result.msj,
+						text: result.msj,
 						showConfirmButton: false,
 						timer: 2500
 					})
@@ -137,7 +137,7 @@
 						position: 'center',
 						icon: 'warning',
 						title: 'Aviso!!',
-						content: result.msj,
+						text: result.msj,
 						showConfirmButton: false,
 						timer: 2500
 					})
@@ -152,7 +152,7 @@
 						position: 'center',
 						icon: 'success',
 						title: 'Bienvenido!!',
-						content: result.msj,
+						text: result.msj,
 						showConfirmButton: false,
 						timer: 2500
 					})
