@@ -2089,18 +2089,7 @@
                     var result = $.parseJSON(resp);
                     if (result.resp == 1) {
                         end_load();
-
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        })
+                        Toast();
                         Toast.fire({
                             icon: 'success',
                             title: 'Staff registrado correctamente11111'
@@ -2678,6 +2667,22 @@
         document.getElementById('appt_dom2').style.display = 'none';
         document.getElementById("appt_dom2").value = "12:59:48";
         document.getElementById('lblstats_dom').style.display = 'none';
+    }
+
+
+    function Toast()
+    {
+        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
     }
 </script>
 
