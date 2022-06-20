@@ -24,8 +24,6 @@ var app = new Vue({
           var result = $.parseJSON(resp);
          if (result.resp=='2')
           {
-           
-
             Swal.fire({
               position: 'center',
               icon: 'warning',
@@ -98,7 +96,7 @@ var app = new Vue({
             Swal.fire({
               position: 'center',
               icon: 'error',
-              title: 'Registro Staff!!',  
+              title: 'Codigo QR no reconocido!!',  
               text: result.msj,
               showConfirmButton: false,
               timer: 3500

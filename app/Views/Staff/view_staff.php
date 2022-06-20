@@ -1197,26 +1197,26 @@
 
 
         $(".exampleModal").draggable({
-        handle: ".modal-header"
-    });
+            handle: ".modal-header"
+        });
 
-    $(".modal-header").on("mousedown", function(mousedownEvt) {
-        var $draggable = $(this);
-        var x = mousedownEvt.pageX - $draggable.offset().left,
-            y = mousedownEvt.pageY - $draggable.offset().top;
-        $("body").on("mousemove.draggable", function(mousemoveEvt) {
-            $draggable.closest(".modal-dialog").offset({
-                "left": mousemoveEvt.pageX - x,
-                "top": mousemoveEvt.pageY - y
+        $(".modal-header").on("mousedown", function(mousedownEvt) {
+            var $draggable = $(this);
+            var x = mousedownEvt.pageX - $draggable.offset().left,
+                y = mousedownEvt.pageY - $draggable.offset().top;
+            $("body").on("mousemove.draggable", function(mousemoveEvt) {
+                $draggable.closest(".modal-dialog").offset({
+                    "left": mousemoveEvt.pageX - x,
+                    "top": mousemoveEvt.pageY - y
+                });
+            });
+            $("body").one("mouseup", function() {
+                $("body").off("mousemove.draggable");
+            });
+            $draggable.closest(".modal").one("bs.modal.hide", function() {
+                $("body").off("mousemove.draggable");
             });
         });
-        $("body").one("mouseup", function() {
-            $("body").off("mousemove.draggable");
-        });
-        $draggable.closest(".modal").one("bs.modal.hide", function() {
-            $("body").off("mousemove.draggable");
-        });
-    });
 
 
         $("#btn_agregarstaff").click(function() {
@@ -1888,6 +1888,11 @@
                     console.log(result);
                     if (result.resp == 1) {
 
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Horario de Staff registrado correctamente'
+                        })
+
                     } else if (result.resp == 2) {
                         data = result.msj_error;
                         plan_pestaña
@@ -1930,12 +1935,10 @@
                 success: function(resp) {
                     var result = $.parseJSON(resp);
                     if (result.resp == 1) {
-                        Swal.fire({
-                            position: 'top-end',
+
+                        Toast.fire({
                             icon: 'success',
-                            title: 'Staff registrado correctamente',
-                            showConfirmButton: false,
-                            timer: 1500
+                            title: 'Staff registrado correctamente'
                         })
 
                         $('#txt_id').val(result.id);
@@ -2155,12 +2158,10 @@
                 success: function(resp) {
                     var result = $.parseJSON(resp);
                     if (result.resp == 1) {
-                        Swal.fire({
-                            position: 'top-end',
+
+                        Toast.fire({
                             icon: 'success',
-                            title: 'Staff actualizado correctamente',
-                            showConfirmButton: false,
-                            timer: 1500
+                            title: 'Staff actualizado correctamente'
                         })
                         table.ajax.reload();
                         //	setTimeout(function() {
@@ -2221,12 +2222,10 @@
             success: function(resp) {
                 var result = $.parseJSON(resp);
                 if (result.resp == 1) {
-                    Swal.fire({
-                        position: 'top-end',
+
+                    Toast.fire({
                         icon: 'error',
-                        title: 'Staff con una cuenta activa no es posible eliminar el registro',
-                        showConfirmButton: false,
-                        timer: 3500
+                        title: 'Staff con una cuenta activa no es posible eliminar el registro'
                     })
                     table.ajax.reload();
                     end_load();
@@ -2253,22 +2252,18 @@
                                 success: function(resp) {
                                     var result = $.parseJSON(resp);
                                     if (result.resp == 1) {
-                                        Swal.fire({
-                                            position: 'top-end',
+
+                                        Toast.fire({
                                             icon: 'success',
-                                            title: 'Registro eliminado',
-                                            showConfirmButton: false,
-                                            timer: 1500
+                                            title: 'Registro eliminado'
                                         })
                                         table.ajax.reload();
                                         end_load();
                                     } else if (resp == 2) {
-                                        Swal.fire({
-                                            position: 'top-end',
+
+                                        Toast.fire({
                                             icon: 'error',
-                                            title: 'Error al eliminar el registro',
-                                            showConfirmButton: false,
-                                            timer: 1500
+                                            title: 'Error al eliminar el registro'
                                         })
                                         end_load();
                                     }
@@ -2302,12 +2297,9 @@
                     $('#Modalqr').modal('show');
                     document.getElementById("image_qr").src = "../" + result.data;
                 } else {
-                    Swal.fire({
-                        position: 'top-end',
+                    Toast.fire({
                         icon: 'warning',
-                        title: 'Usuario no cuenta con código Qr',
-                        showConfirmButton: false,
-                        timer: 2500
+                        title: 'Usuario no cuenta con código Qr'
                     })
                 }
             }
