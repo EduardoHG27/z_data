@@ -26,7 +26,7 @@ var app = new Vue({
           {
             Swal.fire({
               position: 'center',
-              title: 'Atencion!!', 
+              title: 'Atencion!!1', 
               icon: 'warning',
               title: 'Atencion!!',  
               text: result.name + ' -> ' + result.msj,
@@ -39,7 +39,7 @@ var app = new Vue({
            
             Swal.fire({
               position: 'center',
-              title: 'Bienvenido!!', 
+              title: 'Bienvenido!!2', 
               icon: 'success',
               title: 'Bienvenido!!',  
               text:  result.name + ' -> ' + result.msj,
