@@ -26,7 +26,6 @@ var app = new Vue({
           {
             Swal.fire({
               position: 'center',
-              title: 'Atencion!!1', 
               icon: 'warning',
               title: 'Atencion!!',  
               text: result.name + ' -> ' + result.msj,
@@ -39,7 +38,6 @@ var app = new Vue({
            
             Swal.fire({
               position: 'center',
-              title: 'Bienvenido!!2', 
               icon: 'success',
               title: 'Bienvenido!!',  
               text:  result.name + ' -> ' + result.msj,
@@ -98,13 +96,12 @@ var app = new Vue({
             Swal.fire({
               position: 'center',
               icon: 'error',
-              title: 'Codigo QR no reconocido!!',  
+              title: result.company, 
+               html:'<h3>'+result.msj+'<h3>',
               text: result.msj,
               showConfirmButton: false,
               timer: 3500
             })
-
-           
           }
           
         }
