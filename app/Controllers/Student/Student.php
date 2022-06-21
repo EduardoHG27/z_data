@@ -471,6 +471,7 @@ class Student extends BaseController
 
                                 $log->save($data);
                                 $bandera = 0;
+                                $consulta['company'] = $_SESSION['company'];
                                 $consulta['resp'] = '3';
                                 $consulta['name'] = $user['name'];
                                 $consulta['msj'] = 'Se registro tu Entrada con exito!!';
@@ -488,6 +489,7 @@ class Student extends BaseController
                                 ];
 
                                 $log->update($data_log[0]['id_entrada'], $data);
+                                $consulta['company'] = $_SESSION['company'];
                                 $consulta['resp'] = '4';
                                 $consulta['name'] = $user['name'];
                                 $consulta['msj'] = 'Se registro tu Salida con exito!!';
@@ -495,6 +497,7 @@ class Student extends BaseController
                             }
                         }
                     } else if ($data_log[0]['hour_out'] != '') {
+                        $consulta['company'] = $_SESSION['company'];
                         $consulta['resp'] = '5';
                         $consulta['name'] = $user['name'];
                         $consulta['msj'] = 'Se ha registrado Su entrada y salida por hoy';
@@ -502,6 +505,7 @@ class Student extends BaseController
                     }
                 } else {
                     $consulta['resp'] = '6';
+                    $consulta['company'] = $_SESSION['company'];
                     $consulta['name'] = $user['name'];
                     $consulta['msj'] = 'No se tiene registrado hoy su ingreso';
                     echo json_encode($consulta);
@@ -509,6 +513,7 @@ class Student extends BaseController
             }
         } else {
 
+            $consulta['company'] = $_SESSION['company'];
             $consulta['resp'] = '0';
             $consulta['msj'] = 'Código QR no reconocido';
             echo json_encode($consulta);
