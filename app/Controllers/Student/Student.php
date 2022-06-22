@@ -371,7 +371,8 @@ class Student extends BaseController
             if ($user['status'] != 'true') {
                 $consulta['resp'] = '2';
                 $consulta['name'] = $user['name'];
-                $consulta['msj'] = 'Usuario se agoto su membresia';
+                $consulta['msj'] = 'agoto su membresia';
+                $consulta['company'] = $_SESSION['company'];
 
                 $data = [
                     'id_member' => $user['id'],
@@ -391,6 +392,7 @@ class Student extends BaseController
                 $consulta['resp'] = '1';
                 $consulta['name'] = $user['name'];
                 $consulta['msj'] = 'Usuario Activo';
+                $consulta['company'] = $_SESSION['company'];
 
                 $data = [
                     'id_member' => $user['id'],
@@ -413,7 +415,7 @@ class Student extends BaseController
             if ($user['status'] != 'true') {
                 $consulta['resp'] = '2';
                 $consulta['name'] = $user['name'];
-                $consulta['msj'] = 'Miembro de Staff no tiene un horario asignado!!';
+                $consulta['msj'] = 'no tiene un horario asignado!!';
                 echo json_encode($consulta);
             } else {
                 if ($hoy['weekday'] == 'Monday') {
