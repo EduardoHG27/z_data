@@ -1886,7 +1886,7 @@
                 success: function(resp) {
                     var result = $.parseJSON(resp);
                     console.log(result);
-                    if (result.resp == 1) {
+                    if (result.resp == 0) {
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',

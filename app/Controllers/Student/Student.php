@@ -416,6 +416,7 @@ class Student extends BaseController
                 $consulta['resp'] = '2';
                 $consulta['name'] = $user['name'];
                 $consulta['msj'] = 'no tiene un horario asignado!!';
+                $consulta['company'] = $_SESSION['company'];
                 echo json_encode($consulta);
             } else {
                 if ($hoy['weekday'] == 'Monday') {
@@ -460,11 +461,33 @@ class Student extends BaseController
                         $bandera = 0;
                         foreach ($data_schedule as $key => $value) {
                             # code...
+                           $diffff=$this->timeDiff($value['hour_in'],$hour_today);
+
+                           $diffff=($diffff/60);
+
+                           if($diffff<=1)
+                           {
+                            $stat="on time";
+                           }
+                           else if($diffff>1&&$diffff<=5)
+                           {
+                            $stat="less 5";
+                           }
+                           else if($diffff>5&&$diffff<=10)
+                           {
+                            $stat="less 10";
+                           }
+                           else
+                           {
+                            $stat="late";
+                           }
+                       
                             if ($value['day'] == $dia) {
                                 $data = [
                                     'id_staff' => $data_validation_staff[0]['id_staff'],
                                     'hour_in' => $hour_today,
                                     'hour_in_save' => $value['hour_in'],
+                                    'status_hour_in' => $stat,
                                     'day' => $dia,
                                     'day_save' => $day_today,
                                     'year_act' => $_SESSION['year_act'],
@@ -482,12 +505,34 @@ class Student extends BaseController
                         }
                     } else if ($data_log[0]['hour_out'] == '') {
 
+                      
+
                         foreach ($data_schedule as $key => $value) {
+
+
+
+
+                            $diffff=$this->timeDiff($value['hour_out'],$hour_today);
+
+                            $diffff=($diffff/60);
+
+                            if($diffff<0)
+                            {
+                              
+                             $stat="early";
+                            }
+                            else
+                            {
+                               
+                             $stat="on time";
+                            }         
                             # code...
                             if ($value['day'] == $dia) {
                                 $data = [
+
                                     'hour_out' => $hour_today,
-                                    'hour_out_save' => $value['hour_out']
+                                    'hour_out_save' => $value['hour_out'],
+                                    'status_hour_out' =>  $stat
                                 ];
 
                                 $log->update($data_log[0]['id_entrada'], $data);
@@ -859,5 +904,11 @@ class Student extends BaseController
             $consulta['resp'] = '0';
             echo json_encode($consulta);
         }
+    }
+    function timeDiff($firstTime,$lastTime) {
+        $firstTime=strtotime($firstTime);
+        $lastTime=strtotime($lastTime);
+        $timeDiff=$lastTime-$firstTime;
+        return $timeDiff;
     }
 }
