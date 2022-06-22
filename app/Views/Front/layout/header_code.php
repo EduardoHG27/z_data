@@ -34,12 +34,17 @@
         </ul>
       </li>
       <li>
-        <a href="<?php echo base_url(); ?>/principal/data">
-          <i class='fa fa-address-book-o'></i>
-          <span class="link_name">Datos</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="">Datos</a></li>
+        <div class="iocn-link">
+          <a href="#">
+            <i class='fa fa-address-book-o' ></i>
+            <span class="link_name">Datos</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" href="#">Datos</a></li>
+          <li><a href="<?php echo base_url(); ?>/principal/data"">Pagos</a></li>
+          <li><a href="<?php echo base_url(); ?>/principal/info_staff">Staff</a></li>
         </ul>
       </li>
       <li>

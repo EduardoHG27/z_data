@@ -110,6 +110,16 @@ class First_page extends BaseController
         }
     }
 
+    public function info_staff()
+    {
+        $session = session();
+        if ($session->get('usuario')) {
+            return view('Data/view_info_staff');
+        } else {
+            return view('Auth/Home');
+        }
+    }
+
     public function get_out()
     {
         $session = session();

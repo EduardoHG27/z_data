@@ -59,6 +59,7 @@ $routes->group('principal', ['namespace' => 'App\Controllers\Principal'], functi
     $routes->get('boot', 'First_page::boot');
     $routes->get('dashboard', 'First_page::dash');
     $routes->get('session_out', 'First_page::get_out');
+    $routes->get('info_staff', 'First_page::info_staff');
     $routes->post('ajax_load_data', 'First_page::ajax_load_data');
 });
 
@@ -126,7 +127,8 @@ $routes->group('staff', ['namespace' => 'App\Controllers\Staff'], function ($rou
 });
 
 $routes->group('informativo', ['namespace' => 'App\Controllers\Informativo'], function ($routes) {
-    $routes->post("plan-ajax-load", "Informativo::ajaxLoadData");
+    $routes->post("plan-ajax-load", "Info::ajaxLoadData");
+    $routes->post("plan-ajax-staff", "Info_staff::ajaxLoadData");
    
 });
 

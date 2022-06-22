@@ -341,28 +341,7 @@
                 }
             },
             language: {
-                "decimal": "",
-                "emptyTable": "No hay información disponible",
-                "info": "Mostrando del registro _START_ al registro _END_. (Total _TOTAL_)",
-                "infoEmpty": "No hay información disponible",
-                "infoFiltered": "(filtrados de un total de _MAX_ registros)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar _MENU_ registros",
-                "loadingRecords": "Cargando información...",
-                "processing": "Procesando información...",
-                "search": "Buscar:",
-                "zeroRecords": "No hay información disponible",
-                "paginate": {
-                    "first": "Primera",
-                    "last": "Última",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                },
-                "aria": {
-                    "sortAscending": ": activar para ordenar columna ascendente",
-                    "sortDescending": ": activar para ordenar columna descendente"
-                }
+                url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
             },
             columns: [{
                     data: "id_plan"
