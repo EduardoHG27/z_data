@@ -15,7 +15,8 @@ var app = new Vue({
       
       $.ajax({
        url:'https://ecommerce343.com/public/student/qr_log',
-      // url:'http://192.168.100.158:8080/gym_code/public/student/qr',
+      
+     //  url:'http://localhost:8080/gym_code/public/student/qr_log',
         method: "post",
         data: {
           id: content
@@ -27,10 +28,10 @@ var app = new Vue({
             Swal.fire({
               position: 'center',
               icon: 'warning',
-              title: 'Atencion!!',  
-              text: result.name + ' -> ' + result.msj,
+              title: result.company,  
+              html:'<h3>Atencion!<h3><br> El Usuario '+result.name + ',' + result.msj,
               showConfirmButton: false,
-              timer: 3500
+              timer: 4500
             })
           }
           else if (result.resp=='1')
@@ -39,8 +40,8 @@ var app = new Vue({
             Swal.fire({
               position: 'center',
               icon: 'success',
-              title: 'Bienvenido!!',  
-              text:  result.name + ' -> ' + result.msj,
+              title: result.company,  
+              html:'<h3>Bienvenido!<h3><br>'+result.name + ' -> ' + result.msj,
               showConfirmButton: false,
               timer: 3500
             })
@@ -50,8 +51,8 @@ var app = new Vue({
             Swal.fire({
               position: 'center',
               icon: 'success',
-              title: 'Registro Staff',  
-              text:  result.name + ' -> ' + result.msj,
+              title: result.company,  
+              html:'<h3>Registro Staff<h3><br>'+result.name + ' -> ' + result.msj,
               showConfirmButton: false,
               timer: 3500
             })
@@ -61,8 +62,8 @@ var app = new Vue({
             Swal.fire({
               position: 'center',
               icon: 'success',
-              title: 'Registro Staff',  
-              text:  result.name + ' -> ' + result.msj,
+              title: result.company, 
+              html:'<h3>Registro Staff<h3><br>'+result.name + ' -> ' + result.msj,
               showConfirmButton: false,
               timer: 3500
             })
@@ -73,8 +74,8 @@ var app = new Vue({
             Swal.fire({
               position: 'center',
               icon: 'warning',
-              title: 'Registro Staff',  
-              text:  result.name + ' -> ' + result.msj,
+              title: result.company, 
+              html:'<h3>Registro Staff<h3><br>'+result.name + ' -> ' + result.msj,
               showConfirmButton: false,
               timer: 3500
             })
@@ -84,8 +85,8 @@ var app = new Vue({
             Swal.fire({
               position: 'center',
               icon: 'warning',
-              title: 'Registro Staff',  
-              text:  result.name + ' -> ' + result.msj,
+              title: result.company, 
+              html:'<h3>Registro Staff<h3><br>'+result.name + ' -> ' + result.msj,
               showConfirmButton: false,
               timer: 3500
             })
