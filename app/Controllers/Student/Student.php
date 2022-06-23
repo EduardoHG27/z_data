@@ -681,7 +681,7 @@ class Student extends BaseController
     {
         //$query_1 =$logMemberModel->getLastQuery();
         //var_dump($query_1[0]);
-        $date = date('2022-06-21'); //date from database 
+        $date = date('Y-m-d'); //date from database 
         $str2 = date('Y-m-d', strtotime('-6 days', strtotime($date)));
 
         $logMemberModel = new LogMemberModel();
@@ -741,8 +741,7 @@ class Student extends BaseController
             }
         }
 
-        $datos_dias_totales=$this->contarValoresArray($day_count);
-
+        $datos_dias_totales=$this->contarValoresArray($day_cou
         $paysModel = new PaysModel();
         $paysModel->select('cost,date_in');
         $paysModel->where('year_act', $_SESSION['year_act']);
