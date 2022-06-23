@@ -785,7 +785,7 @@
           new Chart(ctx, {
             type: "bar",
             data: {
-              labels: ["L", "M", "X", "J", "V", "S", "D"],
+              labels: result.datos_dias,
               datasets: [{
                 label: "Sales",
                 tension: 0.4,
@@ -793,7 +793,7 @@
                 borderRadius: 4,
                 borderSkipped: false,
                 backgroundColor: "rgba(255, 255, 255, .8)",
-                data: result.datos_entrada,
+                data: result.datos_dias_totales,
                 maxBarThickness: 6
               }, ],
             },

@@ -182,10 +182,10 @@ class Student extends BaseController
 
 
         if (!empty($data_validation)) {
-          
-         
+
+
             if ($data_validation[0]['position'] == '1') {
-            
+
                 if ($password != $data_validation[0]['password']) {
 
                     $consulta['data'] = '1';
@@ -193,16 +193,14 @@ class Student extends BaseController
                     echo json_encode($consulta);
                 } else {
 
-             
+
                     $consulta['data'] = '5';
                     $consulta['msj'] = 'Admin';
 
-                    
+
                     echo json_encode($consulta);
                 }
-            }
-            else
-            {
+            } else {
                 var_dump("error al validar admin");
             }
         } else if (!empty($data_validation_student)) {
@@ -461,27 +459,20 @@ class Student extends BaseController
                         $bandera = 0;
                         foreach ($data_schedule as $key => $value) {
                             # code...
-                           $diffff=$this->timeDiff($value['hour_in'],$hour_today);
+                            $diffff = $this->timeDiff($value['hour_in'], $hour_today);
 
-                           $diffff=($diffff/60);
+                            $diffff = ($diffff / 60);
 
-                           if($diffff<=1)
-                           {
-                            $stat="on time";
-                           }
-                           else if($diffff>1&&$diffff<=5)
-                           {
-                            $stat="less 5";
-                           }
-                           else if($diffff>5&&$diffff<=10)
-                           {
-                            $stat="less 10";
-                           }
-                           else
-                           {
-                            $stat="late";
-                           }
-                       
+                            if ($diffff <= 1) {
+                                $stat = "on time";
+                            } else if ($diffff > 1 && $diffff <= 5) {
+                                $stat = "less 5";
+                            } else if ($diffff > 5 && $diffff <= 10) {
+                                $stat = "less 10";
+                            } else {
+                                $stat = "late";
+                            }
+
                             if ($value['day'] == $dia) {
                                 $data = [
                                     'id_staff' => $data_validation_staff[0]['id_staff'],
@@ -505,27 +496,24 @@ class Student extends BaseController
                         }
                     } else if ($data_log[0]['hour_out'] == '') {
 
-                      
+
 
                         foreach ($data_schedule as $key => $value) {
 
 
 
 
-                            $diffff=$this->timeDiff($value['hour_out'],$hour_today);
+                            $diffff = $this->timeDiff($value['hour_out'], $hour_today);
 
-                            $diffff=($diffff/60);
+                            $diffff = ($diffff / 60);
 
-                            if($diffff<0)
-                            {
-                              
-                             $stat="early";
+                            if ($diffff < 0) {
+
+                                $stat = "early";
+                            } else {
+
+                                $stat = "on time";
                             }
-                            else
-                            {
-                               
-                             $stat="on time";
-                            }         
                             # code...
                             if ($value['day'] == $dia) {
                                 $data = [
@@ -684,13 +672,77 @@ class Student extends BaseController
             'search' => $_REQUEST['search']['value'],
             'like' => $like
         ]);
-       
+
 
         echo json_encode($json_data);
     }
 
     public function dash()
     {
+        //$query_1 =$logMemberModel->getLastQuery();
+        //var_dump($query_1[0]);
+        $date = date('2022-06-21'); //date from database 
+        $str2 = date('Y-m-d', strtotime('-6 days', strtotime($date)));
+
+        $logMemberModel = new LogMemberModel();
+        $logMemberModel->select('*');
+        $logMemberModel->where('status_log', 'true');
+        $logMemberModel->where('date <= "' . $date . '" and Date >= "' . $str2 . '"');
+        $logMemberModel->where('year_act', $_SESSION['year_act']);
+        $logMemberModel->where('company', $_SESSION['company']);
+        $logMemberModel->orderBy('date', 'ASC');
+        $query = $logMemberModel->get();
+
+
+
+        $get_total = $query->getResult('array');
+
+        $dia_res = [];
+        $day_count=[];
+        $z = 0;
+        $y = 0;
+        foreach ($get_total as $key => $value) {
+
+            
+            $dayofweek = date('l', strtotime($value['date']));
+
+            if ($dayofweek == 'Monday') {
+                $dia = 'L';
+            } else if ($dayofweek == 'Tuesday') {
+                $dia = 'M';
+            } else if ($dayofweek == 'Wednesday') {
+                $dia = 'X';
+            } else if ($dayofweek == 'Thursday') {
+                $dia = 'J';
+            } else if ($dayofweek == 'Friday') {
+                $dia = 'V';
+            } else if ($dayofweek == 'Saturday') {
+                $dia = 'S';
+            } else {
+                $dia = 'D';
+            }
+            $day_count[$y++]=$dia;
+            $bandera = 1;
+            foreach ($dia_res as $key => $day_d) {
+
+               
+                if ($day_d == $dia) {
+                    
+                    $bandera = 0;
+                }
+                else{
+                    $bandera = 1;
+                }
+            }
+
+            if ($bandera == 1) {
+                $dia_res[$z++] = $dia;
+
+            }
+        }
+
+        $datos_dias_totales=$this->contarValoresArray($day_count);
+
         $paysModel = new PaysModel();
         $paysModel->select('cost,date_in');
         $paysModel->where('year_act', $_SESSION['year_act']);
@@ -832,6 +884,8 @@ class Student extends BaseController
             $mes_res[$k++] = $value;
         }
         $data = [100, 100, 100, 100, 100, 100, 40];
+        $consulta['datos_dias'] = $dia_res;
+        $consulta['datos_dias_totales'] = $datos_dias_totales;
         $consulta['datos_entrada'] = $data;
         $consulta['datos_ingresos'] = $arr_dat;
         $consulta['mes'] = $mes_res;
@@ -905,10 +959,28 @@ class Student extends BaseController
             echo json_encode($consulta);
         }
     }
-    function timeDiff($firstTime,$lastTime) {
-        $firstTime=strtotime($firstTime);
-        $lastTime=strtotime($lastTime);
-        $timeDiff=$lastTime-$firstTime;
+    function timeDiff($firstTime, $lastTime)
+    {
+        $firstTime = strtotime($firstTime);
+        $lastTime = strtotime($lastTime);
+        $timeDiff = $lastTime - $firstTime;
         return $timeDiff;
     }
+    function contarValoresArray($array)
+{
+	$contar=array();
+ 
+	foreach($array as $value)
+	{
+		if(isset($contar[$value]))
+		{
+			// si ya existe, le añadimos uno
+			$contar[$value]+=1;
+		}else{
+			// si no existe lo añadimos al array
+			$contar[$value]=1;
+		}
+	}
+	return $contar;
+}
 }

@@ -521,7 +521,24 @@
                     data: "hour_out_save"
                 },
                 {
-                    data: "status_hour_out"
+                    data: null,
+                    'orderable': false,
+
+                    render: function(data, type, row) {
+
+                        console.log(row.status_hour_out);
+                        if (row.status_hour_out == "early") {
+                            return '<div >' +
+                                '<button type="button" class="yellow-button"  data-toggle="tooltip" data-placement="top" title="Estatus" >Salida Pendiente</button>' +
+                                '</div>';
+                        } else {
+                            return '<div >' +
+                                '<button  class="red-button" title="Estatus" >En tiempo</button>' +
+                                '</div>';
+                        }
+
+                    }
+                 
                 },
                 {
                     data: "day"
