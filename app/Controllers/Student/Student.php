@@ -741,7 +741,8 @@ class Student extends BaseController
             }
         }
 
-        $datos_dias_totales=$this->contarValoresArray($day_cou
+        $datos_dias_totales=$this->contarValoresArray($day_count);
+
         $paysModel = new PaysModel();
         $paysModel->select('cost,date_in');
         $paysModel->where('year_act', $_SESSION['year_act']);
