@@ -246,7 +246,7 @@
         <div class="col-lg-4 col-md-6 mt-4 mb-4">
           <div class="card z-index-2 ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-              <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+              <div class="bg-gradient-dark shadow-primary border-radius-lg py-3 pe-1">
                 <div class="chart">
                   <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
                 </div>
@@ -258,7 +258,7 @@
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                <p class="mb-0 text-sm"></p>
               </div>
             </div>
           </div>
@@ -279,7 +279,7 @@
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm">just updated</p>
+                <p class="mb-0 text-sm"></p>
               </div>
             </div>
           </div>
@@ -288,19 +288,19 @@
         <div class="col-lg-4 col-md-6 mt-4 mb-4">
           <div class="card z-index-2  ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-              <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+              <div class="bg-gradient-dark shadow-success border-radius-lg py-3 pe-1">
                 <div class="chart">
                   <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
                 </div>
               </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 "> Daily Sales </h6>
-              <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today sales. </p>
+              <h6 class="mb-0 "> Ventas Mensuales </h6>
+              <p class="text-sm "> (<span class="font-weight-bolder">+<?php echo $porcentaje_mes; ?>%</span>) increase in today sales. </p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> updated 4 min ago </p>
+                <p class="mb-0 text-sm"></p>
               </div>
             </div>
           </div>
@@ -768,8 +768,27 @@
   <script>
     var site_url = "<?php echo base_url(); ?>";
 
+/*
+    $(document).ready(function(){
+        function getData(){
+            $.ajax({
+                type: 'POST',
+                url: 'dataTelcadoAutoRefresh.php',
+                success: function(data){
+                    $('#output').html(data);
+                }
+            });
+        }
+        getData();
+        setInterval(function () {
+            getData(); 
+        }, 1000);  // it will refresh your data every 1 sec
+
+    });
+*/
     $(document).ready(function() {
 
+      function getData(){
       var ctx = document.getElementById("chart-bars").getContext("2d");
       var ctx2 = document.getElementById("chart-line").getContext("2d");
       var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
@@ -787,7 +806,7 @@
             data: {
               labels: result.datos_dias,
               datasets: [{
-                label: "Sales",
+                label: "Usuarios",
                 tension: 0.4,
                 borderWidth: 0,
                 borderRadius: 4,
@@ -865,7 +884,7 @@
             data: {
               labels:result.mes ,
               datasets: [{
-                label: "Mobile apps",
+                label: "Ingresos",
                 tension: 0,
                 borderWidth: 0,
                 pointRadius: 5,
@@ -1025,6 +1044,14 @@
 
         }
       });
+    }
+
+    getData();
+    /*
+        setInterval(function () {
+            getData(); 
+        }, 5000);
+*/
     });
   </script>
   <script>
