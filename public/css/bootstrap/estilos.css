@@ -148,12 +148,34 @@
     /* Blue */
     
     .eliminar {
-        background-color: #f44336;
+        background-color: #e84a5f;
+        color: #e6e6e6;
+    }
+  
+
+    .agregar {
+        background-color: #5874dc;
+        color: #e6e6e6;
+    }
+   
+    .modificar {
+        background-color: #fd8f52;
+        color: #e6e6e6;
+    }
+
+    .delete {
+        background-color: #6c7ec0;
+        color: #e6e6e6;
+    }
+
+    .info {
+        background-color: #003f88;
         color: #e6e6e6;
     }
     
+    
     .alerta {
-        background-color: #d7da3b;
+        background-color: #ce4545;
         color: #130e0e;
     }
     
@@ -240,7 +262,7 @@
         }
     }
         .green-button {
-            background-color: #4CAF50;
+            background-color: #56c595;
             border: none;
             color: white;
             padding: 3px 12px;
@@ -253,7 +275,7 @@
         }
     
         .yellow-button {
-            background-color: #d8e000;
+            background-color: #e9b666;
             border: none;
             color: rgb(14, 8, 8);
             padding: 3px 12px;
@@ -266,7 +288,7 @@
         } 
 
         .orange-button {
-            background-color: #e08e00;
+            background-color: #fd8f52;
             border: none;
             color: rgb(14, 8, 8);
             padding: 3px 12px;
@@ -279,7 +301,7 @@
         } 
 
         .red-button {
-            background-color: #e60000;
+            background-color: #e84a5f;
             border: none;
             color: white;
             padding: 3px 12px;
@@ -292,7 +314,7 @@
         }
     
         .red-button-min {
-            background-color: #e60000;
+            background-color: #e84a5f;
             border: none;
             color: white;
             padding: 5px 7px;
@@ -305,7 +327,7 @@
         }
     
         .yellow-button-min {
-            background-color:#e69900;
+            background-color:#fd8f52;
             border: none;
             color: white;
             padding: 5px 7px;
@@ -319,7 +341,7 @@
     
         .blue-button-min {
             /* background-color: #6600ff;*/
-            background-color: #36c8e2;
+            background-color: #5c9090;
             border: none;
             color: white;
             padding: 5px 12px;
@@ -332,7 +354,7 @@
         }
     
         .bluew-button-min {
-            background-color:#000fe6;
+            background-color:#5874dc;
             border: none;
             color: white;
             padding: 5px 7px;
