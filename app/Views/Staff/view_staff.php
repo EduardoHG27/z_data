@@ -227,17 +227,16 @@
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
     <div class="modal-dialog modal-lg">
 
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalTitle"></h4>
-                <div id="ohsnap"></div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <br>
-
             <div class="container">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
 
@@ -247,7 +246,6 @@
                     <li class="nav-item" role="presentation" id="plan_pestaña">
                         <button class="nav-link pestaña" style="" id="plan_button" data-bs-toggle="tab" data-bs-target="#plan_schedule" type="button" role="tab" aria-controls="profile" aria-selected="false">Asignar Horario</button>
                     </li>
-
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="member_form" role="tabpanel" aria-labelledby="home-tab">
@@ -315,19 +313,34 @@
                     </div>
                     <div class="tab-pane fade" id="plan_schedule" role="tabpanel" aria-labelledby="plan_button">
                         <div class="container">
-                            <br>
-                            <h3>Elegir Horario</h3>
-                            <br>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <br>
+                                    <h3>Elegir Horario</h3>
+                                    <br>
+                                </div>
+                                <div class="col-md-6">
+
+                                </div>
+                                <div class="col-md-2">
+
+
+                                </div>
+                            </div>
+
+
+
                             <form action="" id="member-plan">
                                 <div id="msg"></div>
                                 <input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : '' ?>" class="form-control">
 
                                 <div class="row form-group">
                                     <div class="col-md-1" style="float:right;">
-                                    
+
                                     </div>
                                     <div class="col-md-1" style="float:right;">
-                                       
+
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-check">
@@ -345,12 +358,12 @@
                                         </div>
                                     </div>
                                     <div class="col-md-1">
-                                    
+
                                     </div>
                                     <div class="col-md-2">
-                                    <button type="button" class="bluew-button-clock" id="mod_hora" title="Copiar/Pegar Hora"><i class="fa fa-clock-o"></i></button>
+                                        <button type="button" class="bluew-button-clock" id="mod_hora" title="Copiar/Pegar Hora"><i class="fa fa-clock-o"></i></button>
                                     </div>
-                                   
+
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-md-1" style="float:right;">
@@ -562,6 +575,7 @@
 
                                 </div>
                                 <div class="modal-footer">
+
                                     <button type="button" id="bthorario" class="btn btn-info">Asignar Horario</button>
                                     <button type="button" id="bthorario_mod" class="btn btn-info">Modificar Horario</button>
                                     <!--    <button type="button" id="btn_copiar_horario" class="btn btn-info">Copiar Horario</button>-->
@@ -569,6 +583,7 @@
                             </form>
 
                         </div>
+                        <h3><label id="ohsnap"></label></h3>
                     </div>
                     <div class="tab-pane fade" id="view_form" role="tabpanel" aria-labelledby="plan_button">
                         <div class="container">
@@ -994,71 +1009,95 @@
             domingo_1 = $('#appt_lun1').val();
             domingo_2 = $('#appt_lun2').val();
 
-            agregar_hora(domingo_1, domingo_2);
+            var labelText = document.getElementById('lblstats_lun').textContent;
+            let text = labelText;
+            let letter = text.charAt(0);
 
-            
+
+            if (letter == '-') {
+                ohSnap('Aviso!!: Esta hora no se puede copiar!!', {
+                    color: 'red'
+                });
+            } else {
+
+                bandera = 0
+                for (var i = 0; i < text.length; i++) {
+
+                    text.charAt(i)
+                    if (text.charAt(i) == '-') {
+                        bandera = 1;
+                    }
+                }
+
+                if (bandera == 0) {
+                    agregar_hora(domingo_1, domingo_2);
+                } else {
+                    ohSnap('Aviso!!: Esta hora no se puede copiar!!', {
+                        color: 'red'
+                    });
+                }
+
+                //
+            }
+            //
+
+
         });
 
 
         function agregar_hora(hour_in, hour_out) {
 
 
-            remember_2=document.getElementById('check2');
-            remember_3=document.getElementById('check3');
-            remember_4=document.getElementById('check4');
-            remember_5=document.getElementById('check5');
-            remember_6=document.getElementById('check6');
-            remember_7=document.getElementById('check7');
+            remember_2 = document.getElementById('check2');
+            remember_3 = document.getElementById('check3');
+            remember_4 = document.getElementById('check4');
+            remember_5 = document.getElementById('check5');
+            remember_6 = document.getElementById('check6');
+            remember_7 = document.getElementById('check7');
 
-            if(remember_2.checked)
-            {
-              
-          
+            if (remember_2.checked) {
+
+
                 document.getElementById('appt_mar1').value = hour_in;
                 document.getElementById('appt_mar2').value = hour_out;
                 startTimeInput_fijo('mar');
             }
-            
-            if(remember_3.checked)
-            {
-             
+
+            if (remember_3.checked) {
+
                 document.getElementById('appt_mier1').value = hour_in;
                 document.getElementById('appt_mier2').value = hour_out;
-                startTimeInput_fijo('mier');   
+                startTimeInput_fijo('mier');
             }
 
-            if(remember_4.checked)
-            {
-                
-              
+            if (remember_4.checked) {
+
+
                 document.getElementById('appt_juev1').value = hour_in;
                 document.getElementById('appt_juev2').value = hour_out;
                 startTimeInput_fijo('juev');
             }
 
 
-            if(remember_5.checked)
-            {
-                
-               
+            if (remember_5.checked) {
+
+
                 document.getElementById('appt_vier1').value = hour_in;
                 document.getElementById('appt_vier2').value = hour_out;
                 startTimeInput_fijo('vier');
             }
 
 
-            if(remember_6.checked)
-            {
-              
+            if (remember_6.checked) {
+
                 document.getElementById('appt_sab1').value = hour_in;
                 document.getElementById('appt_sab2').value = hour_out;
                 startTimeInput_fijo('sab');
             }
 
 
-            if(remember_7.checked)
-            {
-               
+            if (remember_7.checked) {
+
                 document.getElementById('appt_dom1').value = hour_in;
                 document.getElementById('appt_dom2').value = hour_out;
                 startTimeInput_fijo('dom');
@@ -1834,30 +1873,30 @@
         resp = 1;
         lunes_1 = $('#appt_lun1').val();
         lunes_2 = $('#appt_lun2').val();
-
+        lunes_lbl = document.getElementById('lblstats_lun').textContent
         martes_1 = $('#appt_mar1').val();
         martes_2 = $('#appt_mar2').val();
-
+        martes_lbl = document.getElementById('lblstats_mar').textContent
 
         miercoles_1 = $('#appt_mier1').val();
         miercoles_2 = $('#appt_mier2').val();
-
+        miercoles_lbl = document.getElementById('lblstats_mier').textContent
 
         jueves_1 = $('#appt_juev1').val();
         jueves_2 = $('#appt_juev2').val();
-
+        jueves_lbl = document.getElementById('lblstats_juev').textContent
 
         viernes_1 = $('#appt_vier1').val();
         viernes_2 = $('#appt_vier2').val();
-
+        viernes_lbl = document.getElementById('lblstats_vier').textContent
 
         sabado_1 = $('#appt_sab1').val();
         sabado_2 = $('#appt_sab2').val();
-
+        sabado_lbl = document.getElementById('lblstats_sab').textContent
 
         domingo_1 = $('#appt_dom1').val();
         domingo_2 = $('#appt_dom2').val();
-
+        domingo_lbl = document.getElementById('lblstats_dom').textContent
         const ban = [];
 
         if (lunes_2 == '12:59:48' && martes_2 == '12:59:48' && miercoles_2 == '12:59:48' && jueves_2 == '12:59:48' && viernes_2 == '12:59:48' && sabado_2 == '12:59:48' && domingo_2 == '12:59:48') {
@@ -1887,7 +1926,7 @@
 
             } else {
 
-                ban[0] = lunes_1 + '-' + lunes_2 + '-lunes';
+                ban[0] = lunes_1 + '/' + lunes_2 + '/lunes/' + lunes_lbl;
 
             }
 
@@ -1906,7 +1945,7 @@
                     color: 'red'
                 });
             } else {
-                ban[1] = martes_1 + '-' + martes_2 + '-martes';;
+                ban[1] = martes_1 + '/' + martes_2 + '/martes/' + martes_lbl;
             }
 
             if (miercoles_2 == '' && miercoles_1 == '') {
@@ -1924,7 +1963,7 @@
                     color: 'red'
                 });
             } else {
-                ban[2] = miercoles_1 + '-' + miercoles_2 + '-miercoles';
+                ban[2] = miercoles_1 + '/' + miercoles_2 + '/miercoles/' + miercoles_lbl;
             }
 
             if (jueves_2 == '' && jueves_1 == '') {
@@ -1942,7 +1981,7 @@
                     color: 'red'
                 });
             } else {
-                ban[3] = jueves_1 + '-' + jueves_2 + '-jueves';
+                ban[3] = jueves_1 + '/' + jueves_2 + '/jueves/' + jueves_lbl;
             }
 
             if (viernes_2 == '' && viernes_1 == '') {
@@ -1960,7 +1999,7 @@
                     color: 'red'
                 });
             } else {
-                ban[4] = viernes_1 + '-' + viernes_2 + '-viernes';;
+                ban[4] = viernes_1 + '/' + viernes_2 + '/viernes/' + viernes_lbl;
             }
 
             if (sabado_2 == '' && sabado_1 == '') {
@@ -1978,7 +2017,7 @@
                     color: 'red'
                 });
             } else {
-                ban[5] = sabado_1 + '-' + sabado_2 + '-sabado';;
+                ban[5] = sabado_1 + '/' + sabado_2 + '/sabado/' + sabado_lbl;
             }
 
             if (domingo_2 == '' && domingo_1 == '') {
@@ -1999,7 +2038,7 @@
                 banderad = 3;
             } else {
                 banderad = 1;
-                ban[6] = domingo_1 + '-' + domingo_2 + '-domingo';
+                ban[6] = domingo_1 + '/' + domingo_2 + '/domingo/' + domingo_lbl;
             }
         }
 
@@ -2017,7 +2056,6 @@
 
 
         id_staff = $('#txt_id').val();
-        console.log(id_staff);
 
         if (resp == 1) {
             document.getElementById("plan_button").disabled = false;
@@ -2054,6 +2092,10 @@
                         plan_pestaña
                         $('#msg').html('<div class="alert alert-danger">Error al enviar correo:' + data + '</div>')
                         end_load();
+                    } else if (result.resp == 7) {
+                        ohSnap('Aviso!!: Revisar Horario asignado al Staff', {
+                            color: 'red'
+                        });
                     } else {
                         $('#msg').html('<div class="alert alert-danger">Nombre y/o correo ya registrado</div>')
                     }
@@ -2761,7 +2803,7 @@
 
     function startTimeInput_fijo(day) {
 
-       
+
         domingo_1 = $('#appt_' + day + '1').val();
         domingo_2 = $('#appt_' + day + '2').val();
 
@@ -3174,6 +3216,7 @@
     }
 
     .alert {
+        /*
         padding: 15px;
         margin-bottom: 0px;
         border: 1px solid #eed3d7;
@@ -3181,10 +3224,10 @@
         position: absolute;
         bottom: 380px;
         right: 0px;
-        /* Each alert has its own width */
-        float: right;
+        /* Each alert has its own width 
+        float: left;
         clear: right;
-        background-color: white;
+        background-color: white;*/
     }
 
     .alert-red {

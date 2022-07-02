@@ -15,7 +15,7 @@
 
 <?= $this->extend('Front/layout/main') ?>
 <?= $this->section('content') ?>
-<?php $session = session();?>
+<?php $session = session(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -158,6 +158,16 @@
       </div>
     </nav>
     <!-- End Navbar -->
+
+                     
+                        <input type="text" class="form-control" name="txt_1" id="txt_1" placeholder="Nombre" style="display:none"/>
+                   
+                   
+                       
+                        <input type="text" class="form-control" name="txt_2" id="txt_2" placeholder="Email" style="display:none" />
+                    
+                     
+
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -172,11 +182,11 @@
               </div>
             </div>
             <hr class="dark horizontal my-0">
-            <div  style="height: 58px;" class="card-footer p-3">
-               <span class="text-<?php echo 'danger'; ?> text-sm font-weight-bolder">+55% </span> <select style="margin: 0px 0px 0 0px;" id="standard-select">
-                  <option value="Option 1">que la semana pasada</option>
-                  <option value="Option 2">que el mes pasado</option>
-                </select>
+            <div style="height: 58px;" class="card-footer p-3">
+              <span class="text-<?php echo 'danger'; ?> text-sm font-weight-bolder">+55% </span> <select style="margin: 0px 0px 0 0px;" id="standard-select">
+                <option value="Option 1">que la semana pasada</option>
+                <option value="Option 2">que el mes pasado</option>
+              </select>
             </div>
           </div>
         </div>
@@ -193,11 +203,11 @@
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-             
+
               <span class="text-<?php echo 'success'; ?> text-sm font-weight-bolder">+3% </span> <select style="margin: 0px 0px 0 0px;" id="standard-select">
-                  <option value="Option 1">que la semana pasada</option>
-                  <option value="Option 2">que el mes pasado</option>
-                </select>
+                <option value="Option 1">que la semana pasada</option>
+                <option value="Option 2">que el mes pasado</option>
+              </select>
             </div>
           </div>
         </div>
@@ -214,10 +224,10 @@
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-            <span class="text-<?php echo 'danger'; ?> text-sm font-weight-bolder">+2% </span> <select style="margin: 0px 0px 0 0px;" id="standard-select">
-                  <option value="Option 1">que la semana pasada</option>
-                  <option value="Option 2">que el mes pasado</option>
-                </select>
+              <span class="text-<?php echo 'danger'; ?> text-sm font-weight-bolder">+2% </span> <select style="margin: 0px 0px 0 0px;" id="standard-select">
+                <option value="Option 1">que la semana pasada</option>
+                <option value="Option 2">que el mes pasado</option>
+              </select>
             </div>
           </div>
         </div>
@@ -234,10 +244,10 @@
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-            <span><label  class="text-<?php echo $label_mes ; ?> text-sm font-weight-bolder" for="html"><?php echo $porcentaje_mes; ?>%</label></span> <select style="margin: 0px 0px 0 0px;" id="standard-select">
-                  <option value="Option 1">que el mes pasado</option>
-                  <option value="Option 2">que la semana pasada</option>
-                </select>
+              <span><label class="text-<?php echo $label_mes; ?> text-sm font-weight-bolder" for="html"><?php echo $porcentaje_mes; ?>%</label></span> <select style="margin: 0px 0px 0 0px;" id="standard-select">
+                <option value="Option 1">que el mes pasado</option>
+                <option value="Option 2">que la semana pasada</option>
+              </select>
             </div>
           </div>
         </div>
@@ -248,7 +258,7 @@
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
               <div class="bg-gradient-dark shadow-primary border-radius-lg py-3 pe-1">
                 <div class="chart">
-                  <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                  <canvas id="chart-line-tasks" class="chart-canvas" height="170"></canvas>  
                 </div>
               </div>
             </div>
@@ -263,13 +273,13 @@
             </div>
           </div>
         </div>
-        
+
         <div class="col-lg-4 mt-4 mb-3">
           <div class="card z-index-2 ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
               <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
                 <div class="chart">
-                  <canvas id="chart-line-tasks" class="chart-canvas" height="170"></canvas>
+                  <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
                 </div>
               </div>
             </div>
@@ -305,6 +315,8 @@
             </div>
           </div>
         </div>
+
+
       </div>
       <!--
       <div class="row mb-4">
@@ -768,290 +780,322 @@
   <script>
     var site_url = "<?php echo base_url(); ?>";
 
-/*
-    $(document).ready(function(){
-        function getData(){
-            $.ajax({
-                type: 'POST',
-                url: 'dataTelcadoAutoRefresh.php',
-                success: function(data){
-                    $('#output').html(data);
-                }
-            });
-        }
-        getData();
-        setInterval(function () {
-            getData(); 
-        }, 1000);  // it will refresh your data every 1 sec
-
-    });
-*/
-    $(document).ready(function() {
-
-      function getData(){
-      var ctx = document.getElementById("chart-bars").getContext("2d");
-      var ctx2 = document.getElementById("chart-line").getContext("2d");
-      var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
-
-      $.ajax({
-        url: site_url + '/student/dash_panel',
-        method: "post",
-        data: {
-          id: '12'
-        },
-        success: function(resp) {
-          var result = $.parseJSON(resp);
-          new Chart(ctx, {
-            type: "bar",
-            data: {
-              labels: result.datos_dias,
-              datasets: [{
-                label: "Usuarios",
-                tension: 0.4,
-                borderWidth: 0,
-                borderRadius: 4,
-                borderSkipped: false,
-                backgroundColor: "rgba(255, 255, 255, .8)",
-                data: result.datos_dias_totales,
-                maxBarThickness: 6
-              }, ],
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  display: false,
-                }
-              },
-              interaction: {
-                intersect: false,
-                mode: 'index',
-              },
-              scales: {
-                y: {
-                  grid: {
-                    drawBorder: false,
-                    display: true,
-                    drawOnChartArea: true,
-                    drawTicks: false,
-                    borderDash: [5, 5],
-                    color: 'rgba(255, 255, 255, .2)'
-                  },
-                  ticks: {
-                    suggestedMin: 0,
-                    suggestedMax: 500,
-                    beginAtZero: true,
-                    padding: 10,
-                    font: {
-                      size: 14,
-                      weight: 300,
-                      family: "Roboto",
-                      style: 'normal',
-                      lineHeight: 2
-                    },
-                    color: "#fff"
-                  },
-                },
-                x: {
-                  grid: {
-                    drawBorder: false,
-                    display: true,
-                    drawOnChartArea: true,
-                    drawTicks: false,
-                    borderDash: [5, 5],
-                    color: 'rgba(255, 255, 255, .2)'
-                  },
-                  ticks: {
-                    display: true,
-                    color: '#f8f9fa',
-                    padding: 10,
-                    font: {
-                      size: 14,
-                      weight: 300,
-                      family: "Roboto",
-                      style: 'normal',
-                      lineHeight: 2
-                    },
-                  }
-                },
-              },
-            },
-          });
-
-          new Chart(ctx2, {
-            type: "line",
-            data: {
-              labels:result.mes ,
-              datasets: [{
-                label: "Ingresos",
-                tension: 0,
-                borderWidth: 0,
-                pointRadius: 5,
-                pointBackgroundColor: "rgba(255, 255, 255, .8)",
-                pointBorderColor: "transparent",
-                borderColor: "rgba(255, 255, 255, .8)",
-                borderWidth: 4,
-                backgroundColor: "transparent",
-                fill: true,
-                data: result.datos_ingresos,
-                maxBarThickness: 6
-
-              }],
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  display: false,
-                }
-              },
-              interaction: {
-                intersect: false,
-                mode: 'index',
-              },
-              scales: {
-                y: {
-                  grid: {
-                    drawBorder: false,
-                    display: true,
-                    drawOnChartArea: true,
-                    drawTicks: false,
-                    borderDash: [5, 5],
-                    color: 'rgba(255, 255, 255, .2)'
-                  },
-                  ticks: {
-                    display: true,
-                    padding: 10,
-                    color: '#f8f9fa',
-                    font: {
-                      size: 14,
-                      weight: 300,
-                      family: "Roboto",
-                      style: 'normal',
-                      lineHeight: 2
-                    },
-                  }
-                },
-                x: {
-                  grid: {
-                    drawBorder: false,
-                    display: false,
-                    drawOnChartArea: false,
-                    drawTicks: false,
-                    borderDash: [5, 5]
-                  },
-                  ticks: {
-                    display: true,
-                    color: '#f8f9fa',
-                    padding: 10,
-                    font: {
-                      size: 14,
-                      weight: 300,
-                      family: "Roboto",
-                      style: 'normal',
-                      lineHeight: 2
-                    },
-                  }
-                },
-              },
-            },
-          });
-
-
-
-
-          new Chart(ctx3, {
-            type: "line",
-            data: {
-              labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dic"],
-              datasets: [{
-                label: "Mobile apps",
-                tension: 0,
-                borderWidth: 0,
-                pointRadius: 5,
-                pointBackgroundColor: "rgba(255, 255, 255, .8)",
-                pointBorderColor: "transparent",
-                borderColor: "rgba(255, 255, 255, .8)",
-                borderWidth: 4,
-                backgroundColor: "transparent",
-                fill: true,
-                data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                maxBarThickness: 6
-
-              }],
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  display: false,
-                }
-              },
-              interaction: {
-                intersect: false,
-                mode: 'index',
-              },
-              scales: {
-                y: {
-                  grid: {
-                    drawBorder: false,
-                    display: true,
-                    drawOnChartArea: true,
-                    drawTicks: false,
-                    borderDash: [5, 5],
-                    color: 'rgba(255, 255, 255, .2)'
-                  },
-                  ticks: {
-                    display: true,
-                    padding: 10,
-                    color: '#f8f9fa',
-                    font: {
-                      size: 14,
-                      weight: 300,
-                      family: "Roboto",
-                      style: 'normal',
-                      lineHeight: 2
-                    },
-                  }
-                },
-                x: {
-                  grid: {
-                    drawBorder: false,
-                    display: false,
-                    drawOnChartArea: false,
-                    drawTicks: false,
-                    borderDash: [5, 5]
-                  },
-                  ticks: {
-                    display: true,
-                    color: '#f8f9fa',
-                    padding: 10,
-                    font: {
-                      size: 14,
-                      weight: 300,
-                      family: "Roboto",
-                      style: 'normal',
-                      lineHeight: 2
-                    },
-                  }
-                },
-              },
-            },
-          });
-
-        }
-      });
-    }
-
-    getData();
     /*
-        setInterval(function () {
-            getData(); 
-        }, 5000);
-*/
+        $(document).ready(function(){
+            function getData(){
+                $.ajax({
+                    type: 'POST',
+                    url: 'dataTelcadoAutoRefresh.php',
+                    success: function(data){
+                        $('#output').html(data);
+                    }
+                });
+            }
+            getData();
+            setInterval(function () {
+                getData(); 
+            }, 1000);  // it will refresh your data every 1 sec
+
+        });
+    */
+    $(document).ready(function() {
+      let myChart;
+
+      function getData() {
+        var ctx = document.getElementById("chart-bars").getContext("2d");
+        var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+
+
+
+        $.ajax({
+          url: site_url + '/student/dash_panel',
+          method: "post",
+          data: {
+            id: '12'
+          },
+          success: function(resp) {
+            var result = $.parseJSON(resp);
+
+
+            $('#txt_1').val(result.datos_dias);
+            day_count='';
+           
+            Object.entries(result.datos_dias_totales).forEach(entry => {
+              const [key, value] = entry;
+              console.log(key, value);
+              day_count +=value+',';
+
+            });
+            const editedText = day_count.slice(0, -1)
+            $('#txt_2').val(editedText);
+
+         
+
+
+            new Chart(ctx, {
+              type: "bar",
+              data: {
+                labels: result.datos_dias,
+                datasets: [{
+                  label: "Usuarios",
+                  tension: 0.4,
+                  borderWidth: 0,
+                  borderRadius: 4,
+                  borderSkipped: false,
+                  backgroundColor: "rgba(255, 255, 255, .8)",
+                  data: result.datos_dias_totales,
+                  maxBarThickness: 6
+                }, ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    display: false,
+                  }
+                },
+                interaction: {
+                  intersect: false,
+                  mode: 'index',
+                },
+                scales: {
+                  y: {
+                    grid: {
+                      drawBorder: false,
+                      display: true,
+                      drawOnChartArea: true,
+                      drawTicks: false,
+                      borderDash: [5, 5],
+                      color: 'rgba(255, 255, 255, .2)'
+                    },
+                    ticks: {
+                      suggestedMin: 0,
+                      suggestedMax: 500,
+                      beginAtZero: true,
+                      padding: 10,
+                      font: {
+                        size: 14,
+                        weight: 300,
+                        family: "Roboto",
+                        style: 'normal',
+                        lineHeight: 2
+                      },
+                      color: "#fff"
+                    },
+                  },
+                  x: {
+                    grid: {
+                      drawBorder: false,
+                      display: true,
+                      drawOnChartArea: true,
+                      drawTicks: false,
+                      borderDash: [5, 5],
+                      color: 'rgba(255, 255, 255, .2)'
+                    },
+                    ticks: {
+                      display: true,
+                      color: '#f8f9fa',
+                      padding: 10,
+                      font: {
+                        size: 14,
+                        weight: 300,
+                        family: "Roboto",
+                        style: 'normal',
+                        lineHeight: 2
+                      },
+                    }
+                  },
+                },
+              },
+            });
+
+            new Chart(ctx2, {
+              type: "line",
+              data: {
+                labels: result.mes,
+                datasets: [{
+                  label: "Ingresos",
+                  tension: 0,
+                  borderWidth: 0,
+                  pointRadius: 5,
+                  pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                  pointBorderColor: "transparent",
+                  borderColor: "rgba(255, 255, 255, .8)",
+                  borderWidth: 4,
+                  backgroundColor: "transparent",
+                  fill: true,
+                  data: result.datos_ingresos,
+                  maxBarThickness: 6
+
+                }],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    display: false,
+                  }
+                },
+                interaction: {
+                  intersect: false,
+                  mode: 'index',
+                },
+                scales: {
+                  y: {
+                    grid: {
+                      drawBorder: false,
+                      display: true,
+                      drawOnChartArea: true,
+                      drawTicks: false,
+                      borderDash: [5, 5],
+                      color: 'rgba(255, 255, 255, .2)'
+                    },
+                    ticks: {
+                      display: true,
+                      padding: 10,
+                      color: '#f8f9fa',
+                      font: {
+                        size: 14,
+                        weight: 300,
+                        family: "Roboto",
+                        style: 'normal',
+                        lineHeight: 2
+                      },
+                    }
+                  },
+                  x: {
+                    grid: {
+                      drawBorder: false,
+                      display: false,
+                      drawOnChartArea: false,
+                      drawTicks: false,
+                      borderDash: [5, 5]
+                    },
+                    ticks: {
+                      display: true,
+                      color: '#f8f9fa',
+                      padding: 10,
+                      font: {
+                        size: 14,
+                        weight: 300,
+                        family: "Roboto",
+                        style: 'normal',
+                        lineHeight: 2
+                      },
+                    }
+                  },
+                },
+              },
+            });
+
+
+
+          }
+        });
+
+
+
+        var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+        if (myChart) {
+          myChart.destroy();
+        }
+        days = $('#txt_1').val();
+        days_member = $('#txt_2').val();
+        
+        var array = days.split(",");
+        var array_1 = days_member.split(",");
+       
+
+        myChart = new Chart(ctx3, {
+          type: "bar",
+          data: {
+            labels: array,
+            datasets: [{
+              label: "Usuarios",
+              tension: 0,
+              borderWidth: 0,
+              pointRadius: 5,
+              pointBackgroundColor: "rgba(255, 255, 255, .8)",
+              pointBorderColor: "transparent",
+              borderColor: "rgba(255, 255, 255, .8)",
+              borderWidth: 4,
+              backgroundColor: "transparent",
+              fill: true,
+              data: array_1,
+              maxBarThickness: 6
+
+            }],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false,
+              }
+            },
+            interaction: {
+              intersect: false,
+              mode: 'index',
+            },
+            scales: {
+              y: {
+                grid: {
+                  drawBorder: false,
+                  display: true,
+                  drawOnChartArea: true,
+                  drawTicks: false,
+                  borderDash: [5, 5],
+                  color: 'rgba(255, 255, 255, .2)'
+                },
+                ticks: {
+                  display: true,
+                  padding: 10,
+                  color: '#f8f9fa',
+                  font: {
+                    size: 14,
+                    weight: 300,
+                    family: "Roboto",
+                    style: 'normal',
+                    lineHeight: 2
+                  },
+                }
+              },
+              x: {
+                grid: {
+                  drawBorder: false,
+                  display: false,
+                  drawOnChartArea: false,
+                  drawTicks: false,
+                  borderDash: [5, 5]
+                },
+                ticks: {
+                  display: true,
+                  color: '#f8f9fa',
+                  padding: 10,
+                  font: {
+                    size: 14,
+                    weight: 300,
+                    family: "Roboto",
+                    style: 'normal',
+                    lineHeight: 2
+                  },
+                }
+              },
+            },
+          },
+        });
+      }
+
+      getData();
+
+      setInterval(function() {
+        getData();
+      }, 5000);
+
     });
   </script>
   <script>
@@ -1070,7 +1114,7 @@
 </body>
 <style>
   select {
- 
+
     margin: 20px auto;
     border: 1px solid #ffff;
     height: 30px;

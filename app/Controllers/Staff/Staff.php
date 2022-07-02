@@ -262,43 +262,67 @@ class Staff extends BaseController
     {
         $staffchedule = new StaffscheduleModel();
         $data = $this->request->getPost('data');
-        $id_staff = $this->request->getPost('id_staff');
-        $i = 0;
+
+       
+        $bandera_hor = 0;
         foreach ($data as $key => $value) {
             # code...
 
-            if ($value != 'vacio') {
+            $porciones = explode("/", $value);
 
-                $porciones[$i] = explode("-", $value);
-                $i++;
+            if (isset($porciones[3])) {
+
+
+                if (strpos($porciones[3], '-') !== false) {
+
+                    $bandera_hor = 1;
+                }
             }
         }
-
-        foreach ($porciones as $key => $value) {
-            # code...
-
-            $data_plan = [
-                'id_staff' => $id_staff,
-                'day' => $value[2],
-                'hour_in' => $value[0],
-                'hour_out' => $value[1],
-                'status_day' => 'true',
-                'year_act' => $_SESSION['year_act'],
-                'company' => $_SESSION['company']
-            ];
-
-            $staffchedule->save($data_plan);
-        }
-
-        $staffmodel = new StaffModel();
-        $data = [
-            'status' => 'true'
-        ];
-        if ($staffmodel->update($id_staff, $data)) {
-
-            $consulta['resp'] = '0';
+        if ($bandera_hor == '1') {
+            $consulta['resp'] = '7';
             echo json_encode($consulta);
+        } else
+        {
+            $id_staff = $this->request->getPost('id_staff');
+            $i = 0;
+            foreach ($data as $key => $value) {
+                # code...
+    
+                if ($value != 'vacio') {
+    
+                    $porciones[$i] = explode("/", $value);
+                    $i++;
+                }
+            }
+    
+            foreach ($porciones as $key => $value) {
+                # code...
+    
+                $data_plan = [
+                    'id_staff' => $id_staff,
+                    'day' => $value[2],
+                    'hour_in' => $value[0],
+                    'hour_out' => $value[1],
+                    'status_day' => 'true',
+                    'year_act' => $_SESSION['year_act'],
+                    'company' => $_SESSION['company']
+                ];
+    
+                $staffchedule->save($data_plan);
+            }
+    
+            $staffmodel = new StaffModel();
+            $data = [
+                'status' => 'true'
+            ];
+            if ($staffmodel->update($id_staff, $data)) {
+    
+                $consulta['resp'] = '0';
+                echo json_encode($consulta);
+            }
         }
+       
     }
 
 
