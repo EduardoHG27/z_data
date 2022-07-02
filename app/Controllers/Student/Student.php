@@ -988,9 +988,11 @@ class Student extends BaseController
         $query = $logMemberModel->get();
 
 
+      
 
         $get_total = $query->getResult('array');
 
+        var_dump($get_total);
         $dia_res = [];
         $day_count=[];
         $z = 0;
@@ -1037,7 +1039,6 @@ class Student extends BaseController
 
         $datos_dias_totales=$this->contarValoresArray($day_count);
 
-        var_dump($datos_dias_totales);
 
         $paysModel = new PaysModel();
         $paysModel->select('cost,date_in');
