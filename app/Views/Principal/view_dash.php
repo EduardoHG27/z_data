@@ -306,7 +306,7 @@
             </div>
             <div class="card-body">
               <h6 class="mb-0 "> Ventas Mensuales </h6>
-              <p class="text-sm "> (<span class="font-weight-bolder">+<?php echo $porcentaje_mes; ?>%</span>) increase in today sales. </p>
+              <p class="text-sm "> (<span class="font-weight-bolder"><?php echo $porcentaje_mes; ?>%</span>) increase in today sales. </p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -997,7 +997,7 @@
         });
 
 
-
+ /* 
         var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
         if (myChart) {
           myChart.destroy();
@@ -1014,7 +1014,7 @@
           data: {
             labels: array,
             datasets: [{
-              label: "Usuarios",
+              label: "Mobile apps",
               tension: 0,
               borderWidth: 0,
               pointRadius: 5,
@@ -1088,6 +1088,9 @@
             },
           },
         });
+
+
+        */
       }
 
       getData();
