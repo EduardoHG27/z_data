@@ -404,7 +404,7 @@ class Staff extends BaseController
         $total_count = $data;
 
         $lib = new Datatable($staffModel, 'gp1', ['id_staff', 'matricula_staff', 'name', 'email', 'mobile', 'status', 'position', 'password', 'year_act', 'company', 'created_at', 'updated_at', 'deleted_at','name_position']);
-        $json_data = $lib->getResponse_staff([
+        $json_data = $lib->getResponse_join([
             'draw' => $_REQUEST['draw'],
             'length' => $_REQUEST['length'],
             'start' => $_REQUEST['start'],
@@ -413,7 +413,7 @@ class Staff extends BaseController
             'direction' => $order['dir'],
             'search' => $_REQUEST['search']['value'],
             'like' => $like
-        ]);
+        ],'tbl_position','tbl_position.id_position = tab_staff.position');
 
         echo json_encode($json_data);
     }
@@ -513,6 +513,44 @@ class Staff extends BaseController
         } else {
 
             $consulta['resp'] = '0';
+            
+        }
+    }
+
+    public function status_staff()
+    {
+       
+        $staff= new StaffModel();
+
+        $data = $staff->find();
+        $data = $staff->where('id_staff', $this->request->getPost('id'))->findAll();
+        $data=$data[0];   
+        $consulta['resp'] =$data['status'];
+        $consulta['name'] =$data['name'];
+
+        echo json_encode($consulta);
+       
+    }
+
+    public function status_mod()
+    {
+       
+        $staff= new StaffModel();
+        $schedule= new StaffscheduleModel();
+
+        $data = [
+            'status' =>'false'
+        ];
+
+        if ($staff->update($this->request->getPost('id'), $data)) {
+
+            $schedule->where('id_staff',$this->request->getPost('id'));
+            $schedule->delete();
+            $consulta['resp_1'] = '1';
+            echo json_encode($consulta);
+        } else {
+
+            $consulta['resp_1'] = '0';
             echo json_encode($consulta);
         }
     }

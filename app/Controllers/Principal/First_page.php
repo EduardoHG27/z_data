@@ -5,6 +5,7 @@ namespace App\Controllers\Principal;
 use App\Controllers\BaseController;
 use App\Models\StudetsModel;
 use App\Models\PaysModel;
+use App\Models\ConfigModel;
 use DateTime;
 use DateTimeZone;
 
@@ -13,8 +14,8 @@ class First_page extends BaseController
     public function index()
     {
         $session = session();
-  
-       
+
+
         if ($session->get('usuario')) {
             $data = $this->get_dash();
             return view('Principal/view_dash', $data);
@@ -40,7 +41,7 @@ class First_page extends BaseController
 
 
         if ($session->get('usuario')) {
-            
+
             $data = $this->get_dash();
             return view('Principal/view_dash', $data);
         } else {
@@ -54,7 +55,25 @@ class First_page extends BaseController
         $session = session();
 
         if ($session->get('usuario')) {
-            return view('Student/view_student');
+
+            $config = new ConfigModel();
+            $config->select('name_config,cost_config');
+            $config->where('company', $_SESSION['company']);
+            $query = $config->get();
+            $pay_data = $query->getResult('array');
+
+            $data = [
+                'costo_mensualidad' => $pay_data[0]['cost_config'],
+                'costo_semanal' => $pay_data[1]['cost_config'],
+                'costo_dia' => $pay_data[2]['cost_config'],
+
+            ];
+
+            if ($session->get('usuario')) {
+                return view('Student/view_student', $data);
+            } else {
+                return view('Auth/Home');
+            }
         } else {
             return view('Auth/Home');
         }
@@ -120,14 +139,32 @@ class First_page extends BaseController
         }
     }
 
+    public function info_member()
+    {
+        $session = session();
+        if ($session->get('usuario')) {
+            return view('Data/view_info_member');
+        } else {
+            return view('Auth/Home');
+        }
+    }
+
+    public function settings_pays()
+    {
+        $session = session();
+        if ($session->get('usuario')) {
+            return view('Settings/view_config_pays');
+        } else {
+            return view('Auth/Home');
+        }
+    }
+
     public function get_out()
     {
         $session = session();
         $session->destroy();
         return view('Auth/Home');
     }
-
-
 
     public function get_dash()
     {
@@ -149,15 +186,15 @@ class First_page extends BaseController
         $paysModel = new PaysModel();
         $studetsModel->select();
         $studetsModel->where('status', 'true');
-        $studetsModel->where('year_act',$_SESSION['year_act']);
-        $studetsModel->where('company',$_SESSION['company']);
+        $studetsModel->where('year_act', $_SESSION['year_act']);
+        $studetsModel->where('company', $_SESSION['company']);
         $query = $studetsModel->get();
         $miembros_activos = $query->getResult('array');
         $miembros_activos = count($miembros_activos);
         $studetsModel->select();
         $studetsModel->where('status', 'false');
         $studetsModel->where('year_act', $_SESSION['year_act']);
-        $studetsModel->where('company',$_SESSION['company']);
+        $studetsModel->where('company', $_SESSION['company']);
         $query = $studetsModel->get();
         $miembros_inactivos = $query->getResult('array');
         $miembros_inactivos = count($miembros_inactivos);
@@ -166,7 +203,7 @@ class First_page extends BaseController
         $paysModel->where('date_in >=', $mes_p_start);
         $paysModel->where('date_in <=', $mes_p_today);
         $paysModel->where('year_act', $_SESSION['year_act']);
-        $paysModel->where('company',$_SESSION['company']);
+        $paysModel->where('company', $_SESSION['company']);
         $query = $paysModel->get();
         $cost = $query->getResult('array');
 
@@ -177,7 +214,7 @@ class First_page extends BaseController
         $paysModel->where('date_in >=', $date_in);
         $paysModel->where('date_in <=', $date_last);
         $paysModel->where('year_act', $_SESSION['year_act']);
-        $paysModel->where('company',$_SESSION['company']);
+        $paysModel->where('company', $_SESSION['company']);
         $query = $paysModel->get();
         $cost = $query->getResult('array');
         $ingresos_mensual = 0;
@@ -206,7 +243,7 @@ class First_page extends BaseController
         $paysModel->select('cost,date_in');
         $paysModel->where('date_in =', $todays);
         $paysModel->where('year_act', $_SESSION['year_act']);
-        $paysModel->where('company',$_SESSION['company']);
+        $paysModel->where('company', $_SESSION['company']);
         $query = $paysModel->get();
         $cost = $query->getResult('array');
         foreach ($cost as $key => $value) {

@@ -111,59 +111,92 @@
 			method: "post",
 			data: data,
 			success: function(resp) {
-				var result = $.parseJSON(resp);
+          var result = $.parseJSON(resp);
+          console.log(result.company);
+         if (result.resp=='2')
+          {
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              title: result.company,  
+              html:'<h3>Atencion!<h3><br> El Usuario '+result.name + ',' + result.msj,
+              showConfirmButton: false,
+              timer: 4500
+            })
+          }
+          else if (result.resp=='1')
+          {
+           
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: result.company,  
+              html:'<h3>Bienvenido!<h3><br>'+result.name + ' -> ' + result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
+          }else if (result.resp=='3')
+          {
+           
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: result.company,  
+              html:'<h3>Registro Staff<h3><br>'+result.name + ' -> ' + result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
+          }else if (result.resp=='4')
+          {
+           
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: result.company, 
+              html:'<h3>Registro Staff<h3><br>'+result.name + ' -> ' + result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
+          }else if (result.resp=='5')
+          {
+          
 
-				if (result.data == 0) {
-					Swal.fire({
-						position: 'center',
-						icon: 'error',
-						title: 'Aviso!!',
-						text: result.msj,
-						showConfirmButton: false,
-						timer: 3500
-					})
-				} else if (result.data == 1) {
-					Swal.fire({
-						position: 'center',
-						icon: 'error',
-						title: 'Aviso!!',
-						text: result.msj,
-						showConfirmButton: false,
-						timer: 3500
-					})
-				} else if (result.data == 2) {
-					
-					Swal.fire({
-						position: 'center',
-						icon: 'warning',
-						title: 'Aviso!!',
-						text: result.msj,
-						showConfirmButton: false,
-						timer: 3500
-					})
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              title: result.company, 
+              html:'<h3>Registro Staff<h3><br>'+result.name + ' -> ' + result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
+          }else if (result.resp=='6')
+          {
 
-				} else if (result.data == 5) {
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              title: result.company, 
+              html:'<h3>Registro Staff<h3><br>'+result.name + ' -> ' + result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
+           
+          }else
+          {
 
-					window.location.href = site_url + "/principal/inicio";
-
-				} else {
-
-					Swal.fire({
-						position: 'center',
-						icon: 'success',
-						title: 'Bienvenido!!',
-						text: result.msj,
-						showConfirmButton: false,
-						timer: 3500
-					})
-					$('#username').val('');
-
-					$('#password').val('')
-				}
-
-
-
-			}
+            
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: result.company, 
+               html:'<h3>'+result.msj+'<h3>',
+              text: result.msj,
+              showConfirmButton: false,
+              timer: 3500
+            })
+          }
+          
+        }
 
 		})
 	});

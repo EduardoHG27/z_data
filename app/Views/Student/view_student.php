@@ -137,20 +137,20 @@
                                     <a class="small-box-footere">Recargar Tabla <i class="fa fa-arrow-circle-right"></i>
                                     </a>
                                 </button>
-                                <button id="btn_agregarmiembro" class="ejemplo1 btn-info" data-toggle="modal" data-target="#addForma_Adq">
+                                <button id="btn_agregarmiembro" class="ejemplo1 agregar" data-toggle="modal" data-target="#addForma_Adq">
                                     <div class="icono">
                                         <i class="fa fa-user-plus"></i>
                                     </div>
                                     <a class="small-box-footere">Agregar Miembro<i class="fa fa-arrow-circle-right"></i></a>
                                 </button>
-                                <button id="update_button" class="ejemplo1 btn-warning dis">
+                                <button id="update_button" class="ejemplo1 modificar dis">
                                     <div class="icono">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </div>
                                     <a class="small-box-footere">Modificar Miembro<i class="fa fa-arrow-circle-right"></i></a>
                                 </button>
 
-                                <button id="btndelete" class="ejemplo1 bg-red dis eliminar">
+                                <button id="btndelete" class="ejemplo1 eliminar dis eliminar">
                                     <div class="icono">
                                         <i class="far fa-trash-alt"></i>
                                     </div>
@@ -262,13 +262,34 @@
                     </div>
                     <div class="tab-pane fade" id="plan_form" role="tabpanel" aria-labelledby="plan_button">
                         <div class="container">
-                            <br>
-                            <h3>Elegir plan</h3>
-                            <br>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <br>
+                                    <h3>Elegir plan</h3>
+                                    <br>
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4">
+                                    Plan Mensual <input type="checkbox" class="form-check-input" id="check1" name="check1" value="something" checked>&nbsp&nbsp&nbsp
+                                    Prueba <input type="checkbox" class="form-check-input" id="check2" name="check2" value="something">
+                                </div>
+                            </div>
+
                             <form action="" id="member-plan">
                                 <div id="msg"></div>
                                 <input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : '' ?>" class="form-control">
                                 <div class="row form-group">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Número de meses</label>
+                                            <select class="js-select2" id="plan_select" style="width: 100%;" onchange="getval_plan(this);">
+                                                <option value="0">Selecciona</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Descuento</label>
@@ -278,19 +299,12 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Valor Mes</label>
-                                            <input type="text" id="txt_valor" name="txt_valor" class="form-control" value="300" readonly>
+                                            <label>Costo Mes</label>
+                                            <input type="text" id="txt_valor" name="txt_valor" class="form-control" value="<?php echo $costo_mensualidad ?>" readonly>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Seleccionar Mes</label>
-                                            <select class="js-select2" id="plan_select" style="width: 100%;">
-                                                <option value="0">Selecciona</option>
-                                            </select>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="row form-group">
                                     <div id="div_5" class="col-md-4">
@@ -298,8 +312,53 @@
                                         <input type="text" id="txt_total" name="txt_total" class="form-control" value="" readonly>
                                     </div>
                                 </div>
+
                                 <div class="modal-footer">
                                     <button type="button" id="btnplan" class="btn btn-info">Asignar Plan</button>
+                                </div>
+                            </form>
+
+
+                            <form action="" id="member-plan_test" style="display: none;">
+                                <div id="msg"></div>
+                                <input type="hidden" name="id" value="<?php echo isset($_GET['id']) ? $_GET['id'] : '' ?>" class="form-control">
+                                <div class="row form-group">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Tipo de prueba</label>
+                                            <select class="js-select2" id="plan_select_test" onchange="getval(this);" style="width: 100%;">
+                                                <option value="0">Selecciona</option>
+                                                <option value="1">Dia</option>
+                                                <option value="2">Semana</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div id="div_6" class="form-group">
+                                            <label class="control-label" >Seleccionar Número</label>
+                                            <input type="number" id="txt_num_day" name="txt_num_day" class="form-control" value="" max="6" min="1" readonly>
+                                            <input type="number" id="txt_num_week" name="txt_num_week" class="form-control" value="" max="3" min="1" style="display: none;">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Costo</label>
+                                            <input type="text" id="txt_valor_1" name="txt_valor_1" class="form-control" value="" readonly>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row form-group">
+                                    <div id="div_7" class="col-md-4">
+                                        <label class="control-label">Total</label>
+                                        <input type="text" id="txt_total_1" name="txt_total_1" class="form-control" value="" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" id="btnplan_1" class="btn btn-info">Asignar Plan</button>
                                 </div>
                             </form>
 
@@ -424,11 +483,16 @@
     #member-plan .error {
         color: red;
     }
+
+    #member-plan_test .error {
+        color: red;
+    }
 </style>
 <script>
     var site_url = "<?php echo base_url(); ?>";
 
     document.getElementById('txt_payid').style.display = 'none';
+
 
     $(document).ready(function() {
 
@@ -448,6 +512,37 @@
             closeOnSelect: false
         });
 
+        $('#check2').on('change', function() { // on change of state
+            if (this.checked) // if changed state is "CHECKED"
+            {
+                $("#check1").prop("checked", false);
+                $('#txt_valor_1').val('');
+                $('#txt_total_1').val('');
+                $("#member-plan_test").data('validator').resetForm();
+                remove_red();
+                document.getElementById('member-plan').style.display = 'none';
+                document.getElementById('member-plan').style.display = 'none';
+                document.getElementById('member-plan_test').style.display = 'block';
+                $('#plan_select_test').val('0').change();
+
+            }
+        })
+
+
+        $('#check1').on('change', function() { // on change of state
+            if (this.checked) // if changed state is "CHECKED"
+            {
+                // do the magic here
+                remove_red();
+                document.getElementById('member-plan').style.display = 'block';
+                document.getElementById('member-plan_test').style.display = 'none';
+                $('#plan_select').val('0').change();
+                $('#txt_desc').val('');
+                $('#txt_total').val('');
+                $('#txt_valor').val('<?php echo $costo_mensualidad; ?>');
+                $("#check2").prop("checked", false);
+            }
+        })
 
 
         $('#plan_select').on('change', function() {
@@ -494,6 +589,75 @@
                 });
             }
         });
+
+
+        $('#txt_num_day').on('input', function() {
+            num_days=$('#txt_num_day').val();
+            costo=$('#txt_valor_1').val();
+            res=num_days*costo;
+
+            console.log(num_days,costo);
+            $('#txt_total_1').val(res);
+
+        });
+
+
+        $('#txt_num_week').on('input', function() {
+            num_days=$('#txt_num_week').val();
+            costo=$('#txt_valor_1').val();
+            res=num_days*costo;
+
+            console.log(num_days,costo);
+            $('#txt_total_1').val(res);
+
+        });
+        
+        $('#plan_select_').on('change', function() {
+            if ($('#plan_select').select2('val') != null) {
+                data = $('#plan_select').select2('data')[0];
+
+                $.ajax({
+                    url: site_url + '/student/student_data',
+                    method: "post",
+                    data: {
+                        id: data['id']
+                    },
+                    success: function(resp) {
+                        var result = $.parseJSON(resp);
+
+
+
+                        if (result.resp == 1) {
+                            monto = $('#txt_valor').val();
+
+                            mes = result.data['month'];
+
+                            res_1 = monto * mes;
+                            descuento = result.data['discount'] / 100;
+                            descuento = descuento * res_1
+                            total = res_1 - descuento;
+
+
+                            $('#txt_desc').val(result.data['discount']);
+                            $('#txt_total').val(total);
+
+
+
+
+                            table.ajax.reload();
+                            //	setTimeout(function() {
+                            //		location.reload()
+                            //	}, 1000)
+                        } else if (resp == 2) {
+                            $('#msg').html('<div class="alert alert-danger">ID No already existed.</div>')
+                            end_load();
+                        }
+                    }
+                });
+            }
+        });
+
+
 
         var selected = [];
 
@@ -629,6 +793,9 @@
             // to display datatable search
         });
 
+
+
+
         $("#btndelete").click(function() {
             start_load();
             let data = table.rows('.selected').data()[0];
@@ -719,6 +886,8 @@
         });
 
 
+
+
         $("#update_button").click(function() {
 
             remove_red();
@@ -753,6 +922,10 @@
 
 
 
+
+
+
+
         $('#tbl-students-data tbody').on('click', 'tr', function() {
             if ($(this).hasClass('selected')) {
                 table.$('tr.selected').removeClass('selected')
@@ -768,35 +941,10 @@
 
 
 
+    jQuery.validator.addMethod("lettersonly", function(value, element) {
+        return this.optional(element) || /^[a-z\s]+$/i.test(value);
+    }, "Solo se aceptan letras en este campo");
 
-
-
-
-    jQuery.validator.addMethod("alphanumeric", function(value, element) {
-        return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
-    });
-
-
-    jQuery(function($) {
-        var validator = $('#news_action').validate({
-            rules: {
-                name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                }
-            },
-            messages: {},
-            highlight: function(element) {
-                $(element).parent().addClass('error')
-            },
-            unhighlight: function(element) {
-                $(element).parent().removeClass('error')
-            }
-        });
-    });
 
     var $registrationForm = $('#registration');
     if ($registrationForm.length) {
@@ -804,6 +952,7 @@
             rules: {
                 txt_name: {
                     required: true,
+                    lettersonly: true
                 },
                 txt_email: {
                     required: true,
@@ -818,17 +967,17 @@
             },
             messages: {
                 txt_name: {
-                    required: 'Please enter username!',
+                    required: 'El campo nombre no puede ir vacio!',
                 },
                 txt_email: {
-                    required: 'Please enter email!',
-                    email: 'Please enter valid email!'
+                    required: 'El campo email no puede ir vacio!',
+                    email: 'Por favor inserte un correo valido!'
                 },
                 txt_mobile: {
-                    required: 'Please enter mobile!'
+                    required: 'El campo de telefono no puede ir vacio!'
                 },
                 txt_password: {
-                    required: 'Please enter the password!'
+                    required: 'El campo Contraseña no puede ir vacio!'
                 }
             },
             highlight: function(element) {
@@ -841,9 +990,9 @@
         });
     }
 
-    var $planForm = $('#member-plan');
-    if ($planForm.length) {
-        $planForm.validate({
+    var $planForm1 = $('#member-plan');
+    if ($planForm1.length) {
+        $planForm1.validate({
             rules: {
                 txt_total: {
                     required: true,
@@ -851,7 +1000,7 @@
             },
             messages: {
                 txt_total: {
-                    required: 'Seleccione numero de meses!'
+                    required: 'Seleccione el numero de meses!'
                 }
             },
             highlight: function(element) {
@@ -859,6 +1008,62 @@
             },
             unhighlight: function(element) {
                 $(element).parent().removeClass('error')
+            }
+
+        });
+    }
+
+    var $planFormdata = $('#member-plan_test');
+    if ($planFormdata.length) {
+        $planFormdata.validate({
+            rules: {
+                txt_num_day: {
+                    required: true,
+                    max: 6,
+                    min: 1
+                },
+                txt_total_1: {
+                    required: true,
+                }
+            },
+            messages: {
+                txt_total_1: {
+                    required: 'Seleccione numero de dias!'
+                }
+            },
+            highlight: function(element2) {
+                $(element2).parent().addClass('error')
+            },
+            unhighlight: function(element2) {
+                $(element2).parent().removeClass('error')
+            }
+
+        });
+    }
+
+    var $planFormdata = $('#member-plan_test');
+    if ($planFormdata.length) {
+        $planFormdata.validate({
+            rules: {
+                txt_num_week: {
+                    required: true,
+                    max: 3,
+                    min: 1
+                },
+                txt_total_1: {
+                    required: true,
+                }
+            },
+            messages: {
+                txt_total_1: {
+                    required: 'Seleccione numero de semanas!'
+                }
+            },
+            highlight: function(element2) {
+                $(element2).parent().addClass('error')
+            },
+            unhighlight: function(element2) {
+                $(element2).parent().removeClass('error')
             }
 
         });
@@ -904,7 +1109,7 @@
             var data = {
                 'discount': $('#txt_desc').val(),
                 'month': data['text'],
-                'cost': $('#txt_total').val(),
+                'cost': "<?php echo $costo_mensualidad; ?>",
                 'id': $('#txt_id').val(),
 
             };
@@ -948,14 +1153,90 @@
         }
     });
 
-    $("#btnmodmiembro").click(function() {
-        //   $('#txt_valor').val('300');
-        start_load();
-        if ($("#registration").valid() == false) {
+    $("#btnplan_1").click(function() {
+        if ($("#member-plan_test").valid() == false) {
 
             return;
         } else {
 
+            document.getElementById("plan_button").disabled = false;
+            if ($('#plan_select').select2('val') != null) {
+                data = $('#plan_select').select2('data')[0];
+            }
+            
+            day_num=$('#txt_num_day').val();
+            weeak_num=$('#txt_num_week').val();
+
+            if(day_num=='')
+            {
+                num=weeak_num;
+                type='week';
+               
+            }else
+            {
+                num=day_num;
+                type='day';
+            }
+
+            var data = {
+                'num': num,
+                'val': $('#txt_valor_1').val(),
+                'id': $('#txt_id').val(),
+                'type':type
+
+            };
+            $.ajax({
+                url: site_url + '/student/planmember_store_test',
+                method: "post",
+                data: data,
+                success: function(resp) {
+
+
+                    var result = $.parseJSON(resp);
+
+                    if (result.resp == 1) {
+                        $('#exampleModal').modal('toggle');
+                        table.ajax.reload();
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Plan asignado correctamente'
+                        })
+
+
+                    } else if (resp == 2) {
+                        $('#msg').html('<div class="alert alert-danger">Error al enviar el correo.</div>')
+                        end_load();
+                    }
+                }
+            })
+
+
+        }
+    });
+
+
+
+
+
+    $("#btnmodmiembro").click(function() {
+        //   $('#txt_valor').val('300');
+       
+        if ($("#registration").valid() == false) {
+
+            return;
+        } else {
+            start_load();
             document.getElementById("plan_button").disabled = false;
 
             var data = {
@@ -1356,16 +1637,16 @@
                     document.getElementById("image_qr").src = "../" + result.data;
                 } else {
                     const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        })
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
                     Toast.fire({
                         icon: 'warning',
                         title: 'Usuario no cuenta con código Qr'
@@ -1382,9 +1663,18 @@
     function actualizar(id) {
         enable_tabs();
         today = new Date();
+        
         $('#txt_desc').val('');
         //   $('#txt_valor').val('');
         $('#txt_total').val('');
+
+        $('#plan_select').val('0').change();
+        
+        $("#check1").prop("checked", true);
+        $("#check2").prop("checked", false);
+       
+        document.getElementById('member-plan').style.display = 'block';
+        document.getElementById('member-plan_test').style.display = 'none';
 
         $('.modal-title').text('Modificar | Miembro');
         $("#registration").data('validator').resetForm();
@@ -1485,6 +1775,55 @@
     }
 
 
+
+    function getval(sel) {
+        if(sel.value=='1')
+        {
+            $("#txt_num_day").val(''); 
+            $("#txt_num_week").val(''); 
+            $('#txt_valor_1').val('<?php echo $costo_dia; ?>');
+            $("#txt_num_day").attr("readonly", false); 
+            $("#txt_total_1").val(''); 
+            document.getElementById('txt_num_day').style.display = 'block';
+            document.getElementById('txt_num_week').style.display = 'none';
+            
+            $("#member-plan_test").data('validator').resetForm();
+            
+        }
+        else if(sel.value=='2')
+        {
+            $("#txt_num_day").val(''); 
+            $("#txt_num_week").val(''); 
+            $("#txt_total_1").val(''); 
+            $("#txt_num_day").attr("readonly", true); 
+            document.getElementById('txt_num_day').style.display = 'none';
+            document.getElementById('txt_num_week').style.display = 'block';
+            $("#txt_num_week").attr("readonly", false); 
+            $('#txt_valor_1').val('<?php echo $costo_semanal; ?>');
+            $("#member-plan_test").data('validator').resetForm();
+        }
+        else
+        {
+            $("#txt_num_day").val(''); 
+            $("#txt_num_week").val(''); 
+            $("#txt_total_1").val(''); 
+            $("#txt_num_day").attr("readonly", true); 
+            $("#txt_num_week").attr("readonly", true); 
+            $("#member-plan_test").data('validator').resetForm();
+        }
+    }
+
+    
+    function getval_plan(sel) {
+        if(sel.value=='0')
+        {
+            $("#txt_desc").val(''); 
+            $("#txt_total").val(''); 
+            $("#member-plan").data('validator').resetForm();
+            
+        }
+    }
+
     function addDays(date, days) {
         var result = new Date(date);
 
@@ -1561,8 +1900,33 @@
         div_3.classList.remove("error");
         div_4.classList.remove("error");
         div_5.classList.remove("error");
+        div_6.classList.remove("error");
+        div_7.classList.remove("error");
     }
 
+
+
+    $(".exampleModal").draggable({
+        handle: ".modal-header"
+    });
+
+    $(".modal-header").on("mousedown", function(mousedownEvt) {
+        var $draggable = $(this);
+        var x = mousedownEvt.pageX - $draggable.offset().left,
+            y = mousedownEvt.pageY - $draggable.offset().top;
+        $("body").on("mousemove.draggable", function(mousemoveEvt) {
+            $draggable.closest(".modal-dialog").offset({
+                "left": mousemoveEvt.pageX - x,
+                "top": mousemoveEvt.pageY - y
+            });
+        });
+        $("body").one("mouseup", function() {
+            $("body").off("mousemove.draggable");
+        });
+        $draggable.closest(".modal").one("bs.modal.hide", function() {
+            $("body").off("mousemove.draggable");
+        });
+    });
 </script>
 
 <style>
@@ -1628,6 +1992,10 @@
 
     .tab-card-header>.tab-content {
         padding-bottom: 0;
+    }
+
+    .modal-header {
+        cursor: move;
     }
 </style>
 

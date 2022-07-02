@@ -61,6 +61,8 @@ $routes->group('principal', ['namespace' => 'App\Controllers\Principal'], functi
     $routes->get('session_out', 'First_page::get_out');
     $routes->get('info_staff', 'First_page::info_staff');
     $routes->post('ajax_load_data', 'First_page::ajax_load_data');
+    $routes->get('info_member', 'First_page::info_member');
+    $routes->get('settings_pays', 'First_page::settings_pays');   
 });
 
 
@@ -74,16 +76,13 @@ $routes->group('student', ['namespace' => 'App\Controllers\Student'], function (
     $routes->post("student_delete", "Student::delete");
     $routes->post("student_get_plan", "Student::get_plan");
     $routes->post("student_data", "Student::get_plan_data");
-    $routes->post("student_log", "Student::log");
     $routes->post("planmember_store", "Student::store_planmember");
     $routes->post("student_chek_delete", "Student::chek_delete");
     $routes->post("dash_panel", "Student::dash");
-    $routes->post("qr_log", "Student::qr_log");
+   // $routes->post("qr_log", "Student::qr_log");
+    $routes->post("student_log", "Student::log_function");
     $routes->post("get_qr", "Student::get_qr");
-    
-    
-    
-
+    $routes->post("planmember_store_test", "Student::planmember_store_test");
 });
 $routes->group('pays', ['namespace' => 'App\Controllers\Pays'], function ($routes) {
     $routes->post("pay_delete", "Pays::delete");
@@ -124,14 +123,23 @@ $routes->group('staff', ['namespace' => 'App\Controllers\Staff'], function ($rou
     $routes->post("schedule", "Staff::schedule");
     $routes->post("chek_delete", "Staff::chek_delete");
     $routes->post("staff_get_rol", "Staff::get_rol");
+    $routes->post("status_staff", "Staff::status_staff");
+    $routes->post("status_mod", "Staff::status_mod");  
 });
 
 $routes->group('informativo', ['namespace' => 'App\Controllers\Informativo'], function ($routes) {
     $routes->post("plan-ajax-load", "Info::ajaxLoadData");
     $routes->post("plan-ajax-staff", "Info_staff::ajaxLoadData");
+    $routes->post("plan-ajax-member", "Info_member::ajaxLoadData");
    
 });
 
+$routes->group('settings', ['namespace' => 'App\Controllers\Settings'], function ($routes) {
+    $routes->post("plan-ajax-load", "Settings::ajaxLoadData");
+    $routes->post("create_pay", "Settings::create_pay");
+    $routes->post("mod_pay", "Settings::mod_pay");
+    $routes->post("update_set", "Settings::update_set"); 
+});
 $routes->group('auth', ['namespace' => 'App\Controllers\Auth'], function ($routes) {
     $routes->get('login', 'Register::index');
     $routes->get('tasks', 'Task::index');

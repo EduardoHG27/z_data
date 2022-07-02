@@ -3,7 +3,7 @@
   <div class="sidebar close">
     <div class="logo-details">
       <i class='bx bxl-c-plus-plus'></i>
-      <span class="logo_name">Gym System</span>
+      <span class="logo_name">Gym-Sys</span>
     </div>
     <ul class="nav-links">
       <li>
@@ -45,6 +45,7 @@
           <li><a class="link_name" href="#">Datos</a></li>
           <li><a href="<?php echo base_url(); ?>/principal/data"">Pagos</a></li>
           <li><a href="<?php echo base_url(); ?>/principal/info_staff">Staff</a></li>
+          <li><a href="<?php echo base_url(); ?>/principal/info_member">Miembros</a></li>
         </ul>
       </li>
       <li>
@@ -80,6 +81,7 @@
           <li><a class="link_name" href="#">Ajustes</a></li>
           <li><a href="<?php echo base_url(); ?>/principal/plans">Planes</a></li>
           <li><a href="<?php echo base_url(); ?>/principal/position">Rol</a></li>
+          <li><a href="<?php echo base_url(); ?>/principal/settings_pays">Cuotas</a></li>
           <li><a href="#">PHP & MySQL</a></li>
         </ul>
       </li>

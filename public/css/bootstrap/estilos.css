@@ -365,4 +365,17 @@
             margin: 4px 2px;
             cursor: pointer;
         }
+
+        .bluew-button-clock {
+            background-color:#002dce;
+            border: none;
+            color: white;
+            padding: 5px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 5px 5px;
+            cursor: pointer;
+        }
     

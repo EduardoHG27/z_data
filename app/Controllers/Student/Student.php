@@ -149,84 +149,6 @@ class Student extends BaseController
         }
     }
 
-
-
-    public function log()
-    {
-        $data = [
-            'username' => $this->request->getPost('username'),
-            'password' => $this->request->getPost('password')
-        ];
-        $nombre = trim($data['username']);
-        $password = md5($data['password']);
-
-        $studetsModel = new StudetsModel();
-
-        $studetsModel->select('*');
-        $studetsModel->where('name', $nombre);
-        $studetsModel->where('password', $password);
-        $studetsModel->where('year_act', $_SESSION['year_act']);
-        $studetsModel->where('company', $_SESSION['company']);
-        $query_student = $studetsModel->get();
-        $data_validation_student = $query_student->getResult('array');
-
-
-        $staffModel = new StaffModel();
-        $staffModel->select('*');
-        $staffModel->where('name', $nombre);
-        $staffModel->where('password', $password);
-        $staffModel->where('year_act', $_SESSION['year_act']);
-        $staffModel->where('company', $_SESSION['company']);
-        $query = $staffModel->get();
-        $data_validation = $query->getResult('array');
-
-
-        if (!empty($data_validation)) {
-
-
-            if ($data_validation[0]['position'] == '1') {
-
-                if ($password != $data_validation[0]['password']) {
-
-                    $consulta['data'] = '1';
-                    $consulta['msj'] = 'Contraseña Incorrecta';
-                    echo json_encode($consulta);
-                } else {
-
-
-                    $consulta['data'] = '5';
-                    $consulta['msj'] = 'Admin';
-
-
-                    echo json_encode($consulta);
-                }
-            } else {
-                var_dump("error al validar admin");
-            }
-        } else if (!empty($data_validation_student)) {
-            if ($password != $data_validation_student[0]['password']) {
-                $consulta['data'] = '1';
-                $consulta['msj'] = 'Contraseña Incorrecta';
-
-                echo json_encode($consulta);
-            } else if ($data_validation_student[0]['status'] != 'true') {
-                $consulta['data'] = '2';
-                $consulta['msj'] = 'Usuario se agoto su membresia';
-                echo json_encode($consulta);
-            } else {
-
-                $consulta['data'] = '3';
-                $consulta['msj'] = 'Usuario Activo';
-                echo json_encode($consulta);
-            }
-        } else {
-            $consulta['data'] = '0';
-            $consulta['msj'] = 'Este usuario no se encuentra registrado en el sistema';
-            echo json_encode($consulta);
-        }
-    }
-
-
     public function store()
     {
         include RUTA_APP . '/ThirdParty/phpqrcode/qrlib.php';
@@ -319,6 +241,7 @@ class Student extends BaseController
         }
     }
 
+    /*
     public function qr_log()
     {
         $hoy = getdate();
@@ -333,10 +256,10 @@ class Student extends BaseController
 
         $hour_today = $hoy['hours'] . ':' . $hoy['minutes'] . ':' . $hoy['seconds'];
         $day_today = $hoy['year'] . '-' . $hoy['mon'] . '-' . $hoy['mday'];
-
-
-
         $studetsModel = new StudetsModel();
+
+        $data = $this->request->getPost();
+        var_dump($data);
         $data = [
             'id' => $this->request->getPost('id')
         ];
@@ -553,6 +476,377 @@ class Student extends BaseController
             $consulta['msj'] = 'Código QR no reconocido';
             echo json_encode($consulta);
         }
+    }
+*/
+    public function log_function()
+    {
+
+        $hoy = getdate();
+
+        if (strlen($hoy['minutes']) == 1) {
+            $hoy['minutes'] = '0' . $hoy['minutes'];
+        }
+
+        if (strlen($hoy['seconds']) == 1) {
+            $hoy['seconds'] = '0' . $hoy['seconds'];
+        }
+
+        $hour_today = $hoy['hours'] . ':' . $hoy['minutes'] . ':' . $hoy['seconds'];
+        $day_today = $hoy['year'] . '-' . $hoy['mon'] . '-' . $hoy['mday'];
+      
+
+
+        $data = $this->request->getPost();
+        $num_data=count($data);
+        $studetsModel = new StudetsModel();
+        $studetsModel->select('name,matricula');
+        if($num_data=='1')
+        {
+            $data = ['id' => $this->request->getPost('id')];
+            $studetsModel->where('password_qr', $this->request->getPost('id'));
+        }else{
+
+            $data = [
+                'username' => $this->request->getPost('username'),
+                'password' => $this->request->getPost('password')
+            ];
+           
+            $nombre = trim($data['username']);
+            $password = md5($data['password']);
+    
+    
+         
+           $studetsModel->where('matricula', $nombre);
+           $studetsModel->where('password', $password);
+        }
+       $studetsModel->where('year_act', $_SESSION['year_act']);
+       $studetsModel->where('company', $_SESSION['company']);
+       $query_student = $studetsModel->get();
+       $data_validation = $query_student->getResult('array');
+
+
+
+       
+       $staffModel = new StaffModel();
+       $staffModel->select('id_staff,name,matricula_staff');
+
+       if($num_data=='1')
+       {
+           $data = [
+               'id' => $this->request->getPost('id')
+           ];
+   
+        
+           $staffModel->where('password_qr', $this->request->getPost('id'));
+       }else{
+
+           $data = [
+               'username' => $this->request->getPost('username'),
+               'password' => $this->request->getPost('password')
+           ];
+          
+           $nombre = trim($data['username']);
+           $password = md5($data['password']);
+   
+   
+        
+           $staffModel->where('matricula_staff', $nombre);
+           $staffModel->where('password', $password);
+       }
+
+       
+        $staffModel->where('year_act', $_SESSION['year_act']);
+        $staffModel->where('company', $_SESSION['company']);
+        $query = $staffModel->get();
+        $data_validation_staff = $query->getResult('array');
+
+        $dat = count($data_validation);
+        $dat_staff = count($data_validation_staff);
+
+        if (!$dat == '0') {
+            $user = $studetsModel->getUserBy('matricula', $data_validation[0]['matricula']);
+
+            $log = new LogMemberModel();
+
+
+            if ($user['status'] != 'true') {
+                $consulta['resp'] = '2';
+                $consulta['name'] = $user['name'];
+                $consulta['msj'] = 'agoto su membresia';
+                $consulta['company'] = $_SESSION['company'];
+
+                $data = [
+                    'id_member' => $user['id'],
+                    'hour_in' => $hour_today,
+                    'date' => $day_today,
+                    'status_log' => 'false',
+                    'desc_status_log' => $consulta['msj'],
+                    'year_act' => $_SESSION['year_act'],
+                    'company' => $_SESSION['company']
+                ];
+                if ($log->save($data)) {
+                    echo json_encode($consulta);
+                } else {
+                    var_dump("error al guardar datos de logueo miembro");
+                }
+            } else {
+                $consulta['resp'] = '1';
+                $consulta['name'] = $user['name'];
+                $consulta['msj'] = 'Usuario Activo';
+                $consulta['company'] = $_SESSION['company'];
+
+                $data = [
+                    'id_member' => $user['id'],
+                    'hour_in' => $hour_today,
+                    'date' => $day_today,
+                    'status_log' => 'true',
+                    'desc_status_log' => $consulta['msj'],
+                    'year_act' => $_SESSION['year_act'],
+                    'company' => $_SESSION['company']
+                ];
+
+                if ($log->save($data)) {
+                    echo json_encode($consulta);
+                } else {
+                    var_dump("error al guardar datos de logueo miembro");
+                }
+            }
+        } else if (!$dat_staff == '0') {
+            $user = $staffModel->getUserBy('matricula_staff', $data_validation_staff[0]['matricula_staff']);
+            if ($user['status'] != 'true') {
+                $consulta['resp'] = '2';
+                $consulta['name'] = $user['name'];
+                $consulta['msj'] = 'no tiene un horario asignado!!';
+                $consulta['company'] = $_SESSION['company'];
+                echo json_encode($consulta);
+            } else {
+                if ($hoy['weekday'] == 'Monday') {
+                    $dia = 'lunes';
+                } else if ($hoy['weekday'] == 'Tuesday') {
+                    $dia = 'martes';
+                } else if ($hoy['weekday'] == 'Wednesday') {
+                    $dia = 'miercoles';
+                } else if ($hoy['weekday'] == 'Thursday') {
+                    $dia = 'jueves';
+                } else if ($hoy['weekday'] == 'Friday') {
+                    $dia = 'viernes';
+                } else if ($hoy['weekday'] == 'Saturday') {
+                    $dia = 'sabado';
+                } else if ($hoy['weekday'] == 'Sunday') {
+                    $dia = 'domingo';
+                }
+
+                $schedulestaffModel = new StaffscheduleModel();
+                $schedulestaffModel->select('day,hour_in,hour_out');
+                $schedulestaffModel->where('id_staff', $data_validation_staff[0]['id_staff']);
+                $schedulestaffModel->where('year_act', $_SESSION['year_act']);
+                $schedulestaffModel->where('company', $_SESSION['company']);
+                $schedulestaffModel->where('day', $dia);
+                $query = $schedulestaffModel->get();
+                $data_schedule = $query->getResult('array');
+
+                if (count($data_schedule) != 0) {
+                    $log = new LogStaffModel();
+                    $log->select('id_entrada,hour_out');
+                    $log->where('id_staff', $data_validation_staff[0]['id_staff']);
+                    $log->where('day', $dia);
+                    $log->where('day_save', $day_today);
+                    $log->where('company', $_SESSION['company']);
+                    $log->where('year_act', $_SESSION['year_act']);
+                    $query_log = $log->get();
+                    $data_log = $query_log->getResult('array');
+
+                    if (count($data_log) == 0) {
+                        $bandera = 0;
+                        foreach ($data_schedule as $key => $value) {
+                            # code...
+                            $diffff = $this->timeDiff($value['hour_in'], $hour_today);
+
+                            $diffff = ($diffff / 60);
+
+                            if ($diffff <= 1) {
+                                $stat = "on time";
+                            } else if ($diffff > 1 && $diffff <= 5) {
+                                $stat = "less 5";
+                            } else if ($diffff > 5 && $diffff <= 10) {
+                                $stat = "less 10";
+                            } else {
+                                $stat = "late";
+                            }
+
+                            if ($value['day'] == $dia) {
+                                $data = [
+                                    'id_staff' => $data_validation_staff[0]['id_staff'],
+                                    'hour_in' => $hour_today,
+                                    'hour_in_save' => $value['hour_in'],
+                                    'status_hour_in' => $stat,
+                                    'day' => $dia,
+                                    'day_save' => $day_today,
+                                    'year_act' => $_SESSION['year_act'],
+                                    'company' => $_SESSION['company']
+                                ];
+
+                                $log->save($data);
+                                $consulta['company'] = $_SESSION['company'];
+                                $consulta['resp'] = '3';
+                                $consulta['name'] = $user['name'];
+                                $consulta['msj'] = 'Se registro tu Entrada con exito!!';
+                                echo json_encode($consulta);
+                            }
+                        }
+                    } else if ($data_log[0]['hour_out'] == '') {
+                        foreach ($data_schedule as $key => $value) {
+
+                            $diffff = $this->timeDiff($value['hour_out'], $hour_today);
+
+                            $diffff = ($diffff / 60);
+
+                            if ($diffff < 0) {
+
+                                $stat = "early";
+                            } else {
+
+                                $stat = "on time";
+                            }
+                            # code...
+                            if ($value['day'] == $dia) {
+                                $data = [
+
+                                    'hour_out' => $hour_today,
+                                    'hour_out_save' => $value['hour_out'],
+                                    'status_hour_out' =>  $stat
+                                ];
+
+                                $log->update($data_log[0]['id_entrada'], $data);
+                                $consulta['company'] = $_SESSION['company'];
+                                $consulta['resp'] = '4';
+                                $consulta['name'] = $user['name'];
+                                $consulta['msj'] = 'Se registro tu Salida con exito!!';
+                                echo json_encode($consulta);
+                            }
+                        }
+                    } else if ($data_log[0]['hour_out'] != '') {
+                        $consulta['company'] = $_SESSION['company'];
+                        $consulta['resp'] = '5';
+                        $consulta['name'] = $user['name'];
+                        $consulta['msj'] = 'Se ha registrado Su entrada y salida por hoy';
+                        echo json_encode($consulta);
+                    }
+                } else {
+                    $consulta['resp'] = '6';
+                    $consulta['company'] = $_SESSION['company'];
+                    $consulta['name'] = $user['name'];
+                    $consulta['msj'] = 'No se tiene registrado hoy su ingreso';
+                    echo json_encode($consulta);
+                }
+            }
+        } else {
+            if($num_data=='1')
+            {
+                $consulta['company'] = $_SESSION['company'];
+                $consulta['resp'] = '0';
+                $consulta['msj'] = 'Código QR no reconocido';
+                echo json_encode($consulta);
+            }
+            else
+            {
+                $consulta['company'] = $_SESSION['company'];
+                $consulta['resp'] = '0';
+                $consulta['msj'] = 'Usuario y/o Contraseña no reconocidos';
+                echo json_encode($consulta);
+            }
+
+           
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*       
+        $studetsModel = new StudetsModel();
+
+        $studetsModel->select('*');
+        $studetsModel->where('matricula', $nombre);
+        $studetsModel->where('password', $password);
+        $studetsModel->where('year_act', $_SESSION['year_act']);
+        $studetsModel->where('company', $_SESSION['company']);
+        $query_student = $studetsModel->get();
+        $data_validation_student = $query_student->getResult('array');
+
+        
+     
+        $staffModel = new StaffModel();
+        $staffModel->select('*');
+        $staffModel->where('matricula_staff', $nombre);
+        $staffModel->where('password', $password);
+        $staffModel->where('year_act', $_SESSION['year_act']);
+        $staffModel->where('company', $_SESSION['company']);
+        $query = $staffModel->get();
+        $data_validation = $query->getResult('array');
+
+
+        if (!empty($data_validation)) {
+
+
+            if ($data_validation[0]['position'] == '1') {
+
+                if ($password != $data_validation[0]['password']) {
+
+                    $consulta['data'] = '1';
+                    $consulta['msj'] = 'Contraseña Incorrecta';
+                    echo json_encode($consulta);
+                } else {
+
+
+                    $consulta['data'] = '5';
+                    $consulta['msj'] = 'Admin';
+
+
+                    echo json_encode($consulta);
+                }
+            } else {
+                var_dump("error al validar admin");
+            }
+        } else if (!empty($data_validation_student)) {
+            if ($password != $data_validation_student[0]['password']) {
+                $consulta['data'] = '1';
+                $consulta['msj'] = 'Contraseña Incorrecta';
+
+                echo json_encode($consulta);
+            } else if ($data_validation_student[0]['status'] != 'true') {
+                $consulta['data'] = '2';
+                $consulta['msj'] = 'Usuario se agoto su membresia';
+                echo json_encode($consulta);
+            } else {
+
+                $consulta['data'] = '3';
+                $consulta['msj'] = 'Usuario Activo';
+                echo json_encode($consulta);
+            }
+        } else {
+            $consulta['data'] = '0';
+            $consulta['msj'] = 'Este usuario no se encuentra registrado en el sistema';
+            echo json_encode($consulta);
+        }
+        */
     }
 
     public function get_qr()
@@ -927,7 +1221,7 @@ class Student extends BaseController
 
         $newDate = date('Y-m-d', strtotime($date . ' + ' .  $this->request->getPost('month') . ' months'));
 
-
+       
         $data_plan = [
             'discount' => $this->request->getPost('discount'),
             'date_in' => $date,
@@ -959,6 +1253,59 @@ class Student extends BaseController
             echo json_encode($consulta);
         }
     }
+
+    public function planmember_store_test()
+    {
+        $date = date('Y-m-d');
+        $paysModel = new PaysModel();
+        $data = $this->request->getPost();
+
+         $cost= $data['num']*$data['val'];
+
+       
+         if($data['type']=='day')
+         {
+            $newDate = date('Y-m-d', strtotime($date . ' + ' .  $data['num'] . ' day'));
+         }
+         else
+         {
+            $newDate = date('Y-m-d', strtotime($date . ' + ' .  $data['num'] . ' week'));
+         }
+
+         $data_plan = [
+             'discount' => '',
+             'date_in' => $date,
+             'date_out' => $newDate,
+             'id_member' => $this->request->getPost('id'),
+             'cost' => $cost,
+             'pay_status' => 'true',
+             'year_act' => $_SESSION['year_act'],
+             'company' => $_SESSION['company']
+ 
+         ];
+ 
+ 
+         if ($paysModel->save($data_plan)) {
+ 
+             $studetsModel = new StudetsModel();
+ 
+             $data = [
+                 'status' => 'true'
+             ];
+ 
+             $studetsModel->update($this->request->getPost('id'), $data);
+ 
+             $consulta['resp'] = '1';
+             echo json_encode($consulta);
+         } else {
+ 
+             $consulta['resp'] = '0';
+             echo json_encode($consulta);
+         }
+
+    }
+
+
     function timeDiff($firstTime, $lastTime)
     {
         $firstTime = strtotime($firstTime);

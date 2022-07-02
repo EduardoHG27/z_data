@@ -289,7 +289,7 @@
                                         <select class="js-select2" id="plan_select_1" name='item1' tyle="width: 100%;">
                                             <option value=''>Selecciona</option>
                                         </select>
-                                     <div class="form-group">
+                                     <div class="form-group">btnmodstaff
                                         <label id="label_4" class="control-label">Cargo</label>
                                             <select class="js-select2" id="plan_select" name='plan_select' style="width: 100%;">
                                                 <option value="">Selecciona</option>
@@ -324,9 +324,10 @@
 
                                 <div class="row form-group">
                                     <div class="col-md-1" style="float:right;">
+                                    
                                     </div>
                                     <div class="col-md-1" style="float:right;">
-
+                                       
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-check">
@@ -343,8 +344,13 @@
                                             <label for="">Salida</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-1">
+                                    
                                     </div>
+                                    <div class="col-md-2">
+                                    <button type="button" class="bluew-button-clock" id="mod_hora" title="Copiar/Pegar Hora"><i class="fa fa-clock-o"></i></button>
+                                    </div>
+                                   
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-md-1" style="float:right;">
@@ -942,11 +948,11 @@
 
                         if (row.status == "true") {
                             return '<div >' +
-                                '<button type="button" class="green-button" onclick="change_status(' + row.id_indicator + ',' + row.proy + ',' + row.exercise + ')" data-toggle="tooltip" data-placement="top" title="Estatus" >Activo</button>' +
+                                '<button type="button" class="green-button" onclick="change_status(' + row.id_staff + ')" data-toggle="tooltip" data-placement="top" title="Estatus" >Activo</button>' +
                                 '</div>';
                         } else {
                             return '<div >' +
-                                '<button  class="red-button" onclick="change_status(' + row.id_indicator + ',' + row.proy + ',' + row.exercise + ')" title="Estatus" >No activo</button>' +
+                                '<button  class="red-button" onclick="change_status(' + row.id_staff + ')" title="Estatus" >No activo</button>' +
                                 '</div>';
                         }
 
@@ -979,6 +985,149 @@
             bFilter: true,
             // to display datatable search
         });
+
+
+
+
+        $("#mod_hora").click(function() {
+
+            domingo_1 = $('#appt_lun1').val();
+            domingo_2 = $('#appt_lun2').val();
+
+            agregar_hora(domingo_1, domingo_2);
+
+            
+        });
+
+
+        function agregar_hora(hour_in, hour_out) {
+
+
+            remember_2=document.getElementById('check2');
+            remember_3=document.getElementById('check3');
+            remember_4=document.getElementById('check4');
+            remember_5=document.getElementById('check5');
+            remember_6=document.getElementById('check6');
+            remember_7=document.getElementById('check7');
+
+            if(remember_2.checked)
+            {
+              
+          
+                document.getElementById('appt_mar1').value = hour_in;
+                document.getElementById('appt_mar2').value = hour_out;
+                startTimeInput_fijo('mar');
+            }
+            
+            if(remember_3.checked)
+            {
+             
+                document.getElementById('appt_mier1').value = hour_in;
+                document.getElementById('appt_mier2').value = hour_out;
+                startTimeInput_fijo('mier');   
+            }
+
+            if(remember_4.checked)
+            {
+                
+              
+                document.getElementById('appt_juev1').value = hour_in;
+                document.getElementById('appt_juev2').value = hour_out;
+                startTimeInput_fijo('juev');
+            }
+
+
+            if(remember_5.checked)
+            {
+                
+               
+                document.getElementById('appt_vier1').value = hour_in;
+                document.getElementById('appt_vier2').value = hour_out;
+                startTimeInput_fijo('vier');
+            }
+
+
+            if(remember_6.checked)
+            {
+              
+                document.getElementById('appt_sab1').value = hour_in;
+                document.getElementById('appt_sab2').value = hour_out;
+                startTimeInput_fijo('sab');
+            }
+
+
+            if(remember_7.checked)
+            {
+               
+                document.getElementById('appt_dom1').value = hour_in;
+                document.getElementById('appt_dom2').value = hour_out;
+                startTimeInput_fijo('dom');
+            }
+            /*
+            remember_2=document.getElementById('check2');
+            remember_3=document.getElementById('check3');
+
+            if (remember_2.checked) {
+                document.getElementById('appt_mar1').value = hour_in;
+                document.getElementById('appt_mar2').value = hour_out;
+                console.log("Si2");
+            }
+            else{
+                console.log("data2");
+            }
+
+
+            if (remember_2.checked) {
+                document.getElementById('appt_mier1').value = hour_in;
+                document.getElementById('appt_mier2').value = hour_out;
+                console.log("Si3");
+            }
+            else{
+                console.log("data3");
+            }
+
+            if (document.getElementById('check2').checked) {
+                document.getElementById('appt_juev1').value = hour_in;
+                document.getElementById('appt_juev2').value = hour_out;
+                console.log("Si4");
+
+            }
+            else{
+                console.log("data4");
+            }
+
+
+            if (document.getElementById('check2').checked) {
+
+                document.getElementById('appt_vier1').value = hour_in;
+                document.getElementById('appt_vier2').value = hour_out;
+                console.log("Si5");
+            }
+            else{
+                console.log("data5");
+            }
+
+            if (document.getElementById('check2').checked) {
+                document.getElementById('appt_sab1').value = hour_in;
+                document.getElementById('appt_sab2').value = hour_out;
+                console.log("Si6");
+            }
+            else{
+                console.log("data6");
+            }
+
+            if (document.getElementById('check2').checked) {
+                document.getElementById('appt_dom1').value = hour_in;
+                document.getElementById('appt_dom2').value = hour_out;
+                console.log("Si7");
+            }
+            else{
+                console.log("data7");
+            }
+
+
+*/
+        }
 
         $("#btndelete").click(function() {
             start_load();
@@ -1351,6 +1500,9 @@
         });
     });
 
+    jQuery.validator.addMethod("lettersonly", function(value, element) {
+        return this.optional(element) || /^[a-z\s]+$/i.test(value);
+    }, "Solo se aceptan letras en este campo");
 
     var $registrationForm = $('#registration');
     if ($registrationForm.length) {
@@ -1358,6 +1510,7 @@
             rules: {
                 txt_name: {
                     required: true,
+                    lettersonly: true
                 },
                 txt_email: {
                     required: true,
@@ -1470,8 +1623,6 @@
         domingo_2 = $('#appt_dom2').val();
         domingo_lbl = document.getElementById('lblstats_dom').textContent
 
-
-        console.log(sabado_lbl);
         const ban = [];
 
         if (lunes_2 == '12:59:48' && martes_2 == '12:59:48' && miercoles_2 == '12:59:48' && jueves_2 == '12:59:48' && viernes_2 == '12:59:48' && sabado_2 == '12:59:48' && domingo_2 == '12:59:48') {
@@ -1643,11 +1794,7 @@
                 data: data,
                 success: function(resp) {
                     var result = $.parseJSON(resp);
-
-                    console.log(result);
                     if (result.resp == 0) {
-
-
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
@@ -1676,7 +1823,7 @@
                     } else {
                         $('#msg').html('<div class="alert alert-danger">Error al Modificar el Horario</div>')
                     }
-
+                    table.ajax.reload();
                 }
             })
         }
@@ -1885,7 +2032,6 @@
                 data: data,
                 success: function(resp) {
                     var result = $.parseJSON(resp);
-                    console.log(result);
                     if (result.resp == 0) {
                         const Toast = Swal.mixin({
                             toast: true,
@@ -1902,7 +2048,7 @@
                             icon: 'success',
                             title: 'Horario de Staff registrado correctamente'
                         })
-
+                        table.ajax.reload();
                     } else if (result.resp == 2) {
                         data = result.msj_error;
                         plan_pestaña
@@ -2360,16 +2506,16 @@
                 } else {
 
                     const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        })
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
                     Toast.fire({
                         icon: 'warning',
                         title: 'Usuario no cuenta con código Qr'
@@ -2613,6 +2759,49 @@
 
     }
 
+    function startTimeInput_fijo(day) {
+
+       
+        domingo_1 = $('#appt_' + day + '1').val();
+        domingo_2 = $('#appt_' + day + '2').val();
+
+        if (domingo_1 == null) {
+            console.log('vacio domingo 1');
+        }
+
+        if (domingo_2 == null) {
+            console.log('vacio domingo 2');
+        }
+
+        var startTime = moment(domingo_1, "HH:mm:ss a");
+        var endTime = moment(domingo_2, "HH:mm:ss a");
+        var duration = moment.duration(endTime.diff(startTime));
+        var hours = parseInt(duration.asHours());
+        var minutes = parseInt(duration.asMinutes()) - hours * 60;
+        document.getElementById('lblstats_' + day).style.display = 'block';
+        var labelText = document.getElementById('lblstats_' + day);
+        labelText.innerHTML = hours + ' Hrs' + minutes + ' Mins';
+
+
+        if (!isNaN(hours)) {
+
+            if (hours < 0 || minutes < 0) {
+                ohSnap('Aviso!!: El horario ingresado no esta permitido!', {
+                    color: 'red'
+                });
+                document.getElementById("lblstats_" + day).style.color = 'red';
+            } else {
+                document.getElementById("lblstats_" + day).style.color = 'green';
+            }
+            document.getElementById('lblstats_' + day).style.display = 'block';
+            var labelText = document.getElementById('lblstats_' + day);
+            labelText.innerHTML = hours + ' Hrs ' + minutes + ' Mins';
+        } else {
+            document.getElementById('lblstats_' + day).style.display = 'none';
+        }
+
+    }
+
     function startTimeInput(e, day) {
         var mindate = e.target.value;
 
@@ -2752,6 +2941,86 @@
         document.getElementById('appt_dom2').style.display = 'none';
         document.getElementById("appt_dom2").value = "12:59:48";
         document.getElementById('lblstats_dom').style.display = 'none';
+    }
+
+    function change_status(dat) {
+
+        var data = {
+            'id': dat,
+        };
+        $.ajax({
+            url: site_url + '/staff/status_staff',
+            method: "post",
+            data: data,
+            success: function(resp) {
+                var result = $.parseJSON(resp);
+
+                if (result.resp == 'true') {
+
+                    Swal.fire({
+                        title: 'Esta seguro de cambiar el estatus de : ' + result.name + '  ?',
+                        text: "Una vez que se cambie el Status se borrara su Horario!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Si Modificar!',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+
+                            start_load();
+                            $.ajax({
+                                url: site_url + '/staff/status_mod',
+                                method: "post",
+                                data: data,
+                                success: function(resp_1) {
+                                    var resp_1 = $.parseJSON(resp_1);
+                                    if (resp_1.resp == 1) {
+
+                                        Swal.fire({
+                                            position: 'top-end',
+                                            icon: 'success',
+                                            title: 'Estatus modificado correctamente',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                        $('#exampleModal').modal('toggle');
+
+
+                                    } else if (resp_1 == 0) {
+                                        $('#msg').html('<div class="alert alert-danger">Error al eliminar el plan.</div>')
+
+                                    } else {
+                                        // $('#msg').html('<div class="alert alert-danger">Error :Favor de contactar al administrador</div>')
+
+                                    }
+                                    table.ajax.reload();
+                                }
+
+                            });
+
+
+                            end_load();
+                        }
+                    })
+
+                } else if (resp_1 == 0) {
+                    $('#msg').html('<div class="alert alert-danger">Error al eliminar el plan.</div>')
+
+                } else {
+                    //$('#msg').html('<div class="alert alert-danger">Error :Favor de contactar al administrador</div>')
+
+                }
+
+            }
+
+        });
+
+
+
+
+
     }
 </script>
 

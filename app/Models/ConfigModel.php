@@ -5,15 +5,14 @@ namespace App\Models;
 use CodeIgniter\Model;
 use App\Entities\User;
 
-
-class PaysModel extends Model
+class ConfigModel  extends Model
 {
-    protected $table      = 'tbl_members_pay';
-    protected $primaryKey = 'id_pay';
+    protected $table      = 'tbl_config';
+    protected $primaryKey = 'id_config';
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['id_member','discount','date_in','date_out','cost','pay_status','year_act','company'];
+    protected $allowedFields = ['name_config','cost_config','status_config','year_act','company'];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -25,3 +24,5 @@ class PaysModel extends Model
         return $this->where($column, $value)->first();
     }
 }
+
+

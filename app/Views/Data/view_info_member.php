@@ -154,15 +154,11 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Id Staff</th>
-                                <th>Hora entrada</th>
-                                <th>Hora Guardada</th>
-                                <th>Estatus</th>
-                                <th>Hora Salida</th>
-                                <th>Hora Guardada</th>
-                                <th>Estatus</th>
-                                <th>Dia</th>
+                                <th>Id Member</th>
+                                <th>Nombre</th>
+                                <th>Registro</th>
                                 <th>Fecha</th>
+                                <th>Estatus</th>
                             </tr>
                         </thead>
                     </table>
@@ -444,7 +440,7 @@
             scrollY: "400px",
             scrollCollapse: true,
             ajax: {
-                url: site_url + "/informativo/plan-ajax-staff", // json datasource
+                url: site_url + "/informativo/plan-ajax-member", // json datasource
                 type: "post",
                 data: {
                     // key1: value1 - in case if we want send data with request
@@ -476,7 +472,10 @@
             },
             columns: [
                 {
-                    data: "id_staff"
+                    data: "id_log_member"
+                },
+                {
+                    data: "id_member"
                 },
                 {
                     data: "name"
@@ -485,119 +484,39 @@
                     data: "hour_in"
                 },
                 {
-                    data: "hour_in_save"
+                    data: "date"
                 },
                 {
-                    data: null,
-                    'orderable': false,
-
-                    render: function(data, type, row) {
-
-                        console.log(row.name);
-                        if (row.status_hour_in == "on time") {
-                            return '<div >' +
-                                '<button type="button" class="green-button" onclick="change_status(' + row.id_indicator + ',' + row.proy + ',' + row.exercise + ')" data-toggle="tooltip" data-placement="top" title="Estatus" >A tiempo</button>' +
-                                '</div>';
-                        } else if (row.status_hour_in == "less 5") {
-                            return '<div >' +
-                                '<button  class="yellow-button" onclick="change_status(' + row.id_indicator + ',' + row.proy + ',' + row.exercise + ')" title="Estatus" >- 5 minutos</button>' +
-                                '</div>';
-                        } else if (row.status_hour_in == "less 10") {
-                            return '<div >' +
-                                '<button  class="orange-button" onclick="change_status(' + row.id_indicator + ',' + row.proy + ',' + row.exercise + ')" title="Estatus" >- 10 minutos</button>' +
-                                '</div>';
-                        } else {
-                            return '<div >' +
-                                '<button  class="red-button" onclick="change_status(' + row.id_indicator + ',' + row.proy + ',' + row.exercise + ')" title="Estatus" >+ 10 minutos</button>' +
-                                '</div>';
-                        }
-
-                    }
-
-                },
-                {
-                    data: "hour_out"
-                },
-                {
-                    data: "hour_out_save"
-                },
-                {
-                    data: null,
-                    'orderable': false,
-
-                    render: function(data, type, row) {
-
-                        console.log(row.status_hour_out);
-                        if (row.status_hour_out == "early") {
-                            return '<div >' +
-                                '<button type="button" class="red-button"  data-toggle="tooltip" data-placement="top" title="Estatus" >Salida Prematura</button>' +
-                                '</div>';
-                        } else if (row.status_hour_out == "on time") {
-                           
-                            return '<div >' +
-                                '<button  class="green-button" title="Estatus" >En tiempo</button>' +
-                                '</div>';
-                        }
-                        else{
-                            return '<div >' +
-                           
-                                '</div>';
-                        
-                        }
-
-                    }
-                 
-                },
-                {
-                    data: "day"
-                },
-                {
-                    data: "day_save"
+                    data: "status_log"
                 }
             ],
             columnDefs: [{
-                    "width": "5%",
+                    "width": "20%",
                     "targets": 0
                 },
                 {
-                    "width": "5%",
+                    "width": "20%",
                     "targets": 1
                 },
                 {
-                    "width": "8%",
+                    "width": "20%",
+                    "targets": 1
+                },
+                {
+                    "width": "20%",
                     "targets": 2
                 },
                 {
-                    "width": "8%",
+                    "width": "20%",
                     "targets": 3
                 },
                 {
-                    "width": "20%",
+                    "width": "10%",
                     "targets": 4
                 },
                 {
-                    "width": "8%",
-                    "targets": 5
-                },
-                {
-                    "width": "8%",
-                    "targets": 6
-                },
-                {
-                    "width": "20%",
-                    "targets": 7
-                },
-                {
-                    "width": "8%",
-                    "targets": 8
-                },
-                {
-                    "width": "30%",
-                    "targets": 9
-                },
-                {
                     "className": "text-center",
-                    "targets": [0, 1, 2, 3, 4,5,6,7,8,9,]
+                    "targets": [0, 1, 2, 3, 4]
                 }
             ],
             bFilter: true,

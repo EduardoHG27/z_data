@@ -99,6 +99,89 @@ class Datatable
             "data" => $data
         ];
     }
+
+    
+    public function getResponse_Log_staff(array $filters)
+    {
+        [
+            'draw' => $draw,
+            'length' => $length,
+            'start' => $start,
+            'total_count' => $total_count,
+            'order' => $order,
+            'direction' => $direction,
+            'search' => $search,
+            'like' => $like
+
+        ] = $filters;
+        $data = $like;
+        $page = ceil(($start - 1) / $length + 1);
+        if (!empty($search)) {
+            $this->applyFilters($search);
+        } else {
+            // $this->applyArray($data); 
+            foreach ($data as $column => $value) {
+                if ($value == '') {
+                } else {
+                    $this->model->like($column, $value);
+                }
+            }
+        }
+        $data = $this->model
+            ->join('tbl_students', 'tbl_students.id = tbl_log_member.id_member')
+            ->where('tbl_log_member.year_act', $_SESSION['year_act'])
+            ->where('tbl_log_member.company', $_SESSION['company'])
+            ->orderBy($this->getColumn($order), $direction)
+            ->paginate($length, $this->group, $page);
+        return [
+            "draw" => $draw,
+            "recordsTotal" => count($total_count),
+            "recordsFiltered" => count($total_count),
+            "data" => $data
+        ];
+    }
+
+    public function getResponse_join(array $filters,$table,$script)
+    {
+        [
+            'draw' => $draw,
+            'length' => $length,
+            'start' => $start,
+            'total_count' => $total_count,
+            'order' => $order,
+            'direction' => $direction,
+            'search' => $search,
+            'like' => $like
+
+        ] = $filters;
+        $data = $like;
+        $page = ceil(($start - 1) / $length + 1);
+        if (!empty($search)) {
+            $this->applyFilters($search);
+        } else {
+            // $this->applyArray($data); 
+            foreach ($data as $column => $value) {
+                if ($value == '') {
+                } else {
+                    $this->model->like($column, $value);
+                }
+            }
+        }
+
+        $data = $this->model
+            ->join($table,$script)
+            ->where($table.'.year_act', $_SESSION['year_act'])
+            ->where($table.'.company', $_SESSION['company'])
+            ->orderBy($this->getColumn($order), $direction)
+            ->paginate($length, $this->group, $page);
+        return [
+            "draw" => $draw,
+            "recordsTotal" => count($total_count),
+            "recordsFiltered" => count($total_count),
+            "data" => $data
+        ];
+    }
+
     private function getColumn($index)
     {
         return $this->columns[$index];
