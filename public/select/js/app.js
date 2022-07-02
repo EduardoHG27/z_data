@@ -14,15 +14,16 @@ var app = new Vue({
       self.scans.unshift({ date: +(Date.now()), content: content });
       
       $.ajax({
-       url:'https://ecommerce343.com/public/student/qr_log',
+       url:'https://ecommerce343.com/public/student/student_log',
       
-     //  url:'http://localhost:8080/gym_code/public/student/qr_log',
+      // url:'http://localhost:8080/gym_code/public/student/student_log',
         method: "post",
         data: {
           id: content
       },
         success: function(resp) {
           var result = $.parseJSON(resp);
+          console.log(result.company);
          if (result.resp=='2')
           {
             Swal.fire({
