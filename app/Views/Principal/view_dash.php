@@ -997,7 +997,7 @@
         });
 
 
- /* 
+
         var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
         if (myChart) {
           myChart.destroy();
@@ -1088,9 +1088,6 @@
             },
           },
         });
-
-
-        */
       }
 
       getData();

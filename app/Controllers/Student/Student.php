@@ -992,7 +992,6 @@ class Student extends BaseController
 
         $get_total = $query->getResult('array');
 
-        var_dump($get_total);
         $dia_res = [];
         $day_count=[];
         $z = 0;
