@@ -170,8 +170,8 @@ class Info_staff extends BaseController
         $data = $logStaffModel->where('company', $_SESSION['company'])->findAll();
         $total_count = $data;
 
-        $lib = new Datatable($logStaffModel, 'gp1', ['id_entrada','id_staff','hour_in','hour_in_save','status_hour_in','hour_out','hour_out_save','status_hour_out','day','day_save','year_act','company','created_at','updated_at','deleted_at']);
-        $json_data = $lib->getResponse([
+        $lib = new Datatable($logStaffModel, 'gp1', ['id_entrada','id_staff','hour_in','hour_in_save','status_hour_in','hour_out','hour_out_save','status_hour_out','day','day_save','year_act','company','created_at','updated_at','deleted_at','name']);
+        $json_data = $lib->getResponse_join([
             'draw' => $_REQUEST['draw'],
             'length' => $_REQUEST['length'],
             'start' => $_REQUEST['start'],
@@ -180,7 +180,7 @@ class Info_staff extends BaseController
             'direction' => $order['dir'],
             'search' => $_REQUEST['search']['value'],
             'like' => $like
-        ]);
+        ],'tab_staff','tab_staff.id_staff = tbl_log_staff.id_staff');
 
        
         echo json_encode($json_data);
