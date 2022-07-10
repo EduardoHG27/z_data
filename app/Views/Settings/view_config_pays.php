@@ -256,7 +256,7 @@
                                     <div class="col-md-4">
                                         <label class="control-label">Id</label>
                                         <input type="text" class="form-control" name="txt_id" id="txt_id" placeholder="Id" readonly />
-                                        <small><i>Leave this blank if you want to a auto generate ID no.</i></small>
+                                      
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -576,7 +576,6 @@
                         return '<div >' +
                             '<button class="red-button-min" onclick="eliminar(' + row.id_config + ')"><i class="fas fa-trash-alt"></i></button>' +
                             '<button class="yellow-button-min" onclick="actualizar(' + row.id_config + ')"><i class="fa fa-pencil-square-o"></i></button>' +
-                            '<button class="bluew-button-min" onclick="get_qr(' + row.id_config + ')"><i class="fa fa-qrcode"></i></button>' +
                             '</div>';
                     }
                 },

@@ -210,7 +210,7 @@
                                     <div class="col-md-4">
                                         <label class="control-label">ID No.</label>
                                         <input type="text" class="form-control" name="txt_id" id="txt_id" placeholder="ID" readonly />
-                                        <small><i>Leave this blank if you want to a auto generate ID no.</i></small>
+
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -474,8 +474,7 @@
                     "sortDescending": ": activar para ordenar columna descendente"
                 }
             },
-            columns: [
-                {
+            columns: [{
                     data: "id_staff"
                 },
                 {
@@ -493,7 +492,15 @@
 
                     render: function(data, type, row) {
 
-                        console.log(row.name);
+                       // console.log(row.hour_in);
+                       // console.log(row.hour_in_save);
+
+                        let valuestart = moment.duration(row.hour_in_save, "HH:mm");
+                        let valuestop = moment.duration(row.hour_in, "HH:mm:ss");
+                        let difference = valuestop.subtract(valuestart);
+
+                        console.log(difference.hours() + ":" + difference.minutes())
+
                         if (row.status_hour_in == "on time") {
                             return '<div >' +
                                 '<button type="button" class="green-button" onclick="change_status(' + row.id_indicator + ',' + row.proy + ',' + row.exercise + ')" data-toggle="tooltip" data-placement="top" title="Estatus" >A tiempo</button>' +
@@ -533,20 +540,19 @@
                                 '<button type="button" class="red-button"  data-toggle="tooltip" data-placement="top" title="Estatus" >Salida Prematura</button>' +
                                 '</div>';
                         } else if (row.status_hour_out == "on time") {
-                           
+
                             return '<div >' +
                                 '<button  class="green-button" title="Estatus" >En tiempo</button>' +
                                 '</div>';
-                        }
-                        else{
+                        } else {
                             return '<div >' +
-                           
+
                                 '</div>';
-                        
+
                         }
 
                     }
-                 
+
                 },
                 {
                     data: "day"
@@ -597,7 +603,7 @@
                 },
                 {
                     "className": "text-center",
-                    "targets": [0, 1, 2, 3, 4,5,6,7,8,9,]
+                    "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, ]
                 }
             ],
             bFilter: true,

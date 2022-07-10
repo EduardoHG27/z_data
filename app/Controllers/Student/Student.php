@@ -16,6 +16,8 @@ use App\Libraries\PHPMailer_lib;
 use App\Libraries\qr;
 use QRcode;
 use DateTime;
+
+use function PHPSTORM_META\elementType;
 use function PHPUnit\Framework\isNull;
 
 class Student extends BaseController
@@ -61,6 +63,7 @@ class Student extends BaseController
             $pay_data = $query->getResult('array');
 
 
+
             //$pay_data = $paysModel->where('id_member', $data['id'])->findAll();
 
             if ($pay_data == null) {
@@ -78,6 +81,10 @@ class Student extends BaseController
                 $consulta['resp'] = '1';
                 $consulta['data'] = $data;
                 $consulta['pay'] = $pay_data;
+
+
+                $pieces = explode(" ", $pay_data[0]['created_at']);
+                $consulta['date'] = $pieces[0];
 
 
                 echo json_encode($consulta);
@@ -178,13 +185,15 @@ class Student extends BaseController
             );
 
             $correo->SMTPAuth = true;
-            $correo->Username  = 'eduardoenrique.hernandez@gmail.com';
+            $correo->Username  = 'desarrollo.hergut@gmail.com';
             //$correo->Username  = 'desarrollo.hergut@gmail.com';
             // $correo->Password = 'Hergut27!';
-            $correo->Password = 'xgquztnppmjzgwuw';
+            // eduardoenrique.hernandez $correo->Password = 'xgquztnppmjzgwuw';
+            //Hergut
+            $correo->Password = 'pwywevaqohrofxiv';
             $correo->SMTPSecure = 'ssl';
 
-            $correo->setFrom('eduardoenrique.hernandez@gmail.com', 'CodexWorld');
+            $correo->setFrom('desarrollo.hergut@gmail.com', 'CodexWorld');
             $correo->addReplyTo($this->request->getPost('email'), 'Codexworld');
             $correo->addAddress($this->request->getPost('email'));
             $correo->Subject = 'Registro de Usuario Exitoso';
@@ -493,68 +502,66 @@ class Student extends BaseController
 
         $hour_today = $hoy['hours'] . ':' . $hoy['minutes'] . ':' . $hoy['seconds'];
         $day_today = $hoy['year'] . '-' . $hoy['mon'] . '-' . $hoy['mday'];
-      
+
 
 
         $data = $this->request->getPost();
-        $num_data=count($data);
+        $num_data = count($data);
         $studetsModel = new StudetsModel();
         $studetsModel->select('name,matricula');
-        if($num_data=='1')
-        {
+        if ($num_data == '1') {
             $data = ['id' => $this->request->getPost('id')];
             $studetsModel->where('password_qr', $this->request->getPost('id'));
-        }else{
+        } else {
 
             $data = [
                 'username' => $this->request->getPost('username'),
                 'password' => $this->request->getPost('password')
             ];
-           
+
             $nombre = trim($data['username']);
             $password = md5($data['password']);
-    
-    
-         
-           $studetsModel->where('matricula', $nombre);
-           $studetsModel->where('password', $password);
+
+
+
+            $studetsModel->where('matricula', $nombre);
+            $studetsModel->where('password', $password);
         }
-       $studetsModel->where('year_act', $_SESSION['year_act']);
-       $studetsModel->where('company', $_SESSION['company']);
-       $query_student = $studetsModel->get();
-       $data_validation = $query_student->getResult('array');
+        $studetsModel->where('year_act', $_SESSION['year_act']);
+        $studetsModel->where('company', $_SESSION['company']);
+        $query_student = $studetsModel->get();
+        $data_validation = $query_student->getResult('array');
 
 
 
-       
-       $staffModel = new StaffModel();
-       $staffModel->select('id_staff,name,matricula_staff');
 
-       if($num_data=='1')
-       {
-           $data = [
-               'id' => $this->request->getPost('id')
-           ];
-   
-        
-           $staffModel->where('password_qr', $this->request->getPost('id'));
-       }else{
+        $staffModel = new StaffModel();
+        $staffModel->select('id_staff,name,matricula_staff');
 
-           $data = [
-               'username' => $this->request->getPost('username'),
-               'password' => $this->request->getPost('password')
-           ];
-          
-           $nombre = trim($data['username']);
-           $password = md5($data['password']);
-   
-   
-        
-           $staffModel->where('matricula_staff', $nombre);
-           $staffModel->where('password', $password);
-       }
+        if ($num_data == '1') {
+            $data = [
+                'id' => $this->request->getPost('id')
+            ];
 
-       
+
+            $staffModel->where('password_qr', $this->request->getPost('id'));
+        } else {
+
+            $data = [
+                'username' => $this->request->getPost('username'),
+                'password' => $this->request->getPost('password')
+            ];
+
+            $nombre = trim($data['username']);
+            $password = md5($data['password']);
+
+
+
+            $staffModel->where('matricula_staff', $nombre);
+            $staffModel->where('password', $password);
+        }
+
+
         $staffModel->where('year_act', $_SESSION['year_act']);
         $staffModel->where('company', $_SESSION['company']);
         $query = $staffModel->get();
@@ -741,22 +748,17 @@ class Student extends BaseController
                 }
             }
         } else {
-            if($num_data=='1')
-            {
+            if ($num_data == '1') {
                 $consulta['company'] = $_SESSION['company'];
                 $consulta['resp'] = '0';
                 $consulta['msj'] = 'Código QR no reconocido';
                 echo json_encode($consulta);
-            }
-            else
-            {
+            } else {
                 $consulta['company'] = $_SESSION['company'];
                 $consulta['resp'] = '0';
                 $consulta['msj'] = 'Usuario y/o Contraseña no reconocidos';
                 echo json_encode($consulta);
             }
-
-           
         }
 
 
@@ -780,7 +782,7 @@ class Student extends BaseController
 
 
 
-/*       
+        /*       
         $studetsModel = new StudetsModel();
 
         $studetsModel->select('*');
@@ -855,10 +857,25 @@ class Student extends BaseController
         $data = [
             'id' => $this->request->getPost('id')
         ];
-
-
         $data = $studetsModel->find($data['id']);
+        if (file_exists(RUTA_VENDOR . '/public/' . $data['qr_location'])) {
+        } else {
+            include RUTA_APP . '/ThirdParty/phpqrcode/qrlib.php';
+            $number = rand();
+            $dir = 'temp/';
+            if (!file_exists($dir)) {
+                mkdir($dir);
+            }
+            $filename = $dir . '' . $number . '.png';
+            $tamanio = 15;
+            $level = 'H';
+            $frameSize = 1;
+            $contenido = $data['password'] . $number;
+            QRcode::png($contenido, $filename, $level, $tamanio, $frameSize);
 
+            $data = ['qr_location' => $filename, 'password_qr' => $data['password'] . $number];
+            $studetsModel->update($this->request->getPost('id'), $data);
+        }
 
         if ($data['qr_location'] == '') {
             $consulta['resp'] = '0';
@@ -897,11 +914,12 @@ class Student extends BaseController
         );
 
         $correo->SMTPAuth = true;
-        $correo->Username  = 'eduardoenrique.hernandez@gmail.com';
-        $correo->Password = 'xgquztnppmjzgwuw';
+        $correo->Username  = 'desarrollo.hergut@gmail.com';
+        //$correo->Password = 'xgquztnppmjzgwuw';
+        $correo->Password = 'pwywevaqohrofxiv';
         $correo->SMTPSecure = 'ssl';
 
-        $correo->setFrom('eduardoenrique.hernandez@gmail.com', 'CodexWorld');
+        $correo->setFrom('desarrollo.hergut@gmail.com', 'CodexWorld');
         $correo->addReplyTo($this->request->getPost('email'), 'Codexworld');
         $correo->addAddress($this->request->getPost('email'));
         $correo->Subject = 'Registro de Usuario Exitoso';
@@ -988,17 +1006,17 @@ class Student extends BaseController
         $query = $logMemberModel->get();
 
 
-      
+
 
         $get_total = $query->getResult('array');
 
         $dia_res = [];
-        $day_count=[];
+        $day_count = [];
         $z = 0;
         $y = 0;
         foreach ($get_total as $key => $value) {
 
-            
+
             $dayofweek = date('l', strtotime($value['date']));
 
             if ($dayofweek == 'Monday') {
@@ -1016,27 +1034,25 @@ class Student extends BaseController
             } else {
                 $dia = 'D';
             }
-            $day_count[$y++]=$dia;
+            $day_count[$y++] = $dia;
             $bandera = 1;
             foreach ($dia_res as $key => $day_d) {
 
-               
+
                 if ($day_d == $dia) {
-                    
+
                     $bandera = 0;
-                }
-                else{
+                } else {
                     $bandera = 1;
                 }
             }
 
             if ($bandera == 1) {
                 $dia_res[$z++] = $dia;
-
             }
         }
 
-        $datos_dias_totales=$this->contarValoresArray($day_count);
+        $datos_dias_totales = $this->contarValoresArray($day_count);
 
 
         $paysModel = new PaysModel();
@@ -1223,7 +1239,7 @@ class Student extends BaseController
 
         $newDate = date('Y-m-d', strtotime($date . ' + ' .  $this->request->getPost('month') . ' months'));
 
-       
+
         $data_plan = [
             'discount' => $this->request->getPost('discount'),
             'date_in' => $date,
@@ -1247,6 +1263,7 @@ class Student extends BaseController
 
             $studetsModel->update($this->request->getPost('id'), $data);
 
+            $consulta['data'] = $data_plan;
             $consulta['resp'] = '1';
             echo json_encode($consulta);
         } else {
@@ -1262,49 +1279,108 @@ class Student extends BaseController
         $paysModel = new PaysModel();
         $data = $this->request->getPost();
 
-         $cost= $data['num']*$data['val'];
+        $cost = $data['num'] * $data['val'];
 
-       
-         if($data['type']=='day')
-         {
+
+        if ($data['type'] == 'day') {
             $newDate = date('Y-m-d', strtotime($date . ' + ' .  $data['num'] . ' day'));
-         }
-         else
-         {
+        } else {
             $newDate = date('Y-m-d', strtotime($date . ' + ' .  $data['num'] . ' week'));
-         }
+        }
 
-         $data_plan = [
-             'discount' => '',
-             'date_in' => $date,
-             'date_out' => $newDate,
-             'id_member' => $this->request->getPost('id'),
-             'cost' => $cost,
-             'pay_status' => 'true',
-             'year_act' => $_SESSION['year_act'],
-             'company' => $_SESSION['company']
- 
-         ];
- 
- 
-         if ($paysModel->save($data_plan)) {
- 
-             $studetsModel = new StudetsModel();
- 
-             $data = [
-                 'status' => 'true'
-             ];
- 
-             $studetsModel->update($this->request->getPost('id'), $data);
- 
-             $consulta['resp'] = '1';
-             echo json_encode($consulta);
-         } else {
- 
-             $consulta['resp'] = '0';
-             echo json_encode($consulta);
-         }
+        $data_plan = [
+            'discount' => '',
+            'date_in' => $date,
+            'date_out' => $newDate,
+            'id_member' => $this->request->getPost('id'),
+            'cost' => $cost,
+            'pay_status' => 'true',
+            'year_act' => $_SESSION['year_act'],
+            'company' => $_SESSION['company']
 
+        ];
+
+
+        if ($paysModel->save($data_plan)) {
+
+            $studetsModel = new StudetsModel();
+
+            $data = [
+                'status' => 'true'
+            ];
+
+            $studetsModel->update($this->request->getPost('id'), $data);
+            $consulta['data'] = $data_plan;
+            $consulta['resp'] = '1';
+            echo json_encode($consulta);
+        } else {
+
+            $consulta['resp'] = '0';
+            echo json_encode($consulta);
+        }
+    }
+
+    public function planmember_store_current()
+    {
+        $data = $this->request->getPost();
+        date_default_timezone_set('America/Mexico_City');
+        $hoy = date('Y-m-d');
+
+
+
+        $entrada = date_create_from_format('d/m/Y', $data['fecha_entrada']);
+        $salida = date_create_from_format('d/m/Y', $data['fecha_salida']);
+
+
+
+      
+        if ($entrada->format('Y-m-d') > $hoy) {
+            $consulta['resp'] = '0';
+            $consulta['msj'] = 'La Fecha de Inicio ingresada revaza el dia de hoy!';
+            echo json_encode($consulta);
+
+        } else if ($salida->format('Y-m-d') < $hoy) {
+            $consulta['resp'] = '0';
+            $consulta['msj'] = 'La Fecha de Fin ingresada no revaza el dia de hoy!';
+            echo json_encode($consulta);
+        }else if ($entrada->getTimestamp()  == $salida->getTimestamp()) {
+            $consulta['resp'] = '0';
+            $consulta['msj'] = 'Las fechas ingresadas son iguales!';
+            echo json_encode($consulta);
+        } else if ($entrada->getTimestamp() < $salida->getTimestamp()) {
+            $data_plan = [
+                'discount' => '',
+                'date_in' => $entrada->format('Y-m-d'),
+                'date_out' => $salida->format('Y-m-d'),
+                'id_member' => $data['id'],
+                'cost' => $data['monto'],
+                'pay_status' => 'true',
+                'year_act' => $_SESSION['year_act'],
+                'company' => $_SESSION['company']
+
+            ];
+            $paysModel = new PaysModel();
+
+            if ($paysModel->save($data_plan)) {
+
+                $studetsModel = new StudetsModel();
+
+                $data_stat = [
+                    'status' => 'true'
+                ];
+
+                $studetsModel->update($data['id'], $data_stat);
+
+                $consulta['data'] = $data_plan;
+                $consulta['resp'] = '2';
+                echo json_encode($consulta);
+            }
+        } else {
+
+            $consulta['resp'] = '1';
+            $consulta['msj'] = 'Aviso!!, Las fechas introducidas son incorrectas';
+            echo json_encode($consulta);
+        }
     }
 
 
@@ -1316,20 +1392,18 @@ class Student extends BaseController
         return $timeDiff;
     }
     function contarValoresArray($array)
-{
-	$contar=array();
- 
-	foreach($array as $value)
-	{
-		if(isset($contar[$value]))
-		{
-			// si ya existe, le añadimos uno
-			$contar[$value]+=1;
-		}else{
-			// si no existe lo añadimos al array
-			$contar[$value]=1;
-		}
-	}
-	return $contar;
-}
+    {
+        $contar = array();
+
+        foreach ($array as $value) {
+            if (isset($contar[$value])) {
+                // si ya existe, le añadimos uno
+                $contar[$value] += 1;
+            } else {
+                // si no existe lo añadimos al array
+                $contar[$value] = 1;
+            }
+        }
+        return $contar;
+    }
 }

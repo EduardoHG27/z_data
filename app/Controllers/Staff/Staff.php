@@ -110,7 +110,15 @@ class Staff extends BaseController
 
         $id = $this->request->getPost('id');
         $data = $staffModel->find($id);
-        unlink($data['qr_location']);
+
+     
+        if (file_exists(RUTA_VENDOR.'/public/'.$data['qr_location'])){
+            unlink($data['qr_location']);
+        }else
+        {
+         
+        }
+       
         $staffModel->where('id_staff', $id);
 
 
@@ -223,11 +231,31 @@ class Staff extends BaseController
             'id' => $this->request->getPost('id')
         ];
         $data = $staffModel->find($data['id']);
+        if (file_exists(RUTA_VENDOR.'/public/'.$data['qr_location'])){
+           
+        }else
+        {
+            include RUTA_APP . '/ThirdParty/phpqrcode/qrlib.php';
+            $number = rand();
+            $dir = 'temp/';
+            if (!file_exists($dir)) {
+                mkdir($dir);
+            }
+            $filename = $dir . '' . $number . '.png';
+            $tamanio = 15;
+            $level = 'H';
+            $frameSize = 1;
+            $contenido = $data['password'] . $number;
+            QRcode::png($contenido, $filename, $level, $tamanio, $frameSize);
+            
+            $data = ['qr_location' => $filename,'password_qr' => $data['password'] . $number];
+            $staffModel->update($this->request->getPost('id'), $data);  
+        }
+
         if ($data['qr_location'] == '') {
             $consulta['resp'] = '0';
             echo json_encode($consulta);
         } else {
-
             $consulta['resp'] = '1';
             $consulta['data'] = $data['qr_location'];
             echo json_encode($consulta);

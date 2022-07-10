@@ -236,7 +236,7 @@
                                     <div class="col-md-4">
                                         <label class="control-label">ID No.</label>
                                         <input type="text" class="form-control" name="txt_id" id="txt_id" placeholder="ID" readonly />
-                                        <small><i>Leave this blank if you want to a auto generate ID no.</i></small>
+                                      
                                     </div>
                                 </div>
                                 <div class="row form-group">

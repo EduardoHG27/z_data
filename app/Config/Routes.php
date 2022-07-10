@@ -83,6 +83,8 @@ $routes->group('student', ['namespace' => 'App\Controllers\Student'], function (
     $routes->post("student_log", "Student::log_function");
     $routes->post("get_qr", "Student::get_qr");
     $routes->post("planmember_store_test", "Student::planmember_store_test");
+    
+    $routes->post("planmember_store_current", "Student::planmember_store_current");
 });
 $routes->group('pays', ['namespace' => 'App\Controllers\Pays'], function ($routes) {
     $routes->post("pay_delete", "Pays::delete");
