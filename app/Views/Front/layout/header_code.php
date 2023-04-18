@@ -21,7 +21,7 @@
           <span class="link_name">Miembros</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="">Miembros</a></li>
+          <li><a class="link_name" href="<?php echo base_url(); ?>/principal/student">Miembros</a></li>
         </ul>
       </li>
       <li>
@@ -43,7 +43,7 @@
         </div>
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Datos</a></li>
-          <li><a href="<?php echo base_url(); ?>/principal/data"">Pagos</a></li>
+          <li><a href="<?php echo base_url(); ?>/principal/data">Pagos</a></li>
           <li><a href="<?php echo base_url(); ?>/principal/info_staff">Staff</a></li>
           <li><a href="<?php echo base_url(); ?>/principal/info_member">Miembros</a></li>
         </ul>

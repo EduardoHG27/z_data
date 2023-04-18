@@ -53,6 +53,16 @@ class TblStaff extends Migration
                 'constraint' => '100',
                 'null' => false,
             ],
+            'year_act'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '5',
+                'null' => false,
+            ],
+            'company'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+                'null' => false,
+            ],
             'created_at' => [
                 'type' => 'TEXT',
                 'null' => false,

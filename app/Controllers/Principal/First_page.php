@@ -52,6 +52,7 @@ class First_page extends BaseController
 
     public function student()
     {
+        var_dump("hostras_data");
         $session = session();
 
         if ($session->get('usuario')) {
@@ -61,7 +62,7 @@ class First_page extends BaseController
             $config->where('company', $_SESSION['company']);
             $query = $config->get();
             $pay_data = $query->getResult('array');
-
+            var_dump($pay_data);
             $data = [
                 'costo_mensualidad' => $pay_data[0]['cost_config'],
                 'costo_semanal' => $pay_data[1]['cost_config'],

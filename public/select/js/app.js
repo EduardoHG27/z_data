@@ -14,9 +14,10 @@ var app = new Vue({
       self.scans.unshift({ date: +(Date.now()), content: content });
       
       $.ajax({
-       url:'https://ecommerce343.com/public/student/student_log',
+       url:'https://localhost/public/student/student_log',
       
       // url:'http://localhost:8080/gym_code/public/student/student_log',
+      // url:'https://ecommerce343.com/public/student/student_log',
         method: "post",
         data: {
           id: content

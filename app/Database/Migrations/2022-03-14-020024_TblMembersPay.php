@@ -45,6 +45,21 @@ class TblMembersPay extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '10',
                 'null' => false,
+            ],      
+            'password'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+                'null' => false,
+            ],
+            'year_act'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '5',
+                'null' => false,
+            ],
+            'company'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+                'null' => false,
             ],
             'created_at' => [
                 'type' => 'TEXT',

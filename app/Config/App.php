@@ -23,8 +23,9 @@ class App extends BaseConfig
      *
      * @var string
      */
-     public $baseURL = 'http://localhost:8080/code/public/';
-    ##public $baseURL = 'https://ecommerce343.com/data/public/';
+    public $baseURL = 'http://localhost/z_code/public/';
+    #public $baseURL = 'http://localhost:8080/code/public/';
+    #public $baseURL = 'https://ecommerce343.com/data/public/';
     
 
     /**

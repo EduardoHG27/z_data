@@ -25,7 +25,7 @@ class Register extends BaseController
             'status' =>'true',
             'position' =>'manager',
             'password' => md5('admin'),
-            'year_act' => '2022',
+            'year_act' => '2023',
             'company' => 'Cesar Gym',
            
         ];

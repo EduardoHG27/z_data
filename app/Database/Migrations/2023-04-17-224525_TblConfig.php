@@ -4,32 +4,29 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class TblUser extends Migration
+class TblConfig extends Migration
 {
-   
     public function up()
     {
+        //
         $this->forge->addField([
-            'id_user'          => [
+            'id_config'          => [
                 'type'           => 'INT',
                 'constraint'     => 5,
                 'unsigned'       => true,
                 'auto_increment' => true,
                 'null' => false,
-            ],
-            'username'       => [
+            ], 'name_config'          => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
                 'null' => false,
-            ],
-            'password'       => [
+            ],'cost_config'          => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
                 'null' => false,
-            ],
-            'type'       => [
+            ],'status_config'          => [
                 'type'       => 'VARCHAR',
-                'constraint' => '1',
+                'constraint' => '100',
                 'null' => false,
             ],
             'year_act'       => [
@@ -55,14 +52,13 @@ class TblUser extends Migration
                 'null' => true,
             ]
         ]);
-        $this->forge->addKey('id_user', true);
-        $this->forge->createTable('Tbl_user');
-    }
+        $this->forge->addKey('id_config', true);
+        $this->forge->createTable('tbl_config');
 
+    }
 
     public function down()
     {
-      
-        $this->forge->dropTable('user');
+        //
     }
 }

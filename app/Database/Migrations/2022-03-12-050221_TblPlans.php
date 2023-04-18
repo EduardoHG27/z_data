@@ -42,6 +42,16 @@ class TblPlans extends Migration
                 'constraint' => '10',
                 'null' => false,
             ],
+            'password'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+                'null' => false,
+            ],
+            'year_act'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '5',
+                'null' => false,
+            ],
             'created_at' => [
                 'type' => 'TEXT',
                 'null' => false,
